@@ -1,0 +1,17 @@
+/**
+ * Estilos
+ */
+
+ .dashicons-qmaker{
+    background-image: url(../img/quiz.svg);
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: 70%;
+}
+
+a:hover > .dashicons-qmaker{
+    background-image: url(../img/quiz-hv.svg) ;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: 70%;
+}

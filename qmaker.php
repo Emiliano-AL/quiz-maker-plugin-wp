@@ -34,9 +34,9 @@ global $wpdb;
 define( 'QM_REALPATH_BASENAME_PLUGIN', dirname( plugin_basename( __FILE__ ) ) . '/' );
 define( 'QM_PLUGIN_DIR_PATH', 	plugin_dir_path( __FILE__ ) );
 define( 'QM_PLUGIN_DIR_URL', 	plugin_dir_url( __FILE__ ) );
-define( 'QM_QUIZ', 		"{$wpdb->prefix}qm_quiz" );
-define( 'QM_QUESTION', 	"{$wpdb->prefix}qm_question" );
-define( 'QM_RESPONSE', 	"{$wpdb->prefix}qm_answers" );
+define( 'QM_QUIZ', 			"{$wpdb->prefix}qm_quizes" );
+define( 'QM_QUESTION', 		"{$wpdb->prefix}qm_questions" );
+define( 'QM_ANSWERS', 		"{$wpdb->prefix}qm_answers" );
 
 define( 'QMAKER_VERSION', '1.0.0' );
 

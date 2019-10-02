@@ -32,6 +32,9 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 
 global $wpdb;
 
-$sql = "DROP TABLE IF EXISTS {$wpdb->prefix}qm_quiz";
-
-$wpdb->query( $sql );
+$slqAnswers = "DROP TABLE IF EXISTS {$wpdb->prefix}qm_answers";
+$wpdb->query( $slqAnswers );
+$slqQuestion = "DROP TABLE IF EXISTS {$wpdb->prefix}qm_questions";
+$wpdb->query( $slqQuestion );
+$sqlQuiz = "DROP TABLE IF EXISTS {$wpdb->prefix}qm_quizes";
+$wpdb->query( $sqlQuiz );

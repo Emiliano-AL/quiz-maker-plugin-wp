@@ -59,7 +59,12 @@ class Qmaker_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_styles() {
+	public function enqueue_styles($hook) {
+		
+		/**
+		 * Regitra Bootstrap 4
+		 */
+		wp_enqueue_style( 'qm_bootstrap_css', 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css', array(), '4.3.1', 'all');
 
 		/**
 		 * This function is provided for demonstration purposes only.
@@ -74,6 +79,11 @@ class Qmaker_Admin {
 		 */
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/qmaker-admin.css', array(), $this->version, 'all' );
+		
+		/**
+		 * Estilos para el administrador de wordpress
+		 */
+		wp_enqueue_style( 'qm_styles_admin_wp', plugin_dir_url( __FILE__ ) . 'css/qmaker-wordpress.css', array(), $this->version, 'all' );
 
 	}
 
@@ -82,7 +92,13 @@ class Qmaker_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_scripts() {
+	public function enqueue_scripts($hook) {
+
+		/**
+		 * Registra bootstrap 4 js
+		 */
+		wp_enqueue_script( 'qm_bootstrap_popper_js', 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js', array( 'jquery' ), '1.14.7', true );
+		wp_enqueue_script( 'qm_bootstrap_js', 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js', array( 'jquery' ), '4.3.1', true );
 
 		/**
 		 * This function is provided for demonstration purposes only.
@@ -96,8 +112,15 @@ class Qmaker_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/qmaker-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/qmaker-admin.js', array( 'jquery' ), $this->version, true );
 
+		wp_localize_script( 
+			$this->plugin_name, 
+			'qmaker', 
+			[
+				'url' 		=> admin_url('admin-ajax.php'),
+				'seguridad'	=> wp_create_nonce('qmaker_seg')
+			]);
 	}
 
 
@@ -128,7 +151,7 @@ class Qmaker_Admin {
 			'manage_options', 
 			$this->plugin_name, 
 			array($this, 'display_plugin_main_page'), 
-			'', 
+			'dashicons-qmaker', 
 			41);
 
 		add_submenu_page(
@@ -148,7 +171,11 @@ class Qmaker_Admin {
 	 */
 	public function display_plugin_main_page()
 	{
-		require_once  QM_PLUGIN_DIR_PATH . 'admin/partials/qmaker-main-display.php' ;
+		if($_GET['page'] == 'qmaker' && $_GET['action'] == 'edit' && isset($_GET['id'])){
+			require_once  QM_PLUGIN_DIR_PATH . 'admin/partials/qmaker-main-display-edit.php' ;
+		}else{
+			require_once  QM_PLUGIN_DIR_PATH . 'admin/partials/qmaker-main-display.php' ;
+		}
 	}
 
 	/**
@@ -159,6 +186,30 @@ class Qmaker_Admin {
 	 */
 	public function display_plugin_setup_page(){
 		require_once  QM_PLUGIN_DIR_PATH . 'admin/partials/qmaker-setting-display.php' ;
+	}
+
+
+	public function qmaker_ajax_create_quiz(){
+		
+		check_ajax_referer('qmaker_seg', 'nonce');
+	
+		if(current_user_can('manage_options')){
+			extract($_POST, EXTR_OVERWRITE);
+			if($tipo == 'add'){
+				$columns = [
+					'nombre' => $nombre
+				]; 
+	
+				$json = json_encode(array(
+					'result' 	=> true,
+					'nombre' 	=> 'Emiliano',
+					'insert_id' => 1
+				));
+				//$this->db->insert_id
+				echo $json;
+				wp_die();
+			}
+		}
 	}
 
 }
