@@ -41,6 +41,15 @@ class Qmaker_Admin {
 	private $version;
 
 	/**
+	 * Objeto Quiz
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      Qmaker_Quiz    $qmaker_quiz    Maneja el objeto de los quizes.
+	 */
+	private $qmaker_quiz;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
@@ -52,6 +61,7 @@ class Qmaker_Admin {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
+		$this->qmaker_quiz = new Qmaker_Quiz();
 	}
 
 	/**
@@ -171,9 +181,14 @@ class Qmaker_Admin {
 	 */
 	public function display_plugin_main_page()
 	{
-		if($_GET['page'] == 'qmaker' && $_GET['action'] == 'edit' && isset($_GET['id'])){
-			require_once  QM_PLUGIN_DIR_PATH . 'admin/partials/qmaker-main-display-edit.php' ;
-		}else{
+		if($_GET['page'] == 'qmaker' && $_GET['action'] == 'edit' && isset($_GET['idQuiz'])){
+			require_once  QM_PLUGIN_DIR_PATH . 'admin/partials/qmaker-main-display-edit.php';
+		}
+		elseif($_GET['page'] == 'qmaker' && $_GET['action'] == 'addquestions' && isset($_GET['idQuiz'])){
+			require_once  QM_PLUGIN_DIR_PATH . 'admin/partials/qmaker-questions-admin.php';
+		}
+		else 
+		{
 			require_once  QM_PLUGIN_DIR_PATH . 'admin/partials/qmaker-main-display.php' ;
 		}
 	}
@@ -190,22 +205,27 @@ class Qmaker_Admin {
 
 
 	public function qmaker_ajax_create_quiz(){
-		
 		check_ajax_referer('qmaker_seg', 'nonce');
 	
 		if(current_user_can('manage_options')){
 			extract($_POST, EXTR_OVERWRITE);
 			if($tipo == 'add'){
-				$columns = [
-					'nombre' => $nombre
+				$quiz = [
+					'name' => $name,
+					'description' => $description,
 				]; 
-	
-				$json = json_encode(array(
-					'result' 	=> true,
-					'nombre' 	=> 'Emiliano',
-					'insert_id' => 1
-				));
-				//$this->db->insert_id
+				$id = $this->qmaker_quiz->add_quiz($quiz);
+				if($id > 0){
+					$json = json_encode(array(
+						'result' 	=> true,
+						'insert_id' => $id
+					));
+				}else{
+					$json = json_encode(array(
+						'result' 	=> false,
+						'insert_id' => $id
+					));
+				}
 				echo $json;
 				wp_die();
 			}

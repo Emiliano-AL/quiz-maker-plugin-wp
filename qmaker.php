@@ -77,9 +77,7 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-qmaker.php';
  * @since    1.0.0
  */
 function run_qmaker() {
-
 	$plugin = new Qmaker();
 	$plugin->run();
-
 }
 run_qmaker();

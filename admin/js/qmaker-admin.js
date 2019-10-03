@@ -30,16 +30,21 @@
 	 */
 	 
 	$(function() {
-		var urlAddQuestions = "?page=qmaker&action=addQuestions&idQuiz="
+		
 	})
 
 	$( window ).load(function() {
-		console.log('hola')
+		// console.log('hola')
 	});
 
-	 $('#create-quiz').on('click', function(e){
+	var urlAddQuestions = "?page=qmaker&action=addquestions&idQuiz="
+	var $name = $('#inputName')
+	var $descrition = $('#inputdescription')
+
+	$('#create-quiz').on('click', function(e){
 		e.preventDefault();
-		console.log('hola btn..')
+		console.log('name: ', $name.val() )
+		console.log('descrition: ', $descrition.val() )
 
 		//Evento ajax
 		$.ajax({
@@ -47,19 +52,20 @@
 			type:		'post',
 			datatype:	'json',
 			data: 		{
-				action: 	'qm_add_quiz',
-				nonce:		qmaker.seguridad,
-				nombre:		'valor',
-				tipo:		'add'
+				action: 		'qm_add_quiz',
+				nonce:			qmaker.seguridad,
+				name:			$name.val(),
+				description:	$descrition.val(),
+				tipo:			'add'
 			},
 			success: function(data){
 				data = JSON.parse(data);
 				if(data.result){
 					console.log('Todo Ok!');
-					// urlAddQuestions += data.insert_id;
-					// setTimeout(function(){
-					// 	location.href = urlAddQuestions;
-					// }, 1300);
+					urlAddQuestions += data.insert_id;
+					setTimeout(function(){
+						location.href = urlAddQuestions;
+					}, 1300);
 				}
 				console.log('Resultado: ', data);
 			},
@@ -69,5 +75,42 @@
 				console.log(v)
 			}
 		})
+	 })
+
+
+	 var $btnAddResponse = $('.addresponse-btn')
+	 var $btnDeleResponse = $('.delete-answer-btn')
+	 var $btnSaveResponse = $('.save-question-btn')
+
+	 $btnAddResponse.live('click', function(e){
+		var cont = $('.wrapper_anws').children().length + 1
+		
+		$( '.wrapper_anws' ).append(`
+		 <div class="form-row border border-secondary mx-3 mt-2 py-2 px-4">
+			<div class="col-md-2 custom-checkbox d-flex align-items-center">
+				<input type="checkbox" class="custom-control-input" id="customCheck_${cont}">
+				<label class="custom-control-label ml-3" for="customCheck_${cont}">Correcta</label>
+			</div>
+			<div class="col-md-8">
+				<label for="inputName_${cont}">Respuesta:</label>
+				<input type="text" class="form-control response_text" id="inputName_${cont}" placeholder="Nombre del Quiz">
+			</div>
+			<div class="col-md-2 d-flex align-items-center pt-2">
+				<button type="button" class="btn btn-outline-danger delete-answer-btn">Quitar</button>
+			</div>
+		</div>
+		 	`);
+	 })
+
+
+	 $btnDeleResponse.live('click', function(){
+		console.log('del response 3')
+		$(this).parent().parent().remove()
+	 })
+
+	 $btnSaveResponse.on('click', function(){
+		 $('.wrapper_anws').each(function( index ){
+			console.log($( this ).find('.response_text').val())
+		 })
 	 })
 })( jQuery );

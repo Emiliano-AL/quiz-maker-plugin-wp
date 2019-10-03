@@ -21,7 +21,7 @@
  * @author     Emiliano
  */
 
-class Qmaker_Quiz extends WP_List_Table{
+class Qmaker_Quiz extends WP_List_Table {
 
     /**
 	 * maneja el objeto db
@@ -47,7 +47,7 @@ class Qmaker_Quiz extends WP_List_Table{
 			'plural'   => __( 'Quizes', 'qmaker' ), //plural name of the listed records
 			'ajax'     => false 
         ] );
-        
+
         global $wpdb;
         $this->db = $wpdb;
     }
@@ -109,6 +109,8 @@ class Qmaker_Quiz extends WP_List_Table{
     *
     * Descrición completa
     *
+    *@since     1.0.0
+    *@access    public
     *@author Emiliano
     **/
     public function column_name ($item){
@@ -120,5 +122,47 @@ class Qmaker_Quiz extends WP_List_Table{
         );
 
         return $title . $this->row_actions($actions);
+    }
+
+
+    /**
+    * Agrega un Quiz
+    *
+    * Se encarga de agrear un Quiz en la bd
+    *
+    *@since     1.0.0
+    *@access    public
+    *@author Emiliano
+    **/
+    public function add_quiz($quiz){
+        $this->db->insert(
+            QM_QUIZ,
+            array(
+                'nombre_quiz' => $quiz['name'], 
+                'descripcion' => $quiz['description'] 
+            ),
+            array( '%s', '%s' )
+        );
+
+        return $this->db->insert_id;
+    }
+
+    /**
+    * Regresa un Quiz
+    *
+    * Se encarga de regresar el detalle del quiz,
+    *
+    *@since     1.0.0
+    *@access    public
+    *@author    Emiliano
+    *@param     $quizId     id del quiz
+    **/
+    public function get_quiz($quizId)
+    {
+        if($quizId > 0){
+            $quiz = $this->db->get_row( "SELECT * FROM ".QM_QUIZ." WHERE id = {$quizId}" );
+            return $quiz;
+        }
+        return false;
     }
 }

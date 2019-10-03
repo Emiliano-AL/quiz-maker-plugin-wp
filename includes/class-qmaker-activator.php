@@ -45,26 +45,29 @@ class Qmaker_Activator {
 	private static function qmaker_create_tables (){
 		global $wpdb;
 		$slqAnswers = "CREATE TABLE IF NOT EXISTS " . QM_ANSWERS . "(
-			id int(11) NOT NULL,
+			id int(11) NOT NULL AUTO_INCREMENT,
 			nombre_respuesta text COLLATE utf8mb4_spanish_ci NOT NULL,
 			img_respuesta varchar(60) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
 			es_correcta smallint(6) NOT NULL COMMENT '1=correcto, 0=incorrecto',
-			question_id int(11) NOT NULL
+			question_id int(11) NOT NULL,
+			PRIMARY KEY (id)
 			)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;";
 		$wpdb->query( $slqAnswers );
 
 		$slqQuestion = "CREATE TABLE IF NOT EXISTS " . QM_QUESTION . "(
-			id int(11) NOT NULL,
+			id int(11) NOT NULL AUTO_INCREMENT,
 			nombre_pregunta text COLLATE utf8mb4_spanish_ci NOT NULL,
 			tipo_pregunta int(11) NOT NULL,
-			quiz_id int(11) NOT NULL
+			quiz_id int(11) NOT NULL,
+			PRIMARY KEY (id)
 			)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;";
 		$wpdb->query( $slqQuestion );
 
 		$sqlQuiz = "CREATE TABLE IF NOT EXISTS " . QM_QUIZ . "(
-            id int(11) NOT NULL,
+            id int(11) NOT NULL AUTO_INCREMENT,
   			nombre_quiz varchar(40) COLLATE utf8mb4_spanish_ci NOT NULL,
-  			descripcion varchar(60) COLLATE utf8mb4_spanish_ci NOT NULL
+			descripcion varchar(60) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+			PRIMARY KEY (id)
 		)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;";
 		$wpdb->query( $sqlQuiz );
         

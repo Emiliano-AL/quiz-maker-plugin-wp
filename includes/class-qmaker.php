@@ -98,7 +98,17 @@ class Qmaker {
 	 * @access   private
 	 */
 	private function load_dependencies() {
-
+	
+		/**
+		 * Include clase para manejar los list table
+		 */
+		if(!class_exists('WP_List_Table')){
+			require_once( ABSPATH . 'wp-admin/includes/class-wp-screen.php' );//added
+			require_once( ABSPATH . 'wp-admin/includes/screen.php' );//added
+			require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
+			require_once( ABSPATH . 'wp-admin/includes/template.php' );
+		}
+		
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
@@ -110,6 +120,11 @@ class Qmaker {
 		 * of the plugin.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-qmaker-i18n.php';
+		
+		/**
+		 * Esta clase maneja los quizes del plugin
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-qmaker-quizz.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
