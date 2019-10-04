@@ -127,6 +127,16 @@ class Qmaker {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-qmaker-quizz.php';
 
 		/**
+		 * Esta clase maneja las preguntas y respuestas
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-qmaker-question.php';
+
+		/**
+		 * Esta clase maneja las respuestas
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-qmaker-answer.php';
+
+		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-qmaker-admin.php';
@@ -172,6 +182,7 @@ class Qmaker {
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'qmaker_add_options_menu');
 		
 		$this->loader->add_action( 'wp_ajax_qm_add_quiz', $plugin_admin, 'qmaker_ajax_create_quiz' );
+		$this->loader->add_action( 'wp_ajax_qm_questions_manager', $plugin_admin, 'qmaker_ajax_questions_manager' );
 
 		//Add Settings link	
 		$plugin_basename = plugin_basename(plugin_dir_path(__DIR__). $this->plugin_name . '.php');

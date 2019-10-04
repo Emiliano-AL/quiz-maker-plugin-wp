@@ -49,6 +49,16 @@ class Qmaker_Admin {
 	 */
 	private $qmaker_quiz;
 
+
+	/**
+	 * Objeto Quiz
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      Qmaker_Question    $qmaker_quiz    Maneja el objeto de los quizes.
+	 */
+	private $qmaker_question;
+
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -62,6 +72,7 @@ class Qmaker_Admin {
 		$this->version = $version;
 
 		$this->qmaker_quiz = new Qmaker_Quiz();
+		$this->qmaker_question = new Qmaker_Question();
 	}
 
 	/**
@@ -232,4 +243,39 @@ class Qmaker_Admin {
 		}
 	}
 
+
+	public function qmaker_ajax_questions_manager(){
+		check_ajax_referer('qmaker_seg', 'nonce');
+		if(current_user_can('manage_options')){
+			extract($_POST, EXTR_OVERWRITE);
+			switch ($tipo) {
+				case 'add':
+					$id = $this->qmaker_question->add_question($question, $question['idQuiz']);
+					$response = $this->qmaker_manage_response($id);
+				break;
+
+			}
+
+			echo $response;
+			wp_die();
+		}
+	}
+
+
+	private function qmaker_manage_response($idReponse)
+	{
+		if($idReponse > 0){
+			$json = json_encode(array(
+				'result' 	=> true,
+				'insert_id' => $idReponse
+			));
+		}else{
+			$json = json_encode(array(
+				'result' 	=> false,
+				'insert_id' => $idReponse
+			));
+		}
+
+		return $json;
+	}
 }

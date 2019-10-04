@@ -88,7 +88,7 @@ class Qmaker_Quiz extends WP_List_Table {
     **/
     public function record_count() {
 
-        $sql = "SELECT COUNT(*) FROM {$wpdb->prefix}customers";
+        $sql = "SELECT COUNT(*) FROM ".QM_QUIZ;
         return  $this->db->get_var( $sql );
     }
 
@@ -113,7 +113,7 @@ class Qmaker_Quiz extends WP_List_Table {
     *@access    public
     *@author Emiliano
     **/
-    public function column_name ($item){
+    public function column_name($item){
         //nonce
         $delete_nonce = wp_create_nonce('qmaker_delete_quiz');
         $title = '<strong>' . $item['name']. '</strong>';
@@ -165,4 +165,43 @@ class Qmaker_Quiz extends WP_List_Table {
         }
         return false;
     }
+
+    /**
+    * Regresa El detalle de un quiz
+    *
+    * Se encarga de regresar el detalle del quiz,
+    *
+    *@since     1.0.0
+    *@access    public
+    *@author    Emiliano
+    *@param     $quizId     id del quiz
+    **/
+    public function get_quiz_detail($quizId)
+    {
+        if($quizId > 0){
+            $quiz = $this->db->get_results( "SELECT * FROM ".QM_QUESTION." WHERE quiz_id = {$quizId}" );
+            return $quiz;
+        }
+        return false;
+    }
+
+    public function prepare_items() {
+
+        // $this->_column_headers = $this->get_column_info();
+      
+        // /** Process bulk action */
+        // $this->process_bulk_action();
+      
+        // $per_page     = $this->get_items_per_page( 'customers_per_page', 5 );
+        // $current_page = $this->get_pagenum();
+        // $total_items  = self::record_count();
+      
+        // $this->set_pagination_args( [
+        //   'total_items' => $total_items, //WE have to calculate the total number of items
+        //   'per_page'    => $per_page //WE have to determine how many items to show on a page
+        // ] );
+      
+      
+        // $this->items = self::get_customers( $per_page, $current_page );
+      }
 }

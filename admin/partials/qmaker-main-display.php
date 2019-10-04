@@ -13,6 +13,9 @@
  */
 ?>
 <div class="container">
+  <?php 
+  $qmaker_quiz = new Qmaker_Quiz();
+  ?>
     <div class="row mt-3">
         <div class="col-10">
             <h2 class="text-center"><?php echo esc_html(get_admin_page_title()); ?></h2>
@@ -20,6 +23,17 @@
         <div class="col-2">
             <button class="btn btn-primary" data-toggle="modal" data-target="#addQuizmodal">Agregar Quiz</button>
         </div>
+    </div>
+
+    <div class="row">
+      <h2>Listado Quizes</h2>
+
+						<form method="post">
+							<?php
+							$this->qmaker_quiz->prepare_items();
+							$this->qmaker_quiz->display(); ?>
+						</form>
+			
     </div>
 </div>
 
