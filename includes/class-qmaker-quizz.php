@@ -84,11 +84,21 @@ class Qmaker_Quiz extends WP_List_Table {
     *@param     $id     id del quiz a eliminar
     **/
     public function delete_quiz ($id){
-        $this->db->delete(
-            QM_QUIZ, [ 'ID' => $id ],  [ '%d' ]
-        );
-
-        //TODO: eliminar también preguntas y respuestas del quiz
+        if($id > 0){
+            //Obtener el listado de las preguntas que pertencen a este quiz
+            $questions =  $this->qm_question->get_questions_by_id_quiz( $id );
+            if(count($questions) > 0){
+                foreach($questions as $question){
+                    $this->qm_answers->delete_answers_by_id_question($question->id);
+                }
+            }
+            //Elimina todas las preguntas 
+            $this->qm_question->delete_questions($id);
+            //Elimina el quiz
+            $this->db->delete(
+                QM_QUIZ, [ 'id' => $id ],  [ '%d' ]
+            );
+        }
     }
 
     /**
@@ -100,7 +110,6 @@ class Qmaker_Quiz extends WP_List_Table {
     *@author    Emiliano
     **/
     public function record_count() {
-
         $sql = "SELECT COUNT(*) FROM ".QM_QUIZ;
         return  $this->db->get_var( $sql );
     }
@@ -172,7 +181,7 @@ class Qmaker_Quiz extends WP_List_Table {
     public function column_nombre_quiz($item){
         $actions = array(
             'edit'      => sprintf('<a href="?page=%s&action=%s&idQuiz=%s">Editar</a>',$_REQUEST['page'],'edit',$item['id'] ),
-            'delete'    => sprintf('<a href="?page=%s&action=%s&idQuiz=%s">Papelera</a>',$_REQUEST['page'],'delete',$item['id'] ),
+            'delete'    => sprintf('<a href="?page=%s&action=%s&idQuiz=%s">Eliminar</a>',$_REQUEST['page'],'delete',$item['id'] ),
         );
         return sprintf('%1$s %2$s', $item['nombre_quiz'], $this->row_actions( $actions ) );
     }

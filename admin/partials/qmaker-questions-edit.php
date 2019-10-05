@@ -11,7 +11,6 @@
  * @subpackage Qmaker/admin/partials
  */
 ?>
-
 <div class="container">
 <?php 
  $qmaker_question = new Qmaker_Question();

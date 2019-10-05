@@ -66,7 +66,7 @@
 					urlAddQuestions += data.insert_id;
 					setTimeout(function(){
 						location.href = urlAddQuestions;
-					}, 1300);
+					}, 200);
 				}
 				console.log('Resultado: ', data);
 			},

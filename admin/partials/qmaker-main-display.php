@@ -12,11 +12,20 @@
  * @subpackage Qmaker/admin/partials
  */
 ?>
-
-
 <div class="container">
   <?php 
   $qmaker_quiz = new Qmaker_Quiz();
+  if(isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['idQuiz'])){
+    //TODO: Preguntar antes de hacer el borrado
+    //Elimnar el quiz
+    $qmaker_quiz->delete_quiz($_GET['idQuiz']);
+  ?>
+  <script>
+    var homeplugin = "?page=qmaker";
+    location.href = homeplugin;
+  </script>
+  <?php
+  }
   ?>
     <div class="row mt-3">
         <div class="col-10">
