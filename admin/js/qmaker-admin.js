@@ -118,7 +118,7 @@
 			var responseObj = new Object()
 			var responseCorrect = $(this).find(".is_correct_response input")
 			var responseText = $(this).find(".response_text")
-			responseObj.isCorrect = responseCorrect.is(':checked')
+			responseObj.isCorrect = responseCorrect.is(':checked') ? 1 : 0;
 			responseObj.responseText = responseText.val()
 			responses.push(responseObj)
 		});
@@ -156,4 +156,59 @@
 			}
 		})
 	 })
+	
 })( jQuery );
+
+
+function addItemQuestion(idWrapp){
+	var cont = jQuery('.wrapper_anws_'+idWrapp).children().length + 1
+	console.log('Agregar nuevo...', idWrapp);
+	jQuery( '.wrapper_anws_'+idWrapp ).append(`
+		 <div class="form-row border border-secondary mx-3 mt-2 py-2 px-4 item_answer">
+			<div class="col-md-2 custom-checkbox d-flex align-items-center is_correct_response">
+				<input type="checkbox" class="custom-control-input response_iscorrect" id="customCheck_${cont}">
+				<label class="custom-control-label ml-3" for="customCheck_${cont}">Correcta</label>
+			</div>
+			<div class="col-md-8 text_response">
+				<label for="inputName_${cont}">Respuesta:</label>
+				<input type="text" class="form-control response_text" id="inputName_${cont}" placeholder="Nombre del Quiz">
+			</div>
+			<div class="col-md-2 d-flex align-items-center pt-2">
+				<button type="button" class="btn btn-outline-danger delete-answer-btn">Quitar</button>
+			</div>
+		</div>
+		 	`);
+ }
+
+ function deleteQuestion(id){
+	console.log('hola.. ', id)
+	var r = confirm("La pregunta será removida, ¿esta seguro?")
+	if(r === true){
+		jQuery('.wrapper_question_'+id).remove()
+	}
+	 
+ }
+
+ function saveChangesQuestions(idQuiz){
+	var questions = Array()
+	jQuery('.wrapper_question').each(function() {
+		var questionText = jQuery(this).find('.question_text')
+		var questionNmbr = jQuery(this).find('.question_number')
+		var questionObj = new Object()
+		questionObj.idQuiz = idQuiz
+		questionObj.questionName = questionText.val()
+		questionObj.questionNmbr = questionNmbr.val()
+		var responses = Array()
+		jQuery(this).find('.item_answer').each(function(){
+			var responseObj = new Object()
+			var responseCorrect = jQuery(this).find('.is_correct_response input')
+			var responseText = jQuery(this).find('.response_text')
+			responseObj.isCorrect = responseCorrect.is(':checked') ? 1 : 0;
+			responseObj.responseText = responseText.val()
+			responses.push(responseObj)
+		})
+		questionObj.responses = responses
+		questions.push(questionObj)
+	})
+	console.info(questions)
+ }

@@ -66,27 +66,62 @@ class Qmaker_Question {
     *@param     $question     Array pregunta con sus respectivas respuestas
     *@param     $idQuiz       id id del quiz
     **/
-    public function add_question($question, $idQuiz){
+    public function add_question($question, $idQuiz, $questionNmbr){
         if($idQuiz > 0){
             $this->db->insert(
                 QM_QUESTION,
                 array(
+                    'numero_pregunta'   => $questionNmbr, 
                     'nombre_pregunta'   => $question['questionName'], 
                     'tipo_pregunta'     => 1,
                     'quiz_id'           => $idQuiz
                 ),
-                array( '%s', '%d', '%d' )
+                array( '%d', '%s', '%d', '%d' )
             );
             $questionId = $this->db->insert_id;
-
-            // $this->add_answer( "", "", $questionId );
+            $countResponses = 1;
             foreach ($question['response'] as $anws)
             {
-                $this->qm_answeer->add_answer( $anws, $questionId );
+                $this->qm_answeer->add_answer( $anws, $questionId, $countResponses );
+                $countResponses++;
             }
+            $ttl = $this->db->get_var( "SELECT COUNT(*) FROM ".QM_QUESTION." WHERE quiz_id = {$idQuiz}" );
 
-            return $questionId;
+            return $ttl;
         }
+    }
+
+    /**
+    * cuanta el numero de preguntas de un quiz
+    *
+    * hace un conteo de las preguntsa que pertencen al quiz que recibe
+    *
+    *@author Emiliano
+    *@param     $idQuiz       id id del quiz
+    **/
+    public function total_questions_by_id_quiz ($idQuiz){
+        if($idQuiz > 0){
+            $ttl = $this->db->get_var( "SELECT COUNT(*) FROM ".QM_QUESTION." WHERE quiz_id = {$idQuiz}" );
+            return $ttl;
+        }
+        return false;
+    }
+
+    /**
+    * Regresa el listado de preguntas en base a un id de quiz
+    *
+    * regresa un listado de las preguntas pertenecientes a un quiz
+    *
+    * @author Emiliano
+    * @param     $idQuiz       id id del quiz
+    * @return array
+    **/
+    public function get_questions_by_id_quiz ($idQuiz){
+        if($idQuiz > 0){
+            $results = $this->db->get_results( "SELECT * FROM ".QM_QUESTION." WHERE quiz_id = {$idQuiz}" );
+            return $results;
+        }
+        return false;
     }
 
 }

@@ -67,6 +67,7 @@ class Qmaker_Activator {
             id int(11) NOT NULL AUTO_INCREMENT,
   			nombre_quiz varchar(40) COLLATE utf8mb4_spanish_ci NOT NULL,
 			descripcion varchar(60) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+			preguntas_total int(11) NOT NULL DEFAULT 0,
 			PRIMARY KEY (id)
 		)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;";
 		$wpdb->query( $sqlQuiz );

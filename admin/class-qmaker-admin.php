@@ -193,11 +193,14 @@ class Qmaker_Admin {
 	public function display_plugin_main_page()
 	{
 		if($_GET['page'] == 'qmaker' && $_GET['action'] == 'edit' && isset($_GET['idQuiz'])){
-			require_once  QM_PLUGIN_DIR_PATH . 'admin/partials/qmaker-main-display-edit.php';
+			require_once  QM_PLUGIN_DIR_PATH . 'admin/partials/qmaker-questions-edit.php';
 		}
 		elseif($_GET['page'] == 'qmaker' && $_GET['action'] == 'addquestions' && isset($_GET['idQuiz'])){
 			require_once  QM_PLUGIN_DIR_PATH . 'admin/partials/qmaker-questions-admin.php';
 		}
+		// elseif($_GET['page'] == 'qmaker' && $_GET['action'] == 'edit' && isset($_GET['idQuiz'])){
+		// 	require_once  QM_PLUGIN_DIR_PATH . 'admin/partials/qmaker-questions-admin.php';
+		// }
 		else 
 		{
 			require_once  QM_PLUGIN_DIR_PATH . 'admin/partials/qmaker-main-display.php' ;
@@ -250,8 +253,10 @@ class Qmaker_Admin {
 			extract($_POST, EXTR_OVERWRITE);
 			switch ($tipo) {
 				case 'add':
-					$id = $this->qmaker_question->add_question($question, $question['idQuiz']);
-					$response = $this->qmaker_manage_response($id);
+					$ttl = $this->qmaker_question->total_questions_by_id_quiz($question['idQuiz']) +1;
+					$ttlQuestions = $this->qmaker_question->add_question($question, $question['idQuiz'], $ttl );
+					$this->qmaker_quiz->update_total_questions($question['idQuiz'], $ttlQuestions);
+					$response = $this->qmaker_manage_response($question['idQuiz']);
 				break;
 
 			}

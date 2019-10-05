@@ -12,6 +12,8 @@
  * @subpackage Qmaker/admin/partials
  */
 ?>
+
+
 <div class="container">
   <?php 
   $qmaker_quiz = new Qmaker_Quiz();
@@ -26,14 +28,15 @@
     </div>
 
     <div class="row">
-      <h2>Listado Quizes</h2>
-
-						<form method="post">
-							<?php
-							$this->qmaker_quiz->prepare_items();
-							$this->qmaker_quiz->display(); ?>
-						</form>
-			
+      <div class="col-12">
+        <h2>Listado Quizes</h2>
+        <form method="post">
+          <?php
+          $this->qmaker_quiz->prepare_items();
+          $this->qmaker_quiz->display(); 
+          ?>
+        </form>
+      </div>
     </div>
 </div>
 

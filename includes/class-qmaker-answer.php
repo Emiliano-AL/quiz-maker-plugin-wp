@@ -55,20 +55,38 @@ class Qmaker_Answers {
     *@param     $answer         Array pregunta con sus respectivas respuestas
     *@param     $idQuestion     id id del question
     **/
-    public function add_answer( $answer, $idQuestion){
+    public function add_answer( $answer, $idQuestion, $answerNmbr){
         if($idQuestion > 0){
-            $isValid = $answer['isCorrect'] == true ? 1 : 0;
             $this->db->insert(
                 QM_ANSWERS,
                 array(
+                    'numero_respuesta'      => $answerNmbr, 
                     'nombre_respuesta'      => $answer['responseText'], 
                     'img_respuesta'         => '',
-                    'es_correcta'           => $isValid,
+                    'es_correcta'           => $answer['isCorrect'],
                     'question_id'           => $idQuestion
                 ),
-                array( '%s', '%s', '%d', '%d' )
+                array( '%d', '%s', '%s', '%d', '%d' )
             );
             $answerId = $this->db->insert_id;
         }
+    }
+
+    /**
+    * Regresa todas las respuestas de una pregunta
+    *
+    * Regresa todas las respuestas de una ´regunat en base al id
+    *
+    *@since     1.0.0
+    *@access    public
+    *@author Emiliano
+    *@param     $idQuestion     id id del question
+    **/
+    public function get_answers_by_id_quesion ($idQuestion){
+        if($idQuestion > 0){
+            $results = $this->db->get_results( "SELECT * FROM ".QM_ANSWERS." WHERE question_id = {$idQuestion}" );
+            return $results;
+        }
+        return false;
     }
 }
