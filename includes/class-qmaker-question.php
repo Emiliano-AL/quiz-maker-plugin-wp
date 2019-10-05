@@ -124,4 +124,19 @@ class Qmaker_Question {
         return false;
     }
 
+
+    /**
+    * Elimina las preguntas relacionadas al idQuiz
+    *
+    * Elimina todas las preguntas que dependen del id Quiz
+    *
+    *@author Emiliano
+    *@param     $idQuiz       id id del quiz
+    **/
+    public function delete_questions ($idQuiz){
+        if($idQuiz > 0){
+            $this->db->delete( QM_QUESTION, array( 'quiz_id' => $idQuiz ), array( '%d' ) );
+        }
+    }
+
 }

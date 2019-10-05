@@ -31,6 +31,24 @@ class Qmaker_Quiz extends WP_List_Table {
 	 * @var      wpdb   Maneja el objeto wpdb
 	 */
 	protected $db;
+    
+    /**
+	 * maneja el objeto Qmaker_Question
+	 *
+	 * @since    1.0.0
+	 * @access   protected
+	 * @var      Qmaker_Question   Maneja el objeto Qmaker_Question
+	 */
+	protected $qm_question;
+    
+    /**
+	 * maneja el objeto Qmaker_Answers
+	 *
+	 * @since    1.0.0
+	 * @access   protected
+	 * @var      Qmaker_Answers   Maneja el objeto Qmaker_Answers
+	 */
+	protected $qm_answers;
 
     /**
     * Constructor de la clase
@@ -47,6 +65,9 @@ class Qmaker_Quiz extends WP_List_Table {
 			'plural'   => __( 'Quizes', 'qmaker' ), //plural name of the listed records
 			'ajax'     => false 
         ] );
+
+        $this->qm_question = new Qmaker_Question();
+        $this->qm_answers = new Qmaker_Answers();
 
         global $wpdb;
         $this->db = $wpdb;
@@ -340,5 +361,59 @@ class Qmaker_Quiz extends WP_List_Table {
                 array( '%d' ), array( '%d' ) 
             );
           }
+      }
+
+
+      /**
+      * Se encarga de actualizar un quiz y sus preguntas
+      *
+      * se enacarga de manejar los quizes, preguntas y respuestas
+      *
+      *@since     1.0.0
+      *@access    public
+      *@author    Emiliano
+      *@param     $quiz           $quiz     objeto complate del quiz
+      **/
+      public function manager_update_quiz ($quiz){
+          //Actualiza el quiz 
+          self::update_quiz($quiz['name'], $quiz['description'], $quiz['total_questions'], $quiz['idQuiz'] );
+
+          //Obtener el listado de las preguntas que pertencen a este quiz
+          $questions =  $this->qm_question->get_questions_by_id_quiz( $quiz['idQuiz'] );
+          foreach($questions as $question){
+            $this->qm_answers->delete_answers_by_id_question($question->id);
+          }
+          //Elimina todas las preguntas 
+          $this->qm_question->delete_questions($quiz['idQuiz']);
+
+          //Agregar preguntas y respuestas 
+          foreach($quiz['questions'] as $question){
+              $this->qm_question->add_question($question, $quiz['idQuiz'], $question['questionNmbr']);
+          }
+
+          return $quiz['idQuiz'];  
+      }
+
+      /**
+      * se ancarga de hacer el update de la info del quiz
+      *
+      * maneja las actualizaciones de los generales del quiz
+      *
+      *@author Emiliano
+      **/
+      public function update_quiz ($name, $description, $ttl, $quizId){
+            if($quizId > 0){
+                $this->db->update( 
+                    QM_QUIZ, 
+                    array( 
+                        'nombre_quiz' => $name,
+                        'descripcion' => $description,
+                        'preguntas_total' => $ttl,
+                     ), 
+                    array( 'id' => $quizId ), 
+                    array( '%s', '%s', '%d' ), 
+                    array( '%d' ) 
+                );
+            }
       }
 }

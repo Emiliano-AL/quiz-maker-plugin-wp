@@ -162,40 +162,45 @@
 
 function addItemQuestion(idWrapp){
 	var cont = jQuery('.wrapper_anws_'+idWrapp).children().length + 1
-	console.log('Agregar nuevo...', idWrapp);
+	console.log('Agregar nuevo...', idWrapp)
+	var ans_id = `${idWrapp}_${cont}`
 	jQuery( '.wrapper_anws_'+idWrapp ).append(`
 		 <div class="form-row border border-secondary mx-3 mt-2 py-2 px-4 item_answer">
 			<div class="col-md-2 custom-checkbox d-flex align-items-center is_correct_response">
-				<input type="checkbox" class="custom-control-input response_iscorrect" id="customCheck_${cont}">
-				<label class="custom-control-label ml-3" for="customCheck_${cont}">Correcta</label>
+				<input type="checkbox" class="custom-control-input response_iscorrect" id="customCheck_${ans_id}">
+				<label class="custom-control-label ml-3" for="customCheck_${ans_id}">Correcta</label>
 			</div>
 			<div class="col-md-8 text_response">
-				<label for="inputName_${cont}">Respuesta:</label>
-				<input type="text" class="form-control response_text" id="inputName_${cont}" placeholder="Nombre del Quiz">
+				<label for="inputName_${ans_id}">Respuesta:</label>
+				<input type="text" class="form-control response_text" id="inputName_${ans_id}" placeholder="Nombre del Quiz">
 			</div>
 			<div class="col-md-2 d-flex align-items-center pt-2">
 				<button type="button" class="btn btn-outline-danger delete-answer-btn">Quitar</button>
 			</div>
 		</div>
-		 	`);
+			 `);
  }
 
  function deleteQuestion(id){
 	console.log('hola.. ', id)
 	var r = confirm("La pregunta será removida, ¿esta seguro?")
 	if(r === true){
-		jQuery('.wrapper_question_'+id).remove()
+		jQuery('.wrapp_manager_question_'+id).remove()
 	}
 	 
  }
 
  function saveChangesQuestions(idQuiz){
 	var questions = Array()
+	var quiz = new Object()
+	quiz.name = jQuery('.name_quiz').val()
+	quiz.description = jQuery('.description_quiz').val()
+	quiz.total_questions = jQuery('.wrap_main_questions').children().length
+	quiz.idQuiz = idQuiz
 	jQuery('.wrapper_question').each(function() {
 		var questionText = jQuery(this).find('.question_text')
 		var questionNmbr = jQuery(this).find('.question_number')
 		var questionObj = new Object()
-		questionObj.idQuiz = idQuiz
 		questionObj.questionName = questionText.val()
 		questionObj.questionNmbr = questionNmbr.val()
 		var responses = Array()
@@ -207,8 +212,77 @@ function addItemQuestion(idWrapp){
 			responseObj.responseText = responseText.val()
 			responses.push(responseObj)
 		})
-		questionObj.responses = responses
+		questionObj.response = responses
 		questions.push(questionObj)
 	})
-	console.info(questions)
+	quiz.questions = questions
+	console.info(quiz)
+	//Evento ajax
+	jQuery.ajax({
+		url:		qmaker.url,
+		type:		'post',
+		datatype:	'json',
+		data: 		{
+			action: 		'qm_questions_manager',
+			nonce:			qmaker.seguridad,
+			quiz:			JSON.parse(JSON.stringify(quiz)),
+			tipo:			'update'
+		},
+		success: function(data){
+			data = JSON.parse(data);
+			if(data.result){
+				console.info(data)
+				alert('Se actualizo correctamente.')
+				// var r = confirm("Pregunta agregada correctamente. ¿Deseas agregar más?")
+				// if(r === true){
+				// 	urlAddQuestions += $('.quiz_id').val()
+				// 	location.href = urlAddQuestions;
+				// }else{
+				// 	location.href = urlhome;
+				// }
+			}
+			console.info(data)
+		},
+		error: function(d, x, v){
+			console.log(d)
+			console.log(x)
+			console.log(v)
+		}
+	})
+ }
+
+ function addQuestionWrap(){
+	console.log('Hola...', )	
+	var nmbrQuestion = 	jQuery('.wrap_main_questions').children().length + 1
+	jQuery('.wrap_main_questions').append(`
+		<div class="wrapper_question wrapp_manager_question_${nmbrQuestion}">
+			<div id="question_${nmbrQuestion}" class="border border-primary p-3">
+				<div class="form-group">					
+					<label class="counter_question font-weight-bold" for="inputName">Pregunta ${nmbrQuestion}:</label>
+					<input type="text" class="form-control question_text" id="inputName" placeholder="Nombre de la pregunta">
+					<input type="hidden" class="question_number" value="${nmbrQuestion}">
+					<div class="wrapper_anws_${nmbrQuestion}">
+						<div class="form-row border border-secondary mx-3 mt-2 py-2 px-4 item_answer">
+							<div class="col-md-2 custom-checkbox d-flex align-items-center is_correct_response">
+								<input type="checkbox" class="custom-control-input response_iscorrect" id="customCheck_${nmbrQuestion}">
+								<label class="custom-control-label ml-3" for="customCheck_${nmbrQuestion}">Correcta</label>
+							</div>
+							<div class="col-md-8 text_response">
+								<label for="inputName_${nmbrQuestion}">Respuesta: 1</label>
+								<input type="text" class="form-control response_text" id="inputName_${nmbrQuestion}" placeholder="respuesta">
+							</div>
+							<div class="col-md-2 d-flex align-items-center pt-2">
+								<button type="button" class="btn btn-outline-danger delete-answer-btn">Quitar</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group d-flex justify-content-end">
+					<button type="button" onclick="addItemQuestion(${nmbrQuestion})" class="btn btn-info btn-sm addresponse-btn-edit mr-2">Agregar Respuesta</button>
+					<button type="button" onclick="deleteQuestion(${nmbrQuestion})" class="btn btn-danger btn-sm">Quitar pregunta</button>
+				</div>
+			</div>
+		</div>
+	`)
+	jQuery('.question_text').focus()
  }

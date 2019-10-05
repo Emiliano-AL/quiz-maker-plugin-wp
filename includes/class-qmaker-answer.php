@@ -89,4 +89,20 @@ class Qmaker_Answers {
         }
         return false;
     }
+
+    /**
+    * Elimina las respuestas de una pregunta
+    *
+    * elimina todas las respuestas que pertencen a una pregunta en concreto
+    *
+    *@since     1.0.0
+    *@access    public
+    *@author Emiliano
+    *@param     $idQuestion     id id del question
+    **/
+    public function delete_answers_by_id_question ($idQuestion){
+        if($idQuestion > 0){
+            $this->db->delete( QM_ANSWERS, array( 'question_id' => $idQuestion ), array( '%d' ) );
+        }
+    }
 }

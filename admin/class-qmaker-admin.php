@@ -253,12 +253,17 @@ class Qmaker_Admin {
 			extract($_POST, EXTR_OVERWRITE);
 			switch ($tipo) {
 				case 'add':
-					$ttl = $this->qmaker_question->total_questions_by_id_quiz($question['idQuiz']) +1;
+					$ttl = $this->qmaker_question->total_questions_by_id_quiz($question['idQuiz']) + 1;
 					$ttlQuestions = $this->qmaker_question->add_question($question, $question['idQuiz'], $ttl );
 					$this->qmaker_quiz->update_total_questions($question['idQuiz'], $ttlQuestions);
 					$response = $this->qmaker_manage_response($question['idQuiz']);
-				break;
-
+					break;
+				case 'update':
+					$id = $this->qmaker_quiz->manager_update_quiz($quiz);
+					$response = $this->qmaker_manage_response($id);
+					break;
+				default:
+					$response = $this->qmaker_manage_response(0);
 			}
 
 			echo $response;

@@ -15,3 +15,7 @@ a:hover > .dashicons-qmaker{
     background-repeat: no-repeat;
     background-size: 70%;
 }
+
+.question_text{
+    border: 1px solid #666;
+}
