@@ -41,6 +41,15 @@ class Qmaker_Public {
 	private $version;
 
 	/**
+	* maneja el objeto db
+	*
+	* @since    1.0.0
+	* @access   protected
+	* @var      wpdb   Maneja el objeto wpdb
+	*/
+    protected $db;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
@@ -48,10 +57,11 @@ class Qmaker_Public {
 	 * @param      string    $version    The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
-
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
+		global $wpdb;
+        $this->db = $wpdb;
 	}
 
 	/**
@@ -72,6 +82,11 @@ class Qmaker_Public {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
+
+		 /**
+		 * Regitra Bootstrap 4
+		 */
+		wp_enqueue_style( 'qm_bootstrap_css', 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css', array(), '4.3.1', 'all');
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/qmaker-public.css', array(), $this->version, 'all' );
 
@@ -95,9 +110,49 @@ class Qmaker_Public {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
+		
+		/**
+		 * Registra bootstrap 4 js
+		 */
+		wp_enqueue_script( 'qm_bootstrap_popper_js', 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js', array( 'jquery' ), '1.14.7', true );
+		wp_enqueue_script( 'qm_bootstrap_js', 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js', array( 'jquery' ), '4.3.1', true );
+
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/qmaker-public.js', array( 'jquery' ), $this->version, false );
 
+	}
+
+
+	public function register_shortcodes() {
+		add_shortcode( 'quizmaker', array( $this, 'qmaker_shortcode_quiz_id') );
+	}
+
+	/**
+	* Ejecuta el shoertcode
+	*
+	* esta función se encarga de mostrar los quizes del plugin
+	*
+	*@author Emiliano
+	**/
+	public function qmaker_shortcode_quiz_id($atts, $content = ''){
+		$args = shortcode_atts(array(
+				'id' => ''
+			), $atts);
+
+		ob_start();
+		require_once  QM_PLUGIN_DIR_PATH . 'public/partials/qmaker-public-display.php' ;
+		return ob_get_clean();
+			// $sql = $this->db->prepare("SELECT * FROM ". QM_QUIZ ." WHERE id = %d", $id);
+			// $quiz = $this->db->get_results($sql);
+
+			// if($quiz[0]->id != ''){
+			// 	$output = "<h3>hola {$quiz[0]->nombre_quiz}</h3>";
+			// }else{
+			// 	$output = "<h3>No hay información del quiz</h3>";
+			// }
+		// }
+
+		// return $output;
 	}
 
 }

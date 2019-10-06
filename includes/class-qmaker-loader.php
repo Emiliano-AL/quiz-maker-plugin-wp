@@ -40,6 +40,15 @@ class Qmaker_Loader {
 	 * @var      array    $filters    The filters registered with WordPress to fire when the plugin loads.
 	 */
 	protected $filters;
+	
+	/**
+	 * The array of shorcodes registrados en wordpress.
+	 *
+	 * @since    1.0.0
+	 * @access   protected
+	 * @var      array    $filters    The filters of shorcodes registrados en wordpress para ejecutar cuando se carga el plugin.
+	 */
+	protected $shortcodes;
 
 	/**
 	 * Initialize the collections used to maintain the actions and filters.
@@ -50,6 +59,7 @@ class Qmaker_Loader {
 
 		$this->actions = array();
 		$this->filters = array();
+		$this->shortcodes = array();
 
 	}
 
@@ -110,6 +120,43 @@ class Qmaker_Loader {
 	}
 
 	/**
+	 * Agrega un shortcode nual al array ($this->shortcodes) a iterar para agregarlos a wordpress
+	 *
+	 * @since    1.0.0
+	 * @access		public
+	 * 
+	 * @param    string               $tag             El nombre del Shortcode de Wordpress que se esta registrando
+	 * @param    object               $component        Una referencia a la instancia del objeto en el que se define el Shortcode
+	 * @param    string               $callback         El nombre de la definición del metodo/funcion en el $component
+	 */
+	// public function add_shortcode($tag, $component, $callback) {
+	// 	$this->shortcodes = $this->add_s( $this->shortcodes, $tag, $component, $callback );
+	// }
+
+	/**
+	 * Función de utilidad que se utiliza para registrar los shortcodes en una sola iterada
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * 
+	 * @param    array                $shortcodes		La colección de Shortcodes que se está registrando.
+	 * @param    string               $tag				El nombre del Shortcode de wordpress que se está registrando .
+	 * @param    object               $component        Una referencia a la instancia del objeto en el que se define el shortcode 
+	 * @param    string               $callback         El nombre de la definición del método / función en el $component
+	 * 
+	 * @return   array                                  La colección del shortcodes en wordpress para proceder a iterar
+	 */
+	// private function add_s( $shortcodes, $tag, $component ) {
+	// 	$shortcodes[] = array(
+	// 		'tag'          	=> $tag,
+	// 		'component'     => $component,
+	// 		'callback'      => $callback
+	// 	);
+
+	// 	return $shortcodes;
+	// }
+
+	/**
 	 * Register the filters and actions with WordPress.
 	 *
 	 * @since    1.0.0
@@ -123,6 +170,10 @@ class Qmaker_Loader {
 		foreach ( $this->actions as $hook ) {
 			add_action( $hook['hook'], array( $hook['component'], $hook['callback'] ), $hook['priority'], $hook['accepted_args'] );
 		}
+		
+		// foreach ( $this->shortcodes as $shortcode ) {
+		// 	add_shortcode($shortcode['tag'], array( $shortcode['component'], $shortcode['callback'] ));
+		// }
 
 	}
 

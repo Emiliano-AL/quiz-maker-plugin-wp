@@ -2,3 +2,44 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
+
+.hola{
+    display: inline;
+}
+
+.list-group-item-anws{
+    position: relative;
+    display: block;
+}
+
+/* HTML5 Boilerplate accessible hidden styles */
+[type="radio"] {
+    border: 0; 
+    clip: rect(0 0 0 0); 
+    height: 1px; margin: -1px; 
+    overflow: hidden; 
+    padding: 0; 
+    position: absolute; 
+    width: 1px;
+   
+  }
+/* One radio button per line */
+.item-option {
+    width: 60%;
+    cursor: pointer;
+    line-height: 2.5;
+    font-size: 1em;
+    margin: .5em 0 .5em;
+    background-color:blue;
+    text-align:center;
+  }
+  
+  [type="radio"] + span {
+    display: block;
+  }
+  
+  [type="radio"]:checked + span{
+    background-color:red;
+  }
+  
+ 

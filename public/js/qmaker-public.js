@@ -17,9 +17,7 @@
 	 *
 	 * When the window is loaded:
 	 *
-	 * $( window ).load(function() {
-	 *
-	 * });
+	
 	 *
 	 * ...and/or other possibilities.
 	 *
@@ -28,5 +26,17 @@
 	 * Although scripts in the WordPress core, Plugins and Themes may be
 	 * practising this, we should strive to set a better example in our own work.
 	 */
+	$( window ).load(function() {
+		var $btncheckAnswer = $('.btn-check-anws')
+		$btncheckAnswer.on('click', function(){
+			var idQuestion = 'question_' + $(this).data('question')
+			console.log('hola...', idQuestion)
+		})
+	});
 
+	
 })( jQuery );
+
+function prevQuestion(){
+	console.log('Siguiente')
+}
