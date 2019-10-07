@@ -13,7 +13,7 @@
  * @package           Qmaker
  *
  * @wordpress-plugin
- * Plugin Name:       Quizzes Maker
+ * Plugin Name:       Quizzes Maker HW
  * Plugin URI:        https://habitatweb.mx/
  * Description:       Este plugin, sirve para crear Quizes de manera sencilla y concreta
  * Version:           1.0.0
