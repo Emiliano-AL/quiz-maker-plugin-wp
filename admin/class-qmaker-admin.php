@@ -175,13 +175,13 @@ class Qmaker_Admin {
 			'dashicons-qmaker', 
 			41);
 
-		add_submenu_page(
-			$this->plugin_name, 
-			'Página de Configuración', 
-			'Configuración', 
-			'manage_options',
-			$this->plugin_name.'_settings', 
-			array($this, 'display_plugin_setup_page'));
+		// add_submenu_page(
+		// 	$this->plugin_name, 
+		// 	'Página de Configuración', 
+		// 	'Configuración', 
+		// 	'manage_options',
+		// 	$this->plugin_name.'_settings', 
+		// 	array($this, 'display_plugin_setup_page'));
 	}
 
 	/**
@@ -213,9 +213,9 @@ class Qmaker_Admin {
 	 * @access   public
 	 * @since    1.0.0
 	 */
-	public function display_plugin_setup_page(){
-		require_once  QM_PLUGIN_DIR_PATH . 'admin/partials/qmaker-setting-display.php' ;
-	}
+	// public function display_plugin_setup_page(){
+	// 	require_once  QM_PLUGIN_DIR_PATH . 'admin/partials/qmaker-setting-display.php' ;
+	// }
 
 
 	public function qmaker_ajax_create_quiz(){
