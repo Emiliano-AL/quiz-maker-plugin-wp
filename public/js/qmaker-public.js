@@ -42,23 +42,30 @@
 		$btncheckAnswer.on('click', function(){
 			var idQuestion = '.question_' + $(this).data('question')
 			var btnNext = '#btn-next_' + $(this).data('question')
+			var btnShowResults = '#btn-show-result_' + $(this).data('question')
 			$(btnNext).removeClass('d-none')
+			$(btnShowResults).removeClass('d-none')
 			$(idQuestion).each(function() {
 				var answser = $(this).find('.ans_item')
-				// console.log(answser.is(":checked"))
-				
 				if( !$(answser).parent().hasClass('evaluated') && answser.is(":checked")){
 					if(answser.val() == 1){
-						console.log('Respuesta correcta!')
+						// console.log('Respuesta correcta!')
 						$(answser).next().addClass('correct-answer')
 						$(answser).parent().next().removeClass('d-none')
 						var corrects = Number($('.correct-answers').val()) + 1
 						$('.correct-answers').val(corrects)
 					}else{
-						console.log('Respuesta incorrecta')
+						// console.log('Respuesta incorrecta')
 						$(answser).next().addClass('incorrect-answer')
 						var incorrects = Number($('.incorrect-answers').val()) + 1
 						$('.incorrect-answers').val(incorrects)
+						$(idQuestion).each(function() {
+							if($(this).children('label').hasClass('qm-answers-correct')){
+								// console.log('esta es la correcta')
+								$(this).children('label').children('span').addClass('correct-answer')
+								$(this).children('i').removeClass('d-none')
+							}
+						})
 					}
 				}
 				$(answser).parent().addClass('evaluated')
@@ -91,7 +98,7 @@
 			$('.show-results-text').empty()
 			$('.show-results-text').append(`
 				Tuviste <strong>${corrects}</strong> respuestas correctas y <strong>${incorrects} </strong> incorrectas, 
-				tu calificación final es de <strong>${score.toFixed(2)}</strong>
+				tu calificación final es de <strong>${score.toFixed()}</strong>
 			`)
 			$('.card-results').removeClass('invisible-qm')
 		})
@@ -110,6 +117,7 @@
 			$('#card-question_1').removeClass('invisible-qm')
 			
 			$('.btn-next-ctrl_1').addClass('d-none')
+			//TODO: También se debe agregar las clases d-none a los bts que estaban ocultos
 		})
 	});
 

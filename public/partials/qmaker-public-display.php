@@ -47,7 +47,7 @@ if($id != ''):
                         <?php foreach($answers as $a):?>
                         <li class="list-group-item-anws question_<?php echo $q->id; ?>">
                             <label 
-                                class="item-option" 
+                                class="item-option <?php echo $a->es_correcta == 1 ? 'qm-answers-correct' : ''; ?>" 
                                 data-question="<?php echo $q->id; ?>" 
                                 for="answer_<?php echo $a->id; ?>">
                                 <input type="radio" 
@@ -95,7 +95,7 @@ if($id != ''):
                                         data-question="<?php echo $q->id; ?>" 
                                         data-number-question="<?php echo $qnmbr; ?>"
                                         data-total-questions="<?php echo $ttlQuestions; ?>"
-                                        class="btn btn-outline-info btn-directions btn-show-results btn-sm">
+                                        class="btn btn-outline-info btn-directions btn-show-results btn-sm d-none">
                                         Ver Resultados</i>
                                     </button>
                                     <?php else: ?>
