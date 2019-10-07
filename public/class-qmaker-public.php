@@ -142,17 +142,6 @@ class Qmaker_Public {
 		ob_start();
 		require_once  QM_PLUGIN_DIR_PATH . 'public/partials/qmaker-public-display.php' ;
 		return ob_get_clean();
-			// $sql = $this->db->prepare("SELECT * FROM ". QM_QUIZ ." WHERE id = %d", $id);
-			// $quiz = $this->db->get_results($sql);
-
-			// if($quiz[0]->id != ''){
-			// 	$output = "<h3>hola {$quiz[0]->nombre_quiz}</h3>";
-			// }else{
-			// 	$output = "<h3>No hay información del quiz</h3>";
-			// }
-		// }
-
-		// return $output;
 	}
 
 }

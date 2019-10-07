@@ -2,14 +2,37 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
-
-.hola{
-    display: inline;
+.w-33{
+    width: 33% !important;
 }
-
+.invisible{
+    display: none;
+}
 .list-group-item-anws{
     position: relative;
     display: block;
+}
+
+.question_title{
+    color: #012e3d;
+}
+.btn-check-anws{
+    background-color: #03ABE5;
+    text-transform: uppercase;
+    border: 1px solid #03ABE5;
+    padding: .6rem 1.5rem;
+}
+.btn-check-anws:hover{
+    background-color: #03ABE5;
+    border: 1px solid #03ABE5;
+}
+.btn-directions{
+    border: 1px solid #03ABE5;
+    text-transform: uppercase;
+    padding: .6rem 1.5rem;
+}
+.btn-directions:hover{
+    background-color: #03ABE5;
 }
 
 /* HTML5 Boilerplate accessible hidden styles */
@@ -23,23 +46,60 @@
     width: 1px;
    
   }
-/* One radio button per line */
 .item-option {
     width: 60%;
     cursor: pointer;
     line-height: 2.5;
     font-size: 1em;
     margin: .5em 0 .5em;
-    background-color:blue;
+    background-color:#d4e8f1;
     text-align:center;
+    color: #0A7094;
+
+    border-radius: 5px;
   }
+  .correct-answer{
+      background-color: #60D477 !important;
+      color: #ffffff;
+  }
+  .incorrect-answer{
+    background-color: #ff5252 !important;
+    color: #ffffff;
+  }
+
   
   [type="radio"] + span {
     display: block;
   }
   
   [type="radio"]:checked + span{
-    background-color:red;
+    background-color:#9addf5;
+    border-radius: 5px;
   }
   
- 
+  .img-ctrls-lessMore{
+    background-size: 100%;
+    width: 23px;
+    height: 23px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    margin-top: -1px;
+  }
+  .arrow-left{
+    background-image: url('../img/arrow-left.svg');
+  }
+  .arrow-right{
+    background-image: url('../img/arrow-right.svg');
+  }
+  .verification{
+    background-image: url('../img/verification-mark.svg');
+  }
+  .position-verifcation{
+    position: absolute;
+    top: 18px;
+    margin-left: 6px;
+  }
+  .btn-directions:hover > i {
+    filter: brightness(0) invert(1);
+  }

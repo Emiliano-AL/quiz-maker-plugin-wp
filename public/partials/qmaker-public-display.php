@@ -28,59 +28,99 @@ if($id != ''):
             <h4><?php echo $quiz->nombre_quiz ?></h4>
         </div>
         <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                <!-- <div class="card-body"> -->
-                    <h5 class="card-title text-center">Actividad 1/3</h5>
-                </div>
-                <?php foreach($questions as $q): ?>
-                    <h4 class="text-center pb-0 mt-3" ><?php echo $q->nombre_pregunta; ?></h4>
-                    <ul class="list-group list-group-flush text-center pb-4 pl-4 pr-4 question_<?php echo $q->id; ?>">
+            <?php 
+                $ttlQuestions = count($questions);
+                $qnmbr = 1;
+            ?>
+            <?php foreach($questions as $q): ?>
+                <div class="card <?php echo $qnmbr > 1 ? 'invisible': ''?>" 
+                    id="card-question_<?php echo $qnmbr; ?>" 
+                    data-question="<?php echo $q->id; ?>" >
+                    <div class="card-header">
+                        <h5 class="card-title text-center">
+                            Actividad <?php echo  $qnmbr; ?>/<?php echo $ttlQuestions; ?>
+                        </h5>
+                    </div>
+                    <h4 class="text-center pb-0 mt-3 question_title" ><?php echo $q->nombre_pregunta; ?></h4>
+                    <ul class="list-group list-group-flush text-center pb-4 pl-4 pr-4 question_wrap_<?php echo $q->id; ?>">
                         <?php $answers = $public_quiz->get_answers_by_id_quesion($q->id); ?>
                         <?php foreach($answers as $a):?>
-                        <li class="list-group-item-anws">
-                            <label class="item-option" for="answer_<?php echo $a->id; ?>">
-                                <input type="radio" value="<?php echo $a->es_correcta; ?>" name="option_ans_<?php echo $q->id; ?>" id="answer_<?php echo $a->id; ?>"> 
+                        <li class="list-group-item-anws question_<?php echo $q->id; ?>">
+                            <label class="item-option" data-question="<?php echo $q->id; ?>" for="answer_<?php echo $a->id; ?>">
+                                <input type="radio" 
+                                        class="ans_item"
+                                        value="<?php echo $a->es_correcta; ?>" 
+                                        name="option_ans_<?php echo $q->id; ?>" 
+                                        id="answer_<?php echo $a->id; ?>"> 
                                 <span><?php echo $a->nombre_respuesta; ?></span>
                             </label>
+                            <?php if ($a->es_correcta == 1):?>
+                            <i class="img-ctrls-lessMore position-verifcation verification d-none"></i>
+                            <?php endif; ?>
                         </li>
                         <?php endforeach; ?>
-                        <!-- <li class="list-group-item-anws">
-                            <label class="item-option" for="accessible-and-pretty">
-                                <input type="radio" value="pretty"  name="quality" id="accessible-and-pretty" checked> 
-                                <span>accessible and pretty</span>
-                            </label>
-                        </li>
-                        <li class="list-group-item-anws">
-                            <label class="item-option" for="accessible">
-                                <input type="radio" value="accessible" name="quality" id="accessible"> 
-                                <span>hola</span>
-                            </label>
-                        </li> -->
                     </ul>
                     <div class="card-footer">
                         <table class="w-100">
                             <tr>
-                                <th> 
-                                    <button type="button" onclick="prevQuestion()" class="btn btn-outline-info btn-sm">Anterior</button>
+                                <th class="w-33"> 
+                                    <?php if($qnmbr > 1):?>
+                                    <button 
+                                        type="button" 
+                                        id="btn-prev_<?php echo $q->id; ?>"
+                                        data-question="<?php echo $q->id; ?>" 
+                                        data-number-question="<?php echo $qnmbr; ?>"
+                                        data-total-questions="<?php echo $ttlQuestions; ?>"
+                                        class="btn btn-outline-info btn-directions btn-prev-question btn-sm">
+                                            <i class="img-ctrls-lessMore arrow-left mr-2"></i>Anterior
+                                    </button>
+                                    <?php endif; ?>
                                 </th>
-                                <th class="text-center"> 
-                                    <button type="button" data-question="<?php echo $q->id; ?>" class="btn btn-primary btn-sm btn-check-anws">Revisar</button>
+                                <th class="w-33 text-center"> 
+                                    <button 
+                                        type="button" 
+                                        id="btn-check_<?php echo $q->id; ?>"
+                                        data-question="<?php echo $q->id; ?>" 
+                                        class="btn btn-primary btn-sm btn-check-anws d-none">Revisar</button>
                                 </th>
-                                <th class="text-right"> 
-                                    <button type="button" onclick="nextQuestion()" class="btn btn-outline-info btn-sm">Siguiente</button>
+                                <th class="w-33 text-right"> 
+                                    <?php if($ttlQuestions == $qnmbr): ?>
+                                    <!-- pintar boton de ver resultados -->
+                                    <button 
+                                        type="button" 
+                                        id="btn-show-result_<?php echo $q->id; ?>"
+                                        data-question="<?php echo $q->id; ?>" 
+                                        data-number-question="<?php echo $qnmbr; ?>"
+                                        data-total-questions="<?php echo $ttlQuestions; ?>"
+                                        class="btn btn-outline-info btn-directions btn-show-results btn-sm">
+                                        Ver Resultados</i>
+                                    </button>
+                                    <?php else: ?>
+                                    <button 
+                                        type="button" 
+                                        id="btn-next_<?php echo $q->id; ?>"
+                                        data-question="<?php echo $q->id; ?>" 
+                                        data-number-question="<?php echo $qnmbr; ?>"
+                                        data-total-questions="<?php echo $ttlQuestions; ?>"
+                                        class="btn btn-outline-info btn-directions btn-next-question btn-sm d-none">
+                                        Siguiente<i class="img-ctrls-lessMore arrow-right ml-2"></i>
+                                    </button>
+                                    <?php endif; ?>
                                 </th>
                             </tr>
                         </table>
                     </div>
-                <?php endforeach; ?>
-            </div>
+                    <?php $qnmbr ++; ?>
+                </div><!--end Card-->
+            <?php endforeach; ?>
+            <input type="hidden" class="correct-answers" value="0">
+            <input type="hidden" class="incorrect-answers" value="0">
         </div>
     </div>
 
 </div>
 <?php else: ?>
 
-<h2>hiu</h2>
+<h2>Este Quiz no tienen preguntas.</h2>
 
 <?php endif; ?>

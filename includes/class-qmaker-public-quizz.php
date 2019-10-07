@@ -76,7 +76,7 @@ class Qmaker_Public_Quizz {
     **/
     public function get_answers_by_id_quesion ($idQuestion){
         if($idQuestion > 0){
-            $results = $this->db->get_results( "SELECT * FROM ".QM_ANSWERS." WHERE question_id = {$idQuestion}" );
+            $results = $this->db->get_results( "SELECT * FROM ".QM_ANSWERS." WHERE question_id = {$idQuestion} ORDER BY RAND()" );
             return $results;
         }
         return false;
