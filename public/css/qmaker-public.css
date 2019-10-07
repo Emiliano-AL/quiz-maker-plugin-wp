@@ -16,13 +16,13 @@
 .question_title{
     color: #012e3d;
 }
-.btn-check-anws{
+.btn-check-anws, .btn-reset-quiz{
     background-color: #03ABE5;
     text-transform: uppercase;
     border: 1px solid #03ABE5;
     padding: .6rem 1.5rem;
 }
-.btn-check-anws:hover{
+.btn-check-anws:hover, .btn-reset-quiz:hover{
     background-color: #03ABE5;
     border: 1px solid #03ABE5;
 }

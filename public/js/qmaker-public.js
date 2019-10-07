@@ -46,8 +46,8 @@
 			$(idQuestion).each(function() {
 				var answser = $(this).find('.ans_item')
 				// console.log(answser.is(":checked"))
-				//TODO: Agregar una clase para saber que la pregunta ya fue evaluda
-				if(answser.is(":checked")){
+				
+				if( !$(answser).parent().hasClass('evaluated') && answser.is(":checked")){
 					if(answser.val() == 1){
 						console.log('Respuesta correcta!')
 						$(answser).next().addClass('correct-answer')
@@ -61,6 +61,7 @@
 						$('.incorrect-answers').val(incorrects)
 					}
 				}
+				$(answser).parent().addClass('evaluated')
 			})
 		})
 
@@ -68,7 +69,6 @@
 		$btnNextQuestion.on('click', function(){
 			var cardQuestionToShow = '#card-question_' + ($(this).data('number-question') + 1)
 			var cardQuestionToHide = '#card-question_' + $(this).data('number-question')
-			var totalQuestions = $(this).data('number-question')
 			$(cardQuestionToHide).addClass('invisible')
 			$(cardQuestionToShow).removeClass('invisible')
 		})
@@ -81,9 +81,35 @@
 		})
 		var $btnShowResult = $('.btn-show-results')
 		$btnShowResult.on('click', function(){
-			console.log('Resultados')
-			console.log('Correctas ', $('.correct-answers').val())
-			console.log('Incorrectas ', $('.incorrect-answers').val())
+			var cardQuestionToHide = '#card-question_' + $(this).data('number-question')
+			var ttlQuestions = $(this).data('number-question')
+			var corrects = $('.correct-answers').val()
+			var incorrects = $('.incorrect-answers').val()
+			var score = (10 * corrects) / ttlQuestions
+			$(cardQuestionToHide).addClass('invisible')
+
+			$('.show-results-text').empty()
+			$('.show-results-text').append(`
+				Tuviste <strong>${corrects}</strong> respuestas correctas y <strong>${incorrects} </strong> incorrectas, 
+				tu calificación final es de <strong>${score.toFixed(2)}</strong>
+			`)
+			$('.card-results').removeClass('invisible')
+		})
+		var $btnResetQuiz = $('.btn-reset-quiz')
+		$btnResetQuiz.on('click', function(){
+			$itemOptionAnswer.each(function(){
+				$(this).find('.ans_item').attr( 'checked', false )
+				$(this).find('.ans_item').next().removeClass('incorrect-answer')
+				$(this).find('.ans_item').next().removeClass('correct-answer')
+				$(this).next().addClass('d-none')
+				$(this).find('.ans_item').parent().removeClass('evaluated')
+			})
+			$('.correct-answers').val(0)
+			$('.incorrect-answers').val(0)
+			$('.card-results').addClass('invisible')
+			$('#card-question_1').removeClass('invisible')
+			
+			$('.btn-next-ctrl_1').addClass('d-none')
 		})
 	});
 

@@ -46,7 +46,10 @@ if($id != ''):
                         <?php $answers = $public_quiz->get_answers_by_id_quesion($q->id); ?>
                         <?php foreach($answers as $a):?>
                         <li class="list-group-item-anws question_<?php echo $q->id; ?>">
-                            <label class="item-option" data-question="<?php echo $q->id; ?>" for="answer_<?php echo $a->id; ?>">
+                            <label 
+                                class="item-option" 
+                                data-question="<?php echo $q->id; ?>" 
+                                for="answer_<?php echo $a->id; ?>">
                                 <input type="radio" 
                                         class="ans_item"
                                         value="<?php echo $a->es_correcta; ?>" 
@@ -102,7 +105,7 @@ if($id != ''):
                                         data-question="<?php echo $q->id; ?>" 
                                         data-number-question="<?php echo $qnmbr; ?>"
                                         data-total-questions="<?php echo $ttlQuestions; ?>"
-                                        class="btn btn-outline-info btn-directions btn-next-question btn-sm d-none">
+                                        class="btn btn-outline-info btn-directions btn-next-ctrl_<?php echo $qnmbr;?> btn-next-question btn-sm d-none">
                                         Siguiente<i class="img-ctrls-lessMore arrow-right ml-2"></i>
                                     </button>
                                     <?php endif; ?>
@@ -115,6 +118,18 @@ if($id != ''):
             <?php endforeach; ?>
             <input type="hidden" class="correct-answers" value="0">
             <input type="hidden" class="incorrect-answers" value="0">
+            <div class="card card-results invisible">
+                <div class="card-body">
+                    <h5 class="card-title">Resultados: </h5>
+                    <p class="card-text show-results-text"> </p>
+                    <div class="d-flex justify-content-center">
+                        <button 
+                            type="button" 
+                            class="btn btn-primary btn-reset-quiz">Reiniciar Quiz
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
