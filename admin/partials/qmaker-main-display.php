@@ -63,7 +63,7 @@
         <form>
             <div class="form-group">
                 <label for="inputName">Nombre del quiz</label>
-                <input type="text" class="form-control" id="inputName" placeholder="Nombre del Quiz">
+                <input type="text" class="form-control" id="inputName" placeholder="Nombre del Quiz" required>
             </div>
             <div class="form-group">
                 <label for="inputdescription">Descripción general</label>

@@ -46,36 +46,39 @@
 		e.preventDefault();
 		console.log('name: ', $name.val() )
 		console.log('descrition: ', $descrition.val() )
-
-		//Evento ajax
-		$.ajax({
-			url:		qmaker.url,
-			type:		'post',
-			datatype:	'json',
-			data: 		{
-				action: 		'qm_add_quiz',
-				nonce:			qmaker.seguridad,
-				name:			$name.val(),
-				description:	$descrition.val(),
-				tipo:			'add'
-			},
-			success: function(data){
-				data = JSON.parse(data);
-				if(data.result){
-					console.log('Todo Ok!');
-					urlAddQuestions += data.insert_id;
-					setTimeout(function(){
-						location.href = urlAddQuestions;
-					}, 200);
+		if(!$name.val()){
+			alert('Debes Agregar un nombre al Quiz')
+		}else{
+			//Evento ajax
+			$.ajax({
+				url:		qmaker.url,
+				type:		'post',
+				datatype:	'json',
+				data: 		{
+					action: 		'qm_add_quiz',
+					nonce:			qmaker.seguridad,
+					name:			$name.val(),
+					description:	$descrition.val(),
+					tipo:			'add'
+				},
+				success: function(data){
+					data = JSON.parse(data);
+					if(data.result){
+						console.log('Todo Ok!');
+						urlAddQuestions += data.insert_id;
+						setTimeout(function(){
+							location.href = urlAddQuestions;
+						}, 200);
+					}
+					console.log('Resultado: ', data);
+				},
+				error: function(d, x, v){
+					console.log(d)
+					console.log(x)
+					console.log(v)
 				}
-				console.log('Resultado: ', data);
-			},
-			error: function(d, x, v){
-				console.log(d)
-				console.log(x)
-				console.log(v)
-			}
-		})
+			})
+		}
 	 })
 
 
@@ -111,6 +114,8 @@
 
 	 $btnSaveResponse.on('click', function(){
 		var questionObj = new Object()
+		var hasError = false
+		var hasAnswerCorrect = false
 		questionObj.idQuiz = $('.quiz_id').val()
 		questionObj.questionName = $('.question_text').val()
 		var responses = Array()
@@ -118,43 +123,62 @@
 			var responseObj = new Object()
 			var responseCorrect = $(this).find(".is_correct_response input")
 			var responseText = $(this).find(".response_text")
+			if(responseText.val() === ''){
+				hasError = true
+			}
+			if(responseCorrect.is(':checked')){
+				hasAnswerCorrect = true
+			}
 			responseObj.isCorrect = responseCorrect.is(':checked') ? 1 : 0;
 			responseObj.responseText = responseText.val()
 			responses.push(responseObj)
 		});
 		questionObj.response = responses
 		console.info(questionObj)
-
-		//Evento ajax
-		$.ajax({
-			url:		qmaker.url,
-			type:		'post',
-			datatype:	'json',
-			data: 		{
-				action: 		'qm_questions_manager',
-				nonce:			qmaker.seguridad,
-				question:		JSON.parse(JSON.stringify(questionObj)),
-				tipo:			'add'
-			},
-			success: function(data){
-				data = JSON.parse(data);
-				if(data.result){
-					console.log('Todo Ok!');
-					var r = confirm("Pregunta agregada correctamente. ¿Deseas agregar más?")
-					if(r === true){
-						urlAddQuestions += $('.quiz_id').val()
-						location.href = urlAddQuestions;
-					}else{
-						location.href = urlhome;
+		
+		if(questionObj.questionName === ''){
+			hasError = true
+		}
+		
+		if(!hasError && hasAnswerCorrect){
+			console.log('Todo OK!')
+				//Evento ajax
+			$.ajax({
+				url:		qmaker.url,
+				type:		'post',
+				datatype:	'json',
+				data: 		{
+					action: 		'qm_questions_manager',
+					nonce:			qmaker.seguridad,
+					question:		JSON.parse(JSON.stringify(questionObj)),
+					tipo:			'add'
+				},
+				success: function(data){
+					data = JSON.parse(data);
+					if(data.result){
+						console.log('Todo Ok!');
+						var r = confirm("Pregunta agregada correctamente. ¿Deseas agregar más?")
+						if(r === true){
+							urlAddQuestions += $('.quiz_id').val()
+							location.href = urlAddQuestions;
+						}else{
+							location.href = urlhome;
+						}
 					}
+					console.log('Algo salió mal... ', data)
+				},
+				error: function(d, x, v){
+					console.log(d)
+					console.log(x)
+					console.log(v)
 				}
-			},
-			error: function(d, x, v){
-				console.log(d)
-				console.log(x)
-				console.log(v)
-			}
-		})
+			})
+		}else{
+			console.log('No furula.. ', hasError , hasAnswerCorrect)
+			alert('Debes agregar una pregunta y marcar al menos una respuesta como correcta.')
+			hasError = false
+			hasAnswerCorrect = false
+		}
 	 })
 	
 })( jQuery );
