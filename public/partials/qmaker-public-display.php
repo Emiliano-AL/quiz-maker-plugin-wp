@@ -33,7 +33,7 @@ if($id != ''):
                 $qnmbr = 1;
             ?>
             <?php foreach($questions as $q): ?>
-                <div class="card <?php echo $qnmbr > 1 ? 'invisible': ''?>" 
+                <div class="card <?php echo $qnmbr > 1 ? 'invisible-qm': ''?>" 
                     id="card-question_<?php echo $qnmbr; ?>" 
                     data-question="<?php echo $q->id; ?>" >
                     <div class="card-header">
@@ -58,7 +58,7 @@ if($id != ''):
                                 <span><?php echo $a->nombre_respuesta; ?></span>
                             </label>
                             <?php if ($a->es_correcta == 1):?>
-                            <i class="img-ctrls-lessMore position-verifcation verification d-none"></i>
+                            <i class="img-ctrls-lessMore-qm position-verifcation verification-qm d-none"></i>
                             <?php endif; ?>
                         </li>
                         <?php endforeach; ?>
@@ -75,7 +75,7 @@ if($id != ''):
                                         data-number-question="<?php echo $qnmbr; ?>"
                                         data-total-questions="<?php echo $ttlQuestions; ?>"
                                         class="btn btn-outline-info btn-directions btn-prev-question btn-sm">
-                                            <i class="img-ctrls-lessMore arrow-left mr-2"></i>Anterior
+                                            <i class="img-ctrls-lessMore-qm arrow-left-qm mr-2"></i>Anterior
                                     </button>
                                     <?php endif; ?>
                                 </th>
@@ -106,7 +106,7 @@ if($id != ''):
                                         data-number-question="<?php echo $qnmbr; ?>"
                                         data-total-questions="<?php echo $ttlQuestions; ?>"
                                         class="btn btn-outline-info btn-directions btn-next-ctrl_<?php echo $qnmbr;?> btn-next-question btn-sm d-none">
-                                        Siguiente<i class="img-ctrls-lessMore arrow-right ml-2"></i>
+                                        Siguiente<i class="img-ctrls-lessMore-qm arrow-right-qm ml-2"></i>
                                     </button>
                                     <?php endif; ?>
                                 </th>
@@ -118,7 +118,7 @@ if($id != ''):
             <?php endforeach; ?>
             <input type="hidden" class="correct-answers" value="0">
             <input type="hidden" class="incorrect-answers" value="0">
-            <div class="card card-results invisible">
+            <div class="card card-results invisible-qm">
                 <div class="card-body">
                     <h5 class="card-title">Resultados: </h5>
                     <p class="card-text show-results-text"> </p>

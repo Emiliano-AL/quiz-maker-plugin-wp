@@ -69,15 +69,15 @@
 		$btnNextQuestion.on('click', function(){
 			var cardQuestionToShow = '#card-question_' + ($(this).data('number-question') + 1)
 			var cardQuestionToHide = '#card-question_' + $(this).data('number-question')
-			$(cardQuestionToHide).addClass('invisible')
-			$(cardQuestionToShow).removeClass('invisible')
+			$(cardQuestionToHide).addClass('invisible-qm')
+			$(cardQuestionToShow).removeClass('invisible-qm')
 		})
 		var $btnPrevQuestion = $('.btn-prev-question')
 		$btnPrevQuestion.on('click', function(){
 			var cardQuestionToShow = '#card-question_' + ($(this).data('number-question') - 1)
 			var cardQuestionToHide = '#card-question_' + $(this).data('number-question')
-			$(cardQuestionToHide).addClass('invisible')
-			$(cardQuestionToShow).removeClass('invisible')
+			$(cardQuestionToHide).addClass('invisible-qm')
+			$(cardQuestionToShow).removeClass('invisible-qm')
 		})
 		var $btnShowResult = $('.btn-show-results')
 		$btnShowResult.on('click', function(){
@@ -86,14 +86,14 @@
 			var corrects = $('.correct-answers').val()
 			var incorrects = $('.incorrect-answers').val()
 			var score = (10 * corrects) / ttlQuestions
-			$(cardQuestionToHide).addClass('invisible')
+			$(cardQuestionToHide).addClass('invisible-qm')
 
 			$('.show-results-text').empty()
 			$('.show-results-text').append(`
 				Tuviste <strong>${corrects}</strong> respuestas correctas y <strong>${incorrects} </strong> incorrectas, 
 				tu calificación final es de <strong>${score.toFixed(2)}</strong>
 			`)
-			$('.card-results').removeClass('invisible')
+			$('.card-results').removeClass('invisible-qm')
 		})
 		var $btnResetQuiz = $('.btn-reset-quiz')
 		$btnResetQuiz.on('click', function(){
@@ -106,8 +106,8 @@
 			})
 			$('.correct-answers').val(0)
 			$('.incorrect-answers').val(0)
-			$('.card-results').addClass('invisible')
-			$('#card-question_1').removeClass('invisible')
+			$('.card-results').addClass('invisible-qm')
+			$('#card-question_1').removeClass('invisible-qm')
 			
 			$('.btn-next-ctrl_1').addClass('d-none')
 		})
