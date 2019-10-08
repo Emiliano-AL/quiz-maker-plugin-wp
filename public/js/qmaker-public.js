@@ -49,21 +49,18 @@
 				var answser = $(this).find('.ans_item')
 				if( !$(answser).parent().hasClass('evaluated') && answser.is(":checked")){
 					if(answser.val() == 1){
-						// console.log('Respuesta correcta!')
 						$(answser).next().addClass('correct-answer')
 						$(answser).parent().next().removeClass('d-none')
 						var corrects = Number($('.correct-answers').val()) + 1
 						$('.correct-answers').val(corrects)
 					}else{
-						// console.log('Respuesta incorrecta')
 						$(answser).next().addClass('incorrect-answer')
 						var incorrects = Number($('.incorrect-answers').val()) + 1
 						$('.incorrect-answers').val(incorrects)
 						$(idQuestion).each(function() {
 							if($(this).children('label').hasClass('qm-answers-correct')){
-								// console.log('esta es la correcta')
 								$(this).children('label').children('span').addClass('correct-answer')
-								$(this).children('i').removeClass('d-none')
+								// $(this).children('i').removeClass('d-none')
 							}
 						})
 					}
