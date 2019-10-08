@@ -22,7 +22,7 @@ if($id != ''):
     $quiz = $public_quiz->get_quiz($id);
     $questions = $public_quiz->get_questions_by_id_quiz($id);
 ?>
-<div class="container">
+<div class="container p-0">
     <div class="row">
         <div class="col-12">
             <h4><?php echo $quiz->nombre_quiz ?></h4>
