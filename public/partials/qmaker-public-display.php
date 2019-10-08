@@ -42,10 +42,10 @@ if($id != ''):
                         </h5>
                     </div>
                     <h4 class="text-center pb-0 mt-3 question_title" ><?php echo $q->nombre_pregunta; ?></h4>
-                    <ul class="list-group list-group-flush text-center pb-4 pl-4 pr-4 question_wrap_<?php echo $q->id; ?>">
+                    <ul class="list-group list-group-flush text-center pb-4 pl-4 pr-4 question_wrap_<?php echo $qnmbr; ?>">
                         <?php $answers = $public_quiz->get_answers_by_id_quesion($q->id); ?>
                         <?php foreach($answers as $a):?>
-                        <li class="list-group-item-anws question_<?php echo $q->id; ?>">
+                        <li class="list-group-item-anws li-option question_<?php echo $q->id; ?>">
                             <label 
                                 class="item-option <?php echo $a->es_correcta == 1 ? 'qm-answers-correct' : ''; ?>" 
                                 data-question="<?php echo $q->id; ?>" 
@@ -59,6 +59,8 @@ if($id != ''):
                             </label>
                             <?php if ($a->es_correcta == 1):?>
                             <i class="img-ctrls-lessMore-qm position-verifcation verification-qm d-none"></i>
+                            <?php else: ?>
+                            <i class="img-ctrls-lessMore-qm position-verifcation wrong-qm d-none"></i>
                             <?php endif; ?>
                         </li>
                         <?php endforeach; ?>
@@ -125,6 +127,7 @@ if($id != ''):
                     <div class="d-flex justify-content-center">
                         <button 
                             type="button" 
+                            data-total-questions="<?php echo $ttlQuestions; ?>"
                             class="btn btn-primary btn-reset-quiz">Reiniciar Quiz
                         </button>
                     </div>

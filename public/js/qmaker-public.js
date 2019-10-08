@@ -55,6 +55,7 @@
 						$('.correct-answers').val(corrects)
 					}else{
 						$(answser).next().addClass('incorrect-answer')
+						$(answser).parent().next().removeClass('d-none')
 						var incorrects = Number($('.incorrect-answers').val()) + 1
 						$('.incorrect-answers').val(incorrects)
 						$(idQuestion).each(function() {
@@ -115,8 +116,43 @@
 			
 			$('.btn-next-ctrl_1').addClass('d-none')
 			//TODO: También se debe agregar las clases d-none a los bts que estaban ocultos
+			for(let i = 1; i <= $(this).data('total-questions'); i++){
+				console.log('Hola...', i)
+				let wrap_question = '.question_wrap_'+i
+
+				var $nodes = $(wrap_question).find('li');
+				shuffle($nodes, 'li-option');
+				$(wrap_question).append($nodes);
+			}
+			// var wrapQuestion = 'card-question_' + $(this).data('total-questions')
 		})
 	});
 
 	
 })( jQuery );
+
+//http://jsfiddle.net/serendipity/Xz6BJ/
+function shuffle(nodes, switchableSelector) {
+    var length = nodes.length;
+    //Create the array for the random pick.
+    var switchable = nodes.filter("." + switchableSelector);
+    var switchIndex = [];
+    jQuery.each(switchable, function(index, item) {
+       switchIndex[index] = jQuery(item).index(); 
+    });
+    //The array should be used for picking up random elements.
+    var switchLength = switchIndex.length;
+    var randomPick, randomSwap;
+    for (var index = length; index > 0; index--) {
+        //Get a random index that contains a switchable element.
+        randomPick = switchIndex[Math.floor(Math.random() * switchLength)];
+        //Get the next element that needs to be swapped.
+        randomSwap = nodes[index - 1];
+        //If the element is 'switchable' continue, else ignore
+        if(jQuery(randomSwap).hasClass(switchableSelector)) {
+            nodes[index - 1] = nodes[randomPick];
+            nodes[randomPick] = randomSwap;
+        }
+    }
+    return nodes;
+}

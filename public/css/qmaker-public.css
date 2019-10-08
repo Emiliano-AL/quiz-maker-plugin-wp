@@ -95,6 +95,9 @@
   .verification-qm{
     background-image: url('../img/verification-mark.svg');
   }
+  .wrong-qm{
+    background-image: url('../img/wrong-mark.svg');
+  }
   .position-verifcation{
     position: absolute;
     top: 18px;
