@@ -186,7 +186,6 @@
 
 function addItemQuestion(idWrapp){
 	var cont = jQuery('.wrapper_anws_'+idWrapp).children().length + 1
-	console.log('Agregar nuevo...', idWrapp)
 	var ans_id = `${idWrapp}_${cont}`
 	jQuery( '.wrapper_anws_'+idWrapp ).append(`
 		 <div class="form-row border border-secondary mx-3 mt-2 py-2 px-4 item_answer">
@@ -257,13 +256,6 @@ function addItemQuestion(idWrapp){
 			if(data.result){
 				console.info(data)
 				alert('Se actualizo correctamente.')
-				// var r = confirm("Pregunta agregada correctamente. ¿Deseas agregar más?")
-				// if(r === true){
-				// 	urlAddQuestions += $('.quiz_id').val()
-				// 	location.href = urlAddQuestions;
-				// }else{
-				// 	location.href = urlhome;
-				// }
 			}
 			console.info(data)
 		},
