@@ -65,6 +65,7 @@ if($id != ''):
                         </li>
                         <?php endforeach; ?>
                     </ul>
+                    <div class="msg-alert_<?php echo $q->id;?> alert d-none mx-5 px-4" role="alert"></div>
                     <div class="card-footer">
                         <table class="w-100">
                             <tr>
@@ -97,17 +98,18 @@ if($id != ''):
                                         data-question="<?php echo $q->id; ?>" 
                                         data-number-question="<?php echo $qnmbr; ?>"
                                         data-total-questions="<?php echo $ttlQuestions; ?>"
-                                        class="btn btn-outline-info btn-directions btn-show-results btn-sm d-none">
+                                        class="btn btn-primary btn-directions btn-show-results btn-sm d-none">
                                         Ver Resultados</i>
                                     </button>
                                     <?php else: ?>
+                                    <!-- btn-outline-info -->
                                     <button 
                                         type="button" 
                                         id="btn-next_<?php echo $q->id; ?>"
                                         data-question="<?php echo $q->id; ?>" 
                                         data-number-question="<?php echo $qnmbr; ?>"
-                                        data-total-questions="<?php echo $ttlQuestions; ?>"
-                                        class="btn btn-outline-info btn-directions btn-next-ctrl_<?php echo $qnmbr;?> btn-next-question btn-sm d-none">
+                                        data-total-questions="<?php echo $ttlQuestions; ?>" 
+                                        class="btn btn-primary btn-directions btn-next-ctrl_<?php echo $qnmbr;?> btn-next-question btn-sm d-none">
                                         Siguiente<i class="img-ctrls-lessMore-qm arrow-right-qm ml-2"></i>
                                     </button>
                                     <?php endif; ?>

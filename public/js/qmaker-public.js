@@ -43,31 +43,51 @@
 			var idQuestion = '.question_' + $(this).data('question')
 			var btnNext = '#btn-next_' + $(this).data('question')
 			var btnShowResults = '#btn-show-result_' + $(this).data('question')
-			$(btnNext).removeClass('d-none')
-			$(btnShowResults).removeClass('d-none')
+			// $(btnNext).addClass
+			var isOptionSlctd = false
 			$(idQuestion).each(function() {
-				var answser = $(this).find('.ans_item')
-				if( !$(answser).parent().hasClass('evaluated') && answser.is(":checked")){
-					if(answser.val() == 1){
-						$(answser).next().addClass('correct-answer')
-						$(answser).parent().next().removeClass('d-none')
-						var corrects = Number($('.correct-answers').val()) + 1
-						$('.correct-answers').val(corrects)
-					}else{
-						$(answser).next().addClass('incorrect-answer')
-						$(answser).parent().next().removeClass('d-none')
-						var incorrects = Number($('.incorrect-answers').val()) + 1
-						$('.incorrect-answers').val(incorrects)
-						$(idQuestion).each(function() {
-							if($(this).children('label').hasClass('qm-answers-correct')){
-								$(this).children('label').children('span').addClass('correct-answer')
-								// $(this).children('i').removeClass('d-none')
-							}
-						})
-					}
+				var item = $(this).find('.ans_item')
+				if( item.is(":checked")){
+					isOptionSlctd = true
 				}
-				$(answser).parent().addClass('evaluated')
 			})
+			var alertMsg = '.msg-alert_' + $(this).data('question')
+			if(isOptionSlctd){
+				$(alertMsg).append(``)
+				$(alertMsg).addClass('d-none')
+				$(alertMsg).removeClass('alert-danger')
+
+				$(btnNext).removeClass('d-none')
+				$(btnShowResults).removeClass('d-none')
+				$(idQuestion).each(function() {
+					var answser = $(this).find('.ans_item')
+					if( !$(answser).parent().hasClass('evaluated') && answser.is(":checked")){
+						if(answser.val() == 1){
+							$(answser).next().addClass('correct-answer')
+							$(answser).parent().next().removeClass('d-none')
+							var corrects = Number($('.correct-answers').val()) + 1
+							$('.correct-answers').val(corrects)
+						}else{
+							$(answser).next().addClass('incorrect-answer')
+							$(answser).parent().next().removeClass('d-none')
+							var incorrects = Number($('.incorrect-answers').val()) + 1
+							$('.incorrect-answers').val(incorrects)
+							$(idQuestion).each(function() {
+								if($(this).children('label').hasClass('qm-answers-correct')){
+									$(this).children('label').children('span').addClass('correct-answer')
+									// $(this).children('i').removeClass('d-none')
+								}
+							})
+						}
+					}
+					$(answser).parent().addClass('evaluated')
+				})
+				$(this).addClass('d-none')
+			}else{
+				$(alertMsg).append(`Debes seleccionar al menos una respuesta.`)
+				$(alertMsg).removeClass('d-none')
+				$(alertMsg).addClass('alert-danger')
+			}
 		})
 
 		var $btnNextQuestion = $('.btn-next-question')
@@ -113,11 +133,12 @@
 			$('.incorrect-answers').val(0)
 			$('.card-results').addClass('invisible-qm')
 			$('#card-question_1').removeClass('invisible-qm')
-			
+
+			$('.btn-check-anws').removeClass('d-none')
+
 			$('.btn-next-ctrl_1').addClass('d-none')
 			//TODO: También se debe agregar las clases d-none a los bts que estaban ocultos
 			for(let i = 1; i <= $(this).data('total-questions'); i++){
-				console.log('Hola...', i)
 				let wrap_question = '.question_wrap_'+i
 
 				var $nodes = $(wrap_question).find('li');
