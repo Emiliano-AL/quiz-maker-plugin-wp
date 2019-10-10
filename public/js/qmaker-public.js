@@ -112,7 +112,9 @@
 			var incorrects = $('.incorrect-answers').val()
 			var score = (10 * corrects) / ttlQuestions
 			$(cardQuestionToHide).addClass('invisible-qm')
-
+			if(corrects !== ttlQuestions){
+				$('.btn-reset-quiz').removeClass('d-none')
+			}
 			$('.show-results-text').empty()
 			$('.show-results-text').append(`
 				Tuviste <strong>${corrects}</strong> respuestas correctas y <strong>${incorrects} </strong> incorrectas, 

@@ -12,17 +12,22 @@
     position: relative;
     display: block;
 }
-
 .question_title{
     color: #012e3d;
 }
-.btn-check-anws, .btn-reset-quiz{
+.btn-reset-quiz{
+
+}
+.btn-reset-quiz:hover{
+
+}
+.btn-check-anws{
     background-color: #03ABE5;
     text-transform: uppercase;
     border: 1px solid #03ABE5;
     padding: .6rem 1.5rem;
 }
-.btn-check-anws:hover, .btn-reset-quiz:hover{
+.btn-check-anws:hover {
     background-color: #03ABE5;
     border: 1px solid #03ABE5;
 }
@@ -61,6 +66,7 @@
   .correct-answer{
       background-color: #60D477 !important;
       color: #ffffff;
+      border-radius: 4px;
   }
   .incorrect-answer{
     background-color: #ff5252 !important;

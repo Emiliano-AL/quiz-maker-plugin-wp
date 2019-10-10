@@ -23,7 +23,7 @@
  ?>
     <div class="row mt-3 mb-2">
         <div class="col-8">
-            <h2 class="text-center">Editar Quiz: <?php echo $current_quiz->nombre_quiz ?></h2>
+            <h2>Editar Quiz: <?php echo $current_quiz->nombre_quiz ?></h2>
         </div>
         <div class="col-4 d-flex justify-content-end pr-0">
             <button type="button" onclick="saveChangesQuestions(<?php echo $current_quiz->id ?>)" class="btn btn-primary">Guardar cambios</button>

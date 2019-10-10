@@ -130,7 +130,7 @@ if($id != ''):
                         <button 
                             type="button" 
                             data-total-questions="<?php echo $ttlQuestions; ?>"
-                            class="btn btn-primary btn-reset-quiz">Reiniciar Quiz
+                            class="btn btn-outline-primary btn-reset-quiz d-none">Reiniciar Quiz
                         </button>
                     </div>
                 </div>

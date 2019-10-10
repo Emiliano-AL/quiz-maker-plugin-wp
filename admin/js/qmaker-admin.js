@@ -271,14 +271,14 @@ function addItemQuestion(idWrapp){
 	console.log('Hola...', )	
 	var nmbrQuestion = 	jQuery('.wrap_main_questions').children().length + 1
 	jQuery('.wrap_main_questions').append(`
-		<div class="wrapper_question wrapp_manager_question_${nmbrQuestion}">
-			<div id="question_${nmbrQuestion}" class="border border-primary p-3">
+		<div class="wrapper_question wrapp_manager_question_${nmbrQuestion}  mb-2">
+			<div id="question_${nmbrQuestion}" class="border border-primary px-4 py-3">
 				<div class="form-group">					
 					<label class="counter_question font-weight-bold" for="inputName">Pregunta ${nmbrQuestion}:</label>
 					<input type="text" class="form-control question_text" id="inputName" placeholder="Nombre de la pregunta">
 					<input type="hidden" class="question_number" value="${nmbrQuestion}">
 					<div class="wrapper_anws_${nmbrQuestion}">
-						<div class="form-row border border-secondary mx-3 mt-2 py-2 px-4 item_answer">
+						<div class="form-row border border-secondary mx-0 mt-2 py-2 px-4 item_answer">
 							<div class="col-md-2 custom-checkbox d-flex align-items-center is_correct_response">
 								<input type="checkbox" class="custom-control-input response_iscorrect" id="customCheck_${nmbrQuestion}">
 								<label class="custom-control-label ml-3" for="customCheck_${nmbrQuestion}">Correcta</label>

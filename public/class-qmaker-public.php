@@ -83,11 +83,6 @@ class Qmaker_Public {
 		 * class.
 		 */
 
-		 /**
-		 * Regitra Bootstrap 4
-		 */
-		wp_enqueue_style( 'qm_bootstrap_css', 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css', array(), '4.3.1', 'all');
-
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/qmaker-public.css', array(), $this->version, 'all' );
 
 	}
@@ -110,14 +105,7 @@ class Qmaker_Public {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-		
-		/**
-		 * Registra bootstrap 4 js
-		 */
-		wp_enqueue_script( 'qm_bootstrap_popper_js', 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js', array( 'jquery' ), '1.14.7', true );
-		wp_enqueue_script( 'qm_bootstrap_js', 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js', array( 'jquery' ), '4.3.1', true );
-
-
+	
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/qmaker-public.js', array( 'jquery' ), $this->version, false );
 
 	}
