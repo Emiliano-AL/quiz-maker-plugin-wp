@@ -126,11 +126,14 @@ if($id != ''):
                 <div class="card-body">
                     <h5 class="card-title">Resultados: </h5>
                     <p class="card-text show-results-text"> </p>
+                    <div class="alert alert-msg-qm alert-primary d-none" role="alert">
+                        ¡Excelente esfuerzo!
+                    </div>
                     <div class="d-flex justify-content-center">
                         <button 
                             type="button" 
                             data-total-questions="<?php echo $ttlQuestions; ?>"
-                            class="btn btn-outline-primary btn-reset-quiz d-none">Reiniciar Quiz
+                            class="btn btn-outline-primary btn-reset-quiz">Reiniciar Quiz
                         </button>
                     </div>
                 </div>

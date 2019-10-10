@@ -112,8 +112,11 @@
 			var incorrects = $('.incorrect-answers').val()
 			var score = (10 * corrects) / ttlQuestions
 			$(cardQuestionToHide).addClass('invisible-qm')
-			if(corrects !== ttlQuestions){
-				$('.btn-reset-quiz').removeClass('d-none')
+			console.log('Respuestas: ', corrects, ttlQuestions)
+			if(Number(corrects) === ttlQuestions){
+				console.log('Todo bien: ', corrects, ttlQuestions)
+				$('.btn-reset-quiz').addClass('d-none')
+				$('.alert-msg-qm').removeClass('d-none')
 			}
 			$('.show-results-text').empty()
 			$('.show-results-text').append(`
