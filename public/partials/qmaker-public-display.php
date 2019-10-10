@@ -98,7 +98,7 @@ if($id != ''):
                                         data-question="<?php echo $q->id; ?>" 
                                         data-number-question="<?php echo $qnmbr; ?>"
                                         data-total-questions="<?php echo $ttlQuestions; ?>"
-                                        class="btn btn-primary btn-directions btn-show-results btn-sm d-none">
+                                        class="btn btn-primary btn-directions btn-directions-show-results btn-show-results btn-sm d-none">
                                         Ver Resultados</i>
                                     </button>
                                     <?php else: ?>
@@ -109,7 +109,7 @@ if($id != ''):
                                         data-question="<?php echo $q->id; ?>" 
                                         data-number-question="<?php echo $qnmbr; ?>"
                                         data-total-questions="<?php echo $ttlQuestions; ?>" 
-                                        class="btn btn-primary btn-directions btn-next-ctrl_<?php echo $qnmbr;?> btn-next-question btn-sm d-none">
+                                        class="btn btn-primary btn-directions btn-directions-next btn-next-ctrl_<?php echo $qnmbr;?> btn-next-question btn-sm d-none">
                                         Siguiente<i class="img-ctrls-lessMore-qm arrow-right-qm ml-2"></i>
                                     </button>
                                     <?php endif; ?>

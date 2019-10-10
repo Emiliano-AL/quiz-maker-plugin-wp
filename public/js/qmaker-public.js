@@ -137,6 +137,8 @@
 			$('.btn-check-anws').removeClass('d-none')
 
 			$('.btn-next-ctrl_1').addClass('d-none')
+			$('.btn-directions-next').addClass('d-none')
+			$('.btn-directions-show-results').addClass('d-none')
 			//TODO: También se debe agregar las clases d-none a los bts que estaban ocultos
 			for(let i = 1; i <= $(this).data('total-questions'); i++){
 				let wrap_question = '.question_wrap_'+i
