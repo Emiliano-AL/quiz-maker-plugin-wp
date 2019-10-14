@@ -184,9 +184,10 @@
 })( jQuery );
 
 
-function addItemQuestion(idWrapp){
+function addItemQuestion(idWrapp, idtemp){
+	// console.log('hola..', idtemp)
 	var cont = jQuery('.wrapper_anws_'+idWrapp).children().length + 1
-	var ans_id = `${idWrapp}_${cont}_${Math.floor(Math.random() * 1000)}`
+	var ans_id = `${idWrapp}_${cont}_${idtemp}`
 	jQuery( '.wrapper_anws_'+idWrapp ).append(`
 		 <div class="form-row border border-secondary mx-0 mt-2 py-2 px-4 item_answer">
 			<div class="col-md-2 custom-checkbox d-flex align-items-center is_correct_response">
@@ -260,7 +261,7 @@ function addItemQuestion(idWrapp){
 			data = JSON.parse(data);
 			if(data.result){
 				console.info(data)
-				alert('Se actualizo correctamente.')
+				alert('Actualizado exitosamente.')
 			}
 			console.info(data)
 		},
@@ -272,9 +273,16 @@ function addItemQuestion(idWrapp){
 	})
  }
 
+ function uniqueid() {
+	return Math.random().toString(36).substr(2, 9);
+}
+
  function addQuestionWrap(idQuiz){
 	var nmbrQuestion = 	jQuery('.wrap_main_questions').children().length + 1
-	var ans_id = `${idQuiz}_${nmbrQuestion}_${Math.floor(Math.random() * 1000)}`
+	var ans_id = `${idQuiz}_${nmbrQuestion}_${uniqueid()}`
+	console.log('hola....')
+
+	var uid = uniqueid()
 	jQuery('.wrap_main_questions').append(`
 		<div class="wrapper_question wrapp_manager_question_${nmbrQuestion}  mb-2">
 			<div id="question_${nmbrQuestion}" class="border border-primary px-4 py-3">
@@ -299,7 +307,7 @@ function addItemQuestion(idWrapp){
 					</div>
 				</div>
 				<div class="form-group d-flex justify-content-end">
-					<button type="button" onclick="addItemQuestion(${nmbrQuestion})" class="btn btn-info btn-sm addresponse-btn-edit mr-2">Agregar Respuesta</button>
+					<button type="button" onclick="addItemQuestion(${nmbrQuestion}, '${uid}')" class="btn btn-info btn-sm addresponse-btn-edit mr-2">Agregar Respuesta</button>
 					<button type="button" onclick="deleteQuestion(${nmbrQuestion})" class="btn btn-danger btn-sm">Quitar pregunta</button>
 				</div>
 			</div>
@@ -307,3 +315,4 @@ function addItemQuestion(idWrapp){
 	`)
 	jQuery('.question_text').focus()
  }
+

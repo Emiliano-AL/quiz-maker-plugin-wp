@@ -75,7 +75,8 @@
                         </div><!--END wrapper_anws-->
                     </div>
                     <div class="form-group d-flex justify-content-end">
-                        <button type="button" onclick="addItemQuestion(<?php echo $q->id; ?>)" class="btn btn-info btn-sm addresponse-btn-edit mr-2">Agregar Respuesta</button>
+                        <?php $idQmTemp = uniqid(); ?>
+                        <button type="button" onclick="addItemQuestion(<?php echo $q->id; ?>, '<?php echo $idQmTemp; ?>')" class="btn btn-info btn-sm addresponse-btn-edit mr-2">Agregar Respuesta</button>
                         <button type="button" onclick="deleteQuestion(<?php echo $q->id;?>)" class="btn btn-danger btn-sm">Quitar pregunta</button>
                     </div>
                 </div> <!--END question-->
