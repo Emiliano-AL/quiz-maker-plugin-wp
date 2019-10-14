@@ -279,6 +279,7 @@ function addItemQuestion(idWrapp, idtemp){
 
  function addQuestionWrap(idQuiz){
 	var nmbrQuestion = 	jQuery('.wrap_main_questions').children().length + 1
+	var wrapAns = 	(jQuery('.wrap_main_questions').children().length + 1) + uniqueid()
 	var ans_id = `${idQuiz}_${nmbrQuestion}_${uniqueid()}`
 	console.log('hola....')
 
@@ -290,7 +291,7 @@ function addItemQuestion(idWrapp, idtemp){
 					<label class="counter_question font-weight-bold" for="inputName">Pregunta ${nmbrQuestion}:</label>
 					<input type="text" class="form-control question_text" id="inputName" placeholder="Nombre de la pregunta">
 					<input type="hidden" class="question_number" value="${nmbrQuestion}">
-					<div class="wrapper_anws_${nmbrQuestion}">
+					<div class="wrapper_anws_${wrapAns}">
 						<div class="form-row border border-secondary mx-0 mt-2 py-2 px-4 item_answer">
 							<div class="col-md-2 custom-checkbox d-flex align-items-center is_correct_response">
 								<input type="checkbox" class="custom-control-input response_iscorrect" id="customCheck_${ans_id}">
@@ -307,7 +308,7 @@ function addItemQuestion(idWrapp, idtemp){
 					</div>
 				</div>
 				<div class="form-group d-flex justify-content-end">
-					<button type="button" onclick="addItemQuestion(${nmbrQuestion}, '${uid}')" class="btn btn-info btn-sm addresponse-btn-edit mr-2">Agregar Respuesta</button>
+					<button type="button" onclick="addItemQuestion('${wrapAns}', '${uid}')" class="btn btn-info btn-sm addresponse-btn-edit mr-2">Agregar Respuesta</button>
 					<button type="button" onclick="deleteQuestion(${nmbrQuestion})" class="btn btn-danger btn-sm">Quitar pregunta</button>
 				</div>
 			</div>
