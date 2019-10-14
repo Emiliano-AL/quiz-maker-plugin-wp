@@ -55,7 +55,7 @@ if($id != ''):
                                         value="<?php echo $a->es_correcta; ?>" 
                                         name="option_ans_<?php echo $q->id; ?>" 
                                         id="answer_<?php echo $a->id; ?>"> 
-                                <span><?php echo $a->nombre_respuesta; ?></span>
+                                <span class="qm-option-answ"><?php echo $a->nombre_respuesta; ?></span>
                             </label>
                             <?php if ($a->es_correcta == 1):?>
                             <i class="img-ctrls-lessMore-qm position-verifcation verification-qm d-none"></i>

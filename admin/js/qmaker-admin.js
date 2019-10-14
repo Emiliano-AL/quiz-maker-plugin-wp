@@ -90,14 +90,14 @@
 		var cont = $('.wrapper_anws').children().length + 1
 		
 		$( '.wrapper_anws' ).append(`
-		 <div class="form-row border border-secondary mx-3 mt-2 py-2 px-4 item_answer">
+		 <div class="form-row border border-secondary mx-0 mt-2 py-2 px-4 item_answer">
 			<div class="col-md-2 custom-checkbox d-flex align-items-center is_correct_response">
 				<input type="checkbox" class="custom-control-input response_iscorrect" id="customCheck_${cont}">
 				<label class="custom-control-label ml-3" for="customCheck_${cont}">Correcta</label>
 			</div>
 			<div class="col-md-8 text_response">
 				<label for="inputName_${cont}">Respuesta:</label>
-				<input type="text" class="form-control response_text" id="inputName_${cont}" placeholder="Nombre del Quiz">
+				<input type="text" class="form-control response_text" id="inputName_${cont}" placeholder="Respuesta">
 			</div>
 			<div class="col-md-2 d-flex align-items-center pt-2">
 				<button type="button" class="btn btn-outline-danger delete-answer-btn">Quitar</button>
@@ -174,7 +174,7 @@
 				}
 			})
 		}else{
-			console.log('No furula.. ', hasError , hasAnswerCorrect)
+			console.log('No funciona correctamente.. ', hasError , hasAnswerCorrect)
 			alert('Debes agregar una pregunta y marcar al menos una respuesta como correcta.')
 			hasError = false
 			hasAnswerCorrect = false
@@ -186,16 +186,16 @@
 
 function addItemQuestion(idWrapp){
 	var cont = jQuery('.wrapper_anws_'+idWrapp).children().length + 1
-	var ans_id = `${idWrapp}_${cont}`
+	var ans_id = `${idWrapp}_${cont}_${Math.floor(Math.random() * 1000)}`
 	jQuery( '.wrapper_anws_'+idWrapp ).append(`
-		 <div class="form-row border border-secondary mx-3 mt-2 py-2 px-4 item_answer">
+		 <div class="form-row border border-secondary mx-0 mt-2 py-2 px-4 item_answer">
 			<div class="col-md-2 custom-checkbox d-flex align-items-center is_correct_response">
 				<input type="checkbox" class="custom-control-input response_iscorrect" id="customCheck_${ans_id}">
 				<label class="custom-control-label ml-3" for="customCheck_${ans_id}">Correcta</label>
 			</div>
 			<div class="col-md-8 text_response">
 				<label for="inputName_${ans_id}">Respuesta:</label>
-				<input type="text" class="form-control response_text" id="inputName_${ans_id}" placeholder="Nombre del Quiz">
+				<input type="text" class="form-control response_text" id="inputName_${ans_id}" placeholder="Respuesta">
 			</div>
 			<div class="col-md-2 d-flex align-items-center pt-2">
 				<button type="button" class="btn btn-outline-danger delete-answer-btn">Quitar</button>
@@ -205,7 +205,6 @@ function addItemQuestion(idWrapp){
  }
 
  function deleteQuestion(id){
-	console.log('hola.. ', id)
 	var r = confirm("La pregunta será removida, ¿esta seguro?")
 	if(r === true){
 		jQuery('.wrapp_manager_question_'+id).remove()
@@ -239,7 +238,13 @@ function addItemQuestion(idWrapp){
 		questions.push(questionObj)
 	})
 	quiz.questions = questions
-	console.info(quiz)
+	quiz.questions.map(q =>{
+		q.response.forEach(anws => {
+			//TODO: Validar que al menos una respuesta vaya marcada como correcta, en cada pregunta
+			// console.log(anws)
+		});
+	})
+	// console.info(quiz)
 	//Evento ajax
 	jQuery.ajax({
 		url:		qmaker.url,
@@ -267,9 +272,9 @@ function addItemQuestion(idWrapp){
 	})
  }
 
- function addQuestionWrap(){
-	console.log('Hola...', )	
+ function addQuestionWrap(idQuiz){
 	var nmbrQuestion = 	jQuery('.wrap_main_questions').children().length + 1
+	var ans_id = `${idQuiz}_${nmbrQuestion}_${Math.floor(Math.random() * 1000)}`
 	jQuery('.wrap_main_questions').append(`
 		<div class="wrapper_question wrapp_manager_question_${nmbrQuestion}  mb-2">
 			<div id="question_${nmbrQuestion}" class="border border-primary px-4 py-3">
@@ -280,8 +285,8 @@ function addItemQuestion(idWrapp){
 					<div class="wrapper_anws_${nmbrQuestion}">
 						<div class="form-row border border-secondary mx-0 mt-2 py-2 px-4 item_answer">
 							<div class="col-md-2 custom-checkbox d-flex align-items-center is_correct_response">
-								<input type="checkbox" class="custom-control-input response_iscorrect" id="customCheck_${nmbrQuestion}">
-								<label class="custom-control-label ml-3" for="customCheck_${nmbrQuestion}">Correcta</label>
+								<input type="checkbox" class="custom-control-input response_iscorrect" id="customCheck_${ans_id}">
+								<label class="custom-control-label ml-3" for="customCheck_${ans_id}">Correcta</label>
 							</div>
 							<div class="col-md-8 text_response">
 								<label for="inputName_${nmbrQuestion}">Respuesta: 1</label>

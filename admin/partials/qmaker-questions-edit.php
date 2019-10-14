@@ -57,7 +57,7 @@
                         <?php $i = 1; ?>
                         <div class="wrapper_anws_<?php echo $q->id; ?>">
                             <?php foreach($answers as $ans): ?>
-                            <?php $ans_id = $q->id.'_'.$ans->id ?>
+                            <?php $ans_id = $current_quiz->id.'_'.$q->id.'_'.$ans->id ?>
                             <div class="form-row border border-secondary mx-0 mt-2 py-2 px-4 item_answer">
                                 <div class="col-md-2 custom-checkbox d-flex align-items-center is_correct_response">
                                     <input type="checkbox"  <?php checked( 1, $ans->es_correcta);?>  class="custom-control-input response_iscorrect" id="customCheck_<?php echo $ans_id; ?>">
@@ -87,7 +87,7 @@
 
     <div class="row  mt-3 mb-2">
         <div class="col-4 offset-md-8 d-flex justify-content-end pr-0">
-            <button type="button" onclick="addQuestionWrap()" class="btn btn-warning mr-2">Agregar pregunta</button>
+            <button type="button" onclick="addQuestionWrap(<?php echo $current_quiz->id ?>)" class="btn btn-warning mr-2">Agregar pregunta</button>
             <button type="button" onclick="saveChangesQuestions(<?php echo $current_quiz->id ?>)"  class="btn btn-primary">Guardar cambios</button>
         </div>
     </div>
