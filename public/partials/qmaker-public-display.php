@@ -47,7 +47,7 @@ if($id != ''):
                         <?php foreach($answers as $a):?>
                         <li class="list-group-item-anws li-option question_<?php echo $q->id; ?>">
                             <label 
-                                class="item-option <?php echo $a->es_correcta == 1 ? 'qm-answers-correct' : ''; ?>" 
+                                class="item-option mr-qm-1 <?php echo $a->es_correcta == 1 ? 'qm-answers-correct' : ''; ?>" 
                                 data-question="<?php echo $q->id; ?>" 
                                 for="answer_<?php echo $a->id; ?>">
                                 <input type="radio" 

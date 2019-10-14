@@ -110,9 +110,13 @@
     background-image: url('../img/wrong-mark.svg');
   }
   .position-verifcation{
+    margin: auto;
     position: absolute;
-    top: 18px;
-    margin-left: 6px;
+    top: 0; 
+    bottom: 0; 
+  }
+  .mr-qm-1{
+    margin-right: .8rem;
   }
   .btn-directions:hover > i {
     filter: brightness(0) invert(1);
