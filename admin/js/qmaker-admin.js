@@ -44,8 +44,6 @@
 
 	$('#create-quiz').on('click', function(e){
 		e.preventDefault();
-		console.log('name: ', $name.val() )
-		console.log('descrition: ', $descrition.val() )
 		if(!$name.val()){
 			alert('Debes Agregar un nombre al Quiz')
 		}else{
@@ -187,6 +185,7 @@
 function addItemQuestion(idWrapp){
 	var cont = jQuery('.wrapper_anws_'+idWrapp).children().length + 1
 	var ans_id = `${uniqueid()}`
+	console.log('el id: ',ans_id)
 	jQuery( '.wrapper_anws_'+idWrapp ).append(`
 		 <div class="form-row border border-secondary mx-0 mt-2 py-2 px-4 item_answer">
 			<div class="col-md-2 custom-checkbox d-flex align-items-center is_correct_response">
@@ -218,7 +217,7 @@ function addItemQuestion(idWrapp){
 	var quiz = new Object()
 	let hasErrorGeneral = false
 	let hasErrorOnQuestion = false
-	if(jQuery('.name_quiz').val() === "" || jQuery('.description_quiz').val() === ""){
+	if(jQuery('.name_quiz').val() === ""){
 		hasErrorGeneral = true
 	}
 	quiz.name = jQuery('.name_quiz').val()
@@ -278,7 +277,7 @@ function addItemQuestion(idWrapp){
 		alert('Hay preguntas vacias.')
 		qmIsValid = false
 	}else if(hasErrorGeneral){
-		alert('El quiz debe tener un nombre y descripción.')
+		alert('El quiz debe tener un nombre.')
 		qmIsValid = false
 	}
 	if(qmIsValid){
@@ -323,8 +322,8 @@ function addItemQuestion(idWrapp){
 		<div class="wrapper_question wrapp_manager_question_${nmbrQuestion}  mb-2">
 			<div id="question_${nmbrQuestion}" class="border border-primary px-4 py-3">
 				<div class="form-group">					
-					<label class="counter_question font-weight-bold" for="inputName">Pregunta ${nmbrQuestion}:</label>
-					<input type="text" class="form-control question_text" id="inputName" placeholder="Nombre de la pregunta">
+					<label class="counter_question font-weight-bold" for="inputName_${wrapAns}">Pregunta ${nmbrQuestion}:</label>
+					<input type="text" class="form-control question_text" id="inputName_${wrapAns}" placeholder="Nombre de la pregunta">
 					<input type="hidden" class="question_number" value="${nmbrQuestion}">
 					<div class="wrapper_anws_${wrapAns}">
 						<div class="form-row border border-secondary mx-0 mt-2 py-2 px-4 item_answer">
@@ -333,8 +332,8 @@ function addItemQuestion(idWrapp){
 								<label class="custom-control-label ml-3" for="customCheck_${ans_id}">Correcta</label>
 							</div>
 							<div class="col-md-8 text_response">
-								<label for="inputName_${nmbrQuestion}">Respuesta: 1</label>
-								<input type="text" class="form-control response_text" id="inputName_${nmbrQuestion}" placeholder="respuesta">
+								<label for="inputName_${ans_id}">Respuesta: 1</label>
+								<input type="text" class="form-control response_text" id="inputName_${ans_id}" placeholder="respuesta">
 							</div>
 							<div class="col-md-2 d-flex align-items-center pt-2">
 								<button type="button" class="btn btn-outline-danger delete-answer-btn">Quitar</button>

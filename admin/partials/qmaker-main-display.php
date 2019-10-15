@@ -66,7 +66,7 @@
                 <input type="text" class="form-control" id="inputName" placeholder="Nombre del Quiz" required>
             </div>
             <div class="form-group">
-                <label for="inputdescription">Descripción general</label>
+                <label for="inputdescription">Comentarios</label>
                 <textarea name="inputdescription" id="inputdescription" cols="30" rows="5" class="form-control" placeholder="Descripción general del quiz"></textarea>
             </div>
            

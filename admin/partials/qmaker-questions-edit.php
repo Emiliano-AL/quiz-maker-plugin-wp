@@ -36,7 +36,7 @@
                 <input type="text" class="form-control name_quiz" id="inputName" placeholder="Nombre del Quiz" value="<?php echo $current_quiz->nombre_quiz  ?>">
             </div>
             <div class="form-group">
-                <label class="font-weight-bold" for="inputdescription">Descripción general</label>
+                <label class="font-weight-bold" for="inputdescription">Comentarios</label>
                 <textarea name="inputdescription" id="inputdescription" cols="30" rows="5" class="form-control description_quiz"><?php echo $current_quiz->descripcion ?></textarea>
             </div>
         </div>
@@ -46,19 +46,18 @@
         <?php foreach($questions as $q):?>
             <!-- INICIO wrapper pregunta -->
             <div class="wrapper_question wrapp_manager_question_<?php echo $q->id ?> mb-2">
-            <?php //print_r($q); ?>
+            <?php $idInput = rand(1, 10000000); ?>
                 <div id="question_<?php echo $q->id; ?>" class="border border-primary px-4 py-3">
                     <div class="form-group">
                         <?php $answers = $qmaker_answer->get_answers_by_id_quesion($q->id); ?>
-                        
-                        <label class="counter_question font-weight-bold" for="inputName">Pregunta <?php echo $q->numero_pregunta  ?>:</label>
-                        <input type="text" class="form-control question_text" id="inputName" placeholder="Nombre de la pregunta" value="<?php echo $q->nombre_pregunta; ?>">
+                        <label class="counter_question font-weight-bold" for="inputName_<?php echo $idInput; ?>">Pregunta <?php echo $q->numero_pregunta  ?>:</label>
+                        <input type="text" class="form-control question_text" id="inputName_<?php echo $idInput; ?>" placeholder="Nombre de la pregunta" value="<?php echo $q->nombre_pregunta; ?>">
                         <input type="hidden" class="question_number" value="<?php echo $q->numero_pregunta ?>">
                         <?php $i = 1; ?>
                         <div class="wrapper_anws_<?php echo $q->id; ?>">
                             <?php foreach($answers as $ans): ?>
-                            <?php $ans_id = $current_quiz->id.'_'.$q->id.'_'.$ans->id ?>
-                            <?php //$ans_id = uniqid() ?>
+                            <?php //$ans_id = $current_quiz->id.'_'.$q->id.'_'.$ans->id ?>
+                            <?php $ans_id = rand(1, 10000000); ?>
                             <div class="form-row border border-secondary mx-0 mt-2 py-2 px-4 item_answer">
                                 <div class="col-md-2 custom-checkbox d-flex align-items-center is_correct_response">
                                     <input type="checkbox"  <?php checked( 1, $ans->es_correcta);?>  class="custom-control-input response_iscorrect" id="customCheck_<?php echo $ans_id; ?>">
