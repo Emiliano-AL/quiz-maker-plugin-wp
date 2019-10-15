@@ -184,10 +184,9 @@
 })( jQuery );
 
 
-function addItemQuestion(idWrapp, idtemp){
-	// console.log('hola..', idtemp)
+function addItemQuestion(idWrapp){
 	var cont = jQuery('.wrapper_anws_'+idWrapp).children().length + 1
-	var ans_id = `${idWrapp}_${cont}_${idtemp}`
+	var ans_id = `${uniqueid()}`
 	jQuery( '.wrapper_anws_'+idWrapp ).append(`
 		 <div class="form-row border border-secondary mx-0 mt-2 py-2 px-4 item_answer">
 			<div class="col-md-2 custom-checkbox d-flex align-items-center is_correct_response">
@@ -203,6 +202,7 @@ function addItemQuestion(idWrapp, idtemp){
 			</div>
 		</div>
 			 `);
+	jQuery(`#inputName_${ans_id}`).focus()
  }
 
  function deleteQuestion(id){
@@ -216,12 +216,20 @@ function addItemQuestion(idWrapp, idtemp){
  function saveChangesQuestions(idQuiz){
 	var questions = Array()
 	var quiz = new Object()
+	let hasErrorGeneral = false
+	let hasErrorOnQuestion = false
+	if(jQuery('.name_quiz').val() === "" || jQuery('.description_quiz').val() === ""){
+		hasErrorGeneral = true
+	}
 	quiz.name = jQuery('.name_quiz').val()
 	quiz.description = jQuery('.description_quiz').val()
 	quiz.total_questions = jQuery('.wrap_main_questions').children().length
 	quiz.idQuiz = idQuiz
 	jQuery('.wrapper_question').each(function() {
 		var questionText = jQuery(this).find('.question_text')
+		if(questionText.val() === ""){
+			hasErrorOnQuestion = true
+		}
 		var questionNmbr = jQuery(this).find('.question_number')
 		var questionObj = new Object()
 		questionObj.questionName = questionText.val()
@@ -238,39 +246,69 @@ function addItemQuestion(idWrapp, idtemp){
 		questionObj.response = responses
 		questions.push(questionObj)
 	})
+	let hasResponse = false
+	let hasEmptyAnws = false
 	quiz.questions = questions
 	quiz.questions.map(q =>{
+		hasResponse = false
+		hasEmptyAnws  = false
 		q.response.forEach(anws => {
-			//TODO: Validar que al menos una respuesta vaya marcada como correcta, en cada pregunta
-			// console.log(anws)
-		});
-	})
-	// console.info(quiz)
-	//Evento ajax
-	jQuery.ajax({
-		url:		qmaker.url,
-		type:		'post',
-		datatype:	'json',
-		data: 		{
-			action: 		'qm_questions_manager',
-			nonce:			qmaker.seguridad,
-			quiz:			JSON.parse(JSON.stringify(quiz)),
-			tipo:			'update'
-		},
-		success: function(data){
-			data = JSON.parse(data);
-			if(data.result){
-				console.info(data)
-				alert('Actualizado exitosamente.')
+			if(anws.responseText  === ""){
+				hasEmptyAnws = true
 			}
-			console.info(data)
-		},
-		error: function(d, x, v){
-			console.log(d)
-			console.log(x)
-			console.log(v)
+			if(anws.isCorrect == 1){
+				hasResponse = true
+			}
+		});
+		if(!hasResponse){
+			console.log('Esta pregunta no tiene respuesta', q)
+		}
+		if(hasEmptyAnws){
+			console.log('Esta pregunta no tiene texto', q)
 		}
 	})
+	let qmIsValid = true
+	if(!hasResponse){
+		alert('Hay por lo menos, una pregunta que no tiene una respuesta correcta.')
+		qmIsValid = false
+	}else if(hasEmptyAnws){
+		alert('Hay preguntas que tienen respuestas vacias.')
+		qmIsValid = false
+	}else if(hasErrorOnQuestion){
+		alert('Hay preguntas vacias.')
+		qmIsValid = false
+	}else if(hasErrorGeneral){
+		alert('El quiz debe tener un nombre y descripción.')
+		qmIsValid = false
+	}
+	if(qmIsValid){
+		// Evento ajax 
+		jQuery.ajax({
+			url:		qmaker.url,
+			type:		'post',
+			datatype:	'json',
+			data: 		{
+				action: 		'qm_questions_manager',
+				nonce:			qmaker.seguridad,
+				quiz:			JSON.parse(JSON.stringify(quiz)),
+				tipo:			'update'
+			},
+			success: function(data){
+				data = JSON.parse(data);
+				if(data.result){
+					console.info(data)
+					alert('Actualizado exitosamente.')
+				}
+				console.info(data)
+			},
+			error: function(d, x, v){
+				console.log(d)
+				console.log(x)
+				console.log(v)
+			}
+		})
+	}
+	
  }
 
  function uniqueid() {
@@ -280,10 +318,7 @@ function addItemQuestion(idWrapp, idtemp){
  function addQuestionWrap(idQuiz){
 	var nmbrQuestion = 	jQuery('.wrap_main_questions').children().length + 1
 	var wrapAns = 	(jQuery('.wrap_main_questions').children().length + 1) + uniqueid()
-	var ans_id = `${idQuiz}_${nmbrQuestion}_${uniqueid()}`
-	console.log('hola....')
-
-	var uid = uniqueid()
+	var ans_id = `${uniqueid()}`
 	jQuery('.wrap_main_questions').append(`
 		<div class="wrapper_question wrapp_manager_question_${nmbrQuestion}  mb-2">
 			<div id="question_${nmbrQuestion}" class="border border-primary px-4 py-3">
@@ -308,7 +343,7 @@ function addItemQuestion(idWrapp, idtemp){
 					</div>
 				</div>
 				<div class="form-group d-flex justify-content-end">
-					<button type="button" onclick="addItemQuestion('${wrapAns}', '${uid}')" class="btn btn-info btn-sm addresponse-btn-edit mr-2">Agregar Respuesta</button>
+					<button type="button" onclick="addItemQuestion('${wrapAns}')" class="btn btn-info btn-sm addresponse-btn-edit mr-2">Agregar Respuesta</button>
 					<button type="button" onclick="deleteQuestion(${nmbrQuestion})" class="btn btn-danger btn-sm">Quitar pregunta</button>
 				</div>
 			</div>

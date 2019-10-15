@@ -52,12 +52,13 @@
                         <?php $answers = $qmaker_answer->get_answers_by_id_quesion($q->id); ?>
                         
                         <label class="counter_question font-weight-bold" for="inputName">Pregunta <?php echo $q->numero_pregunta  ?>:</label>
-                        <input type="text" class="form-control question_text" id="inputName" placeholder="Nombre del Quiz" value="<?php echo $q->nombre_pregunta; ?>">
+                        <input type="text" class="form-control question_text" id="inputName" placeholder="Nombre de la pregunta" value="<?php echo $q->nombre_pregunta; ?>">
                         <input type="hidden" class="question_number" value="<?php echo $q->numero_pregunta ?>">
                         <?php $i = 1; ?>
                         <div class="wrapper_anws_<?php echo $q->id; ?>">
                             <?php foreach($answers as $ans): ?>
                             <?php $ans_id = $current_quiz->id.'_'.$q->id.'_'.$ans->id ?>
+                            <?php //$ans_id = uniqid() ?>
                             <div class="form-row border border-secondary mx-0 mt-2 py-2 px-4 item_answer">
                                 <div class="col-md-2 custom-checkbox d-flex align-items-center is_correct_response">
                                     <input type="checkbox"  <?php checked( 1, $ans->es_correcta);?>  class="custom-control-input response_iscorrect" id="customCheck_<?php echo $ans_id; ?>">
@@ -65,7 +66,7 @@
                                 </div>
                                 <div class="col-md-8 text_response">
                                     <label for="inputName_<?php echo $ans_id; ?>">Respuesta: <?php echo $ans->numero_respuesta; ?></label>
-                                    <input type="text" class="form-control response_text" id="inputName_<?php echo $ans_id; ?>" placeholder="Nombre del Quiz" value="<?php echo $ans->nombre_respuesta; ?>">
+                                    <input type="text" class="form-control response_text" id="inputName_<?php echo $ans_id; ?>" placeholder="Respuesta" value="<?php echo $ans->nombre_respuesta; ?>">
                                 </div>
                                 <div class="col-md-2 d-flex align-items-center pt-2">
                                     <button type="button" class="btn btn-outline-danger delete-answer-btn">Quitar</button>
@@ -75,8 +76,7 @@
                         </div><!--END wrapper_anws-->
                     </div>
                     <div class="form-group d-flex justify-content-end">
-                        <?php $idQmTemp = uniqid(); ?>
-                        <button type="button" onclick="addItemQuestion(<?php echo $q->id; ?>, '<?php echo $idQmTemp; ?>')" class="btn btn-info btn-sm addresponse-btn-edit mr-2">Agregar Respuesta</button>
+                        <button type="button" onclick="addItemQuestion(<?php echo $q->id; ?>)" class="btn btn-info btn-sm addresponse-btn-edit mr-2">Agregar Respuesta</button>
                         <button type="button" onclick="deleteQuestion(<?php echo $q->id;?>)" class="btn btn-danger btn-sm">Quitar pregunta</button>
                     </div>
                 </div> <!--END question-->
