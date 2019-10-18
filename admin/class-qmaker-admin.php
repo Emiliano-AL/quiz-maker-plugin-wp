@@ -167,13 +167,13 @@ class Qmaker_Admin {
 	public function qmaker_add_options_menu()
 	{
 		add_menu_page(
-			'Quizz Maker', 
-			'Quizz Maker', 
+			'Quiz Maker', 
+			'Quiz Maker', 
 			'manage_options', 
 			$this->plugin_name, 
 			array($this, 'display_plugin_main_page'), 
-			'dashicons-qmaker', 
-			41);
+			'dashicons-list-view', 
+			9);
 
 		// add_submenu_page(
 		// 	$this->plugin_name, 

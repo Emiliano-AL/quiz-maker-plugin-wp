@@ -32,13 +32,13 @@
             <h2 class="text-center"><?php echo esc_html(get_admin_page_title()); ?></h2>
         </div>
         <div class="col-2">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#addQuizmodal">Agregar Quiz</button>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#addQuizmodal">Agregar quiz</button>
         </div>
     </div>
 
     <div class="row">
       <div class="col-12">
-        <h2>Listado Quizes</h2>
+        <h2>Listado quizzes</h2>
         <form method="post">
           <?php
           $this->qmaker_quiz->prepare_items();
@@ -54,7 +54,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addQuizmodalLbl">Agregar Quiz</h5>
+        <h5 class="modal-title" id="addQuizmodalLbl">Agregar quiz</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
