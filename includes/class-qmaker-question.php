@@ -68,16 +68,18 @@ class Qmaker_Question {
     **/
     public function add_question($question, $idQuiz, $questionNmbr){
         if($idQuiz > 0){
+            $qname = $this->pods_unsanitize($question['questionName']);
             $this->db->insert(
                 QM_QUESTION,
                 array(
                     'numero_pregunta'   => $questionNmbr, 
-                    'nombre_pregunta'   => $question['questionName'], 
+                    'nombre_pregunta'   => $qname, 
                     'tipo_pregunta'     => 1,
                     'quiz_id'           => $idQuiz
                 ),
                 array( '%d', '%s', '%d', '%d' )
             );
+
             $questionId = $this->db->insert_id;
             $countResponses = 1;
             foreach ($question['response'] as $anws)
@@ -89,6 +91,46 @@ class Qmaker_Question {
 
             return $ttl;
         }
+    }
+
+
+    /**
+     * Filter input and return unsanitized output
+     *
+     * Fuente: https://github.com/pods-framework/pods/blob/edc9582/includes/data.php?ts=4#L220
+     * 
+     * @param mixed $input  The string, array, or object to unsanitize
+     * @param array $params Additional options
+     *
+     * @return array|mixed|object|string|void
+     *
+     * @since 1.2.0
+     */
+    public function pods_unsanitize( $input, $params = array() ) {
+        if ( '' === $input || is_int( $input ) || is_float( $input ) || empty( $input ) ) {
+            return $input;
+        }
+        $output = array();
+        if ( empty( $input ) ) {
+            $output = $input;
+        } elseif ( is_object( $input ) ) {
+            $input = get_object_vars( $input );
+            $n_params           = (array) $params;
+            $n_params['nested'] = true;
+            foreach ( $input as $key => $val ) {
+                $output[ pods_unsanitize( $key ) ] = pods_unsanitize( $val, $n_params );
+            }
+            $output = (object) $output;
+        } elseif ( is_array( $input ) ) {
+            $n_params           = (array) $params;
+            $n_params['nested'] = true;
+            foreach ( $input as $key => $val ) {
+                $output[ pods_unsanitize( $key ) ] = pods_unsanitize( $val, $n_params );
+            }
+        } else {
+            $output = wp_unslash( $input );
+        }//end if
+        return $output;
     }
 
     /**
