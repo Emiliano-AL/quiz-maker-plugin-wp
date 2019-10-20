@@ -207,17 +207,6 @@ class Qmaker_Admin {
 		}
 	}
 
-	/**
-	 * Renderea la página de configuración del plugin
-	 * 
-	 * @access   public
-	 * @since    1.0.0
-	 */
-	// public function display_plugin_setup_page(){
-	// 	require_once  QM_PLUGIN_DIR_PATH . 'admin/partials/qmaker-setting-display.php' ;
-	// }
-
-
 	public function qmaker_ajax_create_quiz(){
 		check_ajax_referer('qmaker_seg', 'nonce');
 	
