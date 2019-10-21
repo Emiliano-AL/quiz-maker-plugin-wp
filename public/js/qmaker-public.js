@@ -33,8 +33,10 @@
 			$(this).attr( 'checked', true )
 		})
 		$itemOptionAnswer.on('click', function(){
-			var btnCheck = '#btn-check_'+$(this).data('question')
-			$(btnCheck).removeClass('d-none')
+			if(!jQuery(this).hasClass('evaluated')){
+				var btnCheck = '#btn-check_'+$(this).data('question')
+				$(btnCheck).removeClass('d-none')
+			}
 		})
 
 
@@ -61,6 +63,7 @@
 				$(btnShowResults).removeClass('d-none')
 				$(idQuestion).each(function() {
 					var answser = $(this).find('.ans_item')
+					answser.attr('disabled', true)
 					if( !$(answser).parent().hasClass('evaluated') && answser.is(":checked")){
 						if(answser.val() == 1){
 							$(answser).next().addClass('correct-answer')
@@ -129,6 +132,7 @@
 		$btnResetQuiz.on('click', function(){
 			$itemOptionAnswer.each(function(){
 				$(this).find('.ans_item').attr( 'checked', false )
+				$(this).find('.ans_item').attr( 'disabled', false )
 				$(this).find('.ans_item').next().removeClass('incorrect-answer')
 				$(this).find('.ans_item').next().removeClass('correct-answer')
 				$(this).next().addClass('d-none')
