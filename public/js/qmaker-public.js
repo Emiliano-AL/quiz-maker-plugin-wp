@@ -44,7 +44,7 @@
 		$btncheckAnswer.on('click', function(){
 			var idQuestion = '.question_' + $(this).data('question')
 			var btnNext = '#btn-next_' + $(this).data('question')
-			var btnShowResults = '#btn-show-result_' + $(this).data('question')
+			var btnShowResults = '#btn-show-result_' + $(this).data('question')	
 			// $(btnNext).addClass
 			var isOptionSlctd = false
 			$(idQuestion).each(function() {
@@ -66,15 +66,17 @@
 					answser.attr('disabled', true)
 					if( !$(answser).parent().hasClass('evaluated') && answser.is(":checked")){
 						if(answser.val() == 1){
-							$(answser).next().addClass('correct-answer')
-							$(answser).parent().next().removeClass('d-none')
 							var corrects = Number($('.correct-answers').val()) + 1
 							$('.correct-answers').val(corrects)
-						}else{
-							$(answser).next().addClass('incorrect-answer')
+							$('.correct-answers').val(corrects)
+							$(answser).next().addClass('correct-answer')
 							$(answser).parent().next().removeClass('d-none')
+						}else{
 							var incorrects = Number($('.incorrect-answers').val()) + 1
 							$('.incorrect-answers').val(incorrects)
+							console.info('QUIZM: incorrects', incorrects)
+							$(answser).next().addClass('incorrect-answer')
+							$(answser).parent().next().removeClass('d-none')
 							$(idQuestion).each(function() {
 								if($(this).children('label').hasClass('qm-answers-correct')){
 									$(this).children('label').children('span').addClass('correct-answer')

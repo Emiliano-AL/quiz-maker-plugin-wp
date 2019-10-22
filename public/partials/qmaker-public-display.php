@@ -87,6 +87,8 @@ if($id != ''):
                                         type="button" 
                                         id="btn-check_<?php echo $q->id; ?>"
                                         data-question="<?php echo $q->id; ?>" 
+                                        data-last-question="<?php echo $ttlQuestions == $qnmbr ? 1 : 0; ?>" 
+                                        data-total-questions="<?php echo $ttlQuestions; ?>" 
                                         class="btn btn-primary btn-sm btn-check-anws d-none">Revisar</button>
                                 </th>
                                 <th class="w-33 text-right"> 
