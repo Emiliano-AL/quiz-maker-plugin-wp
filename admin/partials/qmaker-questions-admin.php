@@ -23,9 +23,6 @@ $quiz_detail = $qmaker_quiz->get_quiz_detail($_GET['idQuiz']);
     <div class="row pt-3">
         <div class="col-md-12">
             <h3 class="text-center">Preguntas (<?php echo count($quiz_detail); ?>)</h3>
-            <!-- <div class="form-group d-flex justify-content-end">
-                <button type="button" class="btn btn-success">Agregar pregunta</button>
-            </div> -->
 
             <!-- INICIO wrapper pregunta -->
             <div class="wrapper_question">

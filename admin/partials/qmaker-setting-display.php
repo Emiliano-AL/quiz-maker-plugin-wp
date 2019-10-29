@@ -17,7 +17,6 @@
 <div class="wrap">
     <h2><?php echo esc_html(get_admin_page_title()); ?></h2>
     <pre>
-        <?php //print_r(get_query_var('page'));?>
         <?php echo $_GET['page'];?>
     </pre>
 </div>

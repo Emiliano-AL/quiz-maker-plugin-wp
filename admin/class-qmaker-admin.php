@@ -174,14 +174,6 @@ class Qmaker_Admin {
 			array($this, 'display_plugin_main_page'), 
 			'dashicons-list-view', 
 			9);
-
-		// add_submenu_page(
-		// 	$this->plugin_name, 
-		// 	'Página de Configuración', 
-		// 	'Configuración', 
-		// 	'manage_options',
-		// 	$this->plugin_name.'_settings', 
-		// 	array($this, 'display_plugin_setup_page'));
 	}
 
 	/**
@@ -198,15 +190,18 @@ class Qmaker_Admin {
 		elseif($_GET['page'] == 'qmaker' && $_GET['action'] == 'addquestions' && isset($_GET['idQuiz'])){
 			require_once  QM_PLUGIN_DIR_PATH . 'admin/partials/qmaker-questions-admin.php';
 		}
-		// elseif($_GET['page'] == 'qmaker' && $_GET['action'] == 'edit' && isset($_GET['idQuiz'])){
-		// 	require_once  QM_PLUGIN_DIR_PATH . 'admin/partials/qmaker-questions-admin.php';
-		// }
 		else 
 		{
 			require_once  QM_PLUGIN_DIR_PATH . 'admin/partials/qmaker-main-display.php' ;
 		}
 	}
 
+	/**
+	 * Se encarga de crear el Quiz en la BD
+	 * 
+	 * @access   public
+	 * @since    1.0.0
+	 */
 	public function qmaker_ajax_create_quiz(){
 		check_ajax_referer('qmaker_seg', 'nonce');
 	
@@ -235,7 +230,13 @@ class Qmaker_Admin {
 		}
 	}
 
-
+	/**
+	 * Maneja todas las acciones respecto a las preguntas, 
+	 * agregar, y editar
+	 * 
+	 * @access   public
+	 * @since    1.0.0
+	 */
 	public function qmaker_ajax_questions_manager(){
 		check_ajax_referer('qmaker_seg', 'nonce');
 		if(current_user_can('manage_options')){
@@ -261,6 +262,12 @@ class Qmaker_Admin {
 	}
 
 
+	/**
+	 * Función auxiliar para generar una respuesta estandard
+	 * 
+	 * @access   public
+	 * @since    1.0.0
+	 */
 	private function qmaker_manage_response($idReponse)
 	{
 		if($idReponse > 0){
