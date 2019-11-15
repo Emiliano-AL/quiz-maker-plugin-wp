@@ -65,10 +65,10 @@
                 <label for="inputName">Nombre del quiz</label>
                 <input type="text" class="form-control" id="inputName" placeholder="Nombre del Quiz" required>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="inputdescription">Comentarios</label>
                 <textarea name="inputdescription" id="inputdescription" cols="30" rows="5" class="form-control" placeholder="Descripción general del quiz"></textarea>
-            </div>
+            </div> -->
            
             <button type="button" id="create-quiz" class="btn btn-primary add-quiz">Agregar</button>
         </form>

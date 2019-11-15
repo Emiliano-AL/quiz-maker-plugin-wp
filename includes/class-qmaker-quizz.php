@@ -159,7 +159,8 @@ class Qmaker_Quiz extends WP_List_Table {
     public function column_default( $item, $column_name ) {
         switch ( $column_name ) {
             // case 'nombre_quiz':
-            case 'descripcion':
+            case 'id':
+            // case 'descripcion':
             case 'preguntas_total':
                 return $item[ $column_name ];
        
@@ -207,10 +208,11 @@ class Qmaker_Quiz extends WP_List_Table {
      */
     public function get_columns() {
         $columns = [
-            'cb'            => '<input type="checkbox" />',
-            'nombre_quiz'      => __( 'Nombre del quiz', 'qmaker' ),
-            'descripcion'   => __( 'Descripción', 'qmaker' ),
-            'preguntas_total' => __( 'Total de preguntas', 'qmaker' )
+            'cb'                => '<input type="checkbox" />',
+            'nombre_quiz'       => __( 'Nombre del quiz', 'qmaker' ),
+            'id'                => __( 'ID Quiz', 'qmaker' ),
+            // 'descripcion'       => __( 'Descripción', 'qmaker' ),
+            'preguntas_total'   => __( 'Total de preguntas', 'qmaker' )
         ];
     
         return $columns;
@@ -416,7 +418,7 @@ class Qmaker_Quiz extends WP_List_Table {
                     QM_QUIZ, 
                     array( 
                         'nombre_quiz' => $name,
-                        'descripcion' => $description,
+                        // 'descripcion' => $description,
                         'preguntas_total' => $ttl,
                      ), 
                     array( 'id' => $quizId ), 

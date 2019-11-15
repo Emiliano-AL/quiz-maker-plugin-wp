@@ -23,8 +23,9 @@
  ?>
     <div class="row mt-3 mb-2">
         <div class="col-8">
-            <h2>Editar Quiz: <?php echo $current_quiz->nombre_quiz ?></h2>
+            <h2>Editar Quiz: <?php echo $current_quiz->nombre_quiz ?> - <span class="text-muted">ID <?php echo $current_quiz->id ?></span></h2>
         </div>
+       
         <div class="col-4 d-flex justify-content-end pr-0">
             <button type="button" onclick="saveChangesQuestions(<?php echo $current_quiz->id ?>)" class="btn btn-primary">Guardar cambios</button>
         </div>
@@ -35,10 +36,7 @@
                 <label class="font-weight-bold" for="inputName">Nombre del Quiz</label>
                 <input type="text" class="form-control name_quiz" id="inputName" placeholder="Nombre del Quiz" value="<?php echo $current_quiz->nombre_quiz  ?>">
             </div>
-            <div class="form-group">
-                <label class="font-weight-bold" for="inputdescription">Comentarios</label>
-                <textarea name="inputdescription" id="inputdescription" cols="30" rows="5" class="form-control description_quiz"><?php echo $current_quiz->descripcion ?></textarea>
-            </div>
+       
         </div>
     </div>
     <div class="row">
