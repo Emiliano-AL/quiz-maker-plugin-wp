@@ -26,7 +26,13 @@
             <h2>Editar Quiz: <?php echo $current_quiz->nombre_quiz ?> - <span class="text-muted">ID <?php echo $current_quiz->id ?></span></h2>
         </div>
        
+        <!-- <div class="col-2 text-right">
+          
+        </div> -->
+
         <div class="col-4 d-flex justify-content-end pr-0">
+            <?php $url = site_url().'/vista-previa/?id='. $current_quiz->id; ?>
+            <a type="button" href="<?php echo $url ?>" target="_blank" class="btn btn-warning mr-2">Vista previa</a>
             <button type="button" onclick="saveChangesQuestions(<?php echo $current_quiz->id ?>)" class="btn btn-primary">Guardar cambios</button>
         </div>
     </div>
@@ -36,7 +42,6 @@
                 <label class="font-weight-bold" for="inputName">Nombre del Quiz</label>
                 <input type="text" class="form-control name_quiz" id="inputName" placeholder="Nombre del Quiz" value="<?php echo $current_quiz->nombre_quiz  ?>">
             </div>
-       
         </div>
     </div>
     <div class="row">
@@ -49,12 +54,11 @@
                     <div class="form-group">
                         <?php $answers = $qmaker_answer->get_answers_by_id_quesion($q->id); ?>
                         <label class="counter_question font-weight-bold" for="inputName_<?php echo $idInput; ?>">Pregunta <?php echo $q->numero_pregunta  ?>:</label>
-                        <input type="text" class="form-control question_text" id="inputName_<?php echo $idInput; ?>" placeholder="Nombre de la pregunta" value="<?php echo $q->nombre_pregunta; ?>">
+                        <textarea class="form-control question_text" name="textarea" rows="3" cols="50"  id="inputName_<?php echo $idInput; ?>" placeholder="Nombre de la pregunta"><?php echo $q->nombre_pregunta; ?></textarea>
                         <input type="hidden" class="question_number" value="<?php echo $q->numero_pregunta ?>">
                         <?php $i = 1; ?>
                         <div class="wrapper_anws_<?php echo $q->id; ?>">
                             <?php foreach($answers as $ans): ?>
-                            <?php //$ans_id = $current_quiz->id.'_'.$q->id.'_'.$ans->id ?>
                             <?php $ans_id = rand(1, 10000000); ?>
                             <div class="form-row border border-secondary mx-0 mt-2 py-2 px-4 item_answer">
                                 <div class="col-md-2 custom-checkbox d-flex align-items-center is_correct_response">
@@ -63,7 +67,7 @@
                                 </div>
                                 <div class="col-md-8 text_response">
                                     <label for="inputName_<?php echo $ans_id; ?>">Respuesta: <?php echo $ans->numero_respuesta; ?></label>
-                                    <input type="text" class="form-control response_text" id="inputName_<?php echo $ans_id; ?>" placeholder="Respuesta" value="<?php echo $ans->nombre_respuesta; ?>">
+                                    <textarea id="inputName_<?php echo $ans_id; ?>" class="form-control response_text" placeholder="Respuesta" cols="10" rows="2"><?php echo $ans->nombre_respuesta; ?></textarea>
                                 </div>
                                 <div class="col-md-2 d-flex align-items-center pt-2">
                                     <button type="button" class="btn btn-outline-danger delete-answer-btn">Quitar</button>

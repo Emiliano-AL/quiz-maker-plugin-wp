@@ -16,20 +16,25 @@ $quiz_detail = $qmaker_quiz->get_quiz_detail($_GET['idQuiz']);
 <div class="container">
     <div class="row mt-3">
         <div class="col-10">
-            <h2 class="text-center">Agregar preguntas a: <?php echo $current_quiz->nombre_quiz ?></h2>
+            <h2 class="text-center">Agregar preguntas a: <?php echo $current_quiz->nombre_quiz ?> - <span class="text-muted">ID <?php echo $current_quiz->id ?></span></h2>
         </div>
     </div>
 
     <div class="row pt-3">
-        <div class="col-md-12">
+        <div class="col-md-10">
             <h3 class="text-center">Preguntas (<?php echo count($quiz_detail); ?>)</h3>
-
+        </div>
+        <div class="col-md-2 text-right">
+            <?php $url = site_url().'/vista-previa/?id='. $current_quiz->id; ?>
+            <a type="button" href="<?php echo $url ?>" target="_blank" class="btn btn-warning mr-2">Vista previa</a>
+        </div>
+        <div class="col-md-12">
             <!-- INICIO wrapper pregunta -->
             <div class="wrapper_question">
                 <div id="question_1" class="border border-primary p-3">
                     <div class="form-group">
                         <label class="counter_question font-weight-bold" for="inputName">Pregunta <?php echo count($quiz_detail)+1;  ?>:</label>
-                        <input type="text" class="form-control question_text" id="inputName" placeholder="Nombre del Quiz">
+                        <textarea id="inputName" class="form-control question_text" cols="10" rows="2"></textarea>
                         <div class="wrapper_anws">
                             <div class="form-row border border-secondary mx-0 mt-2 py-2 px-4 item_answer">
                                 <div class="col-md-2 custom-checkbox d-flex align-items-center is_correct_response">
@@ -38,7 +43,7 @@ $quiz_detail = $qmaker_quiz->get_quiz_detail($_GET['idQuiz']);
                                 </div>
                                 <div class="col-md-8 text_response">
                                     <label for="inputName_1">Respuesta:</label>
-                                    <input type="text" class="form-control response_text" id="inputName_1" placeholder="Nombre del Quiz">
+                                    <textarea id="inputName_1" class="form-control response_text" cols="10" rows="2"></textarea>
                                 </div>
                                 <div class="col-md-2 d-flex align-items-center pt-2">
                                     <button type="button" class="btn btn-outline-danger delete-answer-btn">Quitar</button>

@@ -95,7 +95,7 @@
 			</div>
 			<div class="col-md-8 text_response">
 				<label for="inputName_${cont}">Respuesta:</label>
-				<input type="text" class="form-control response_text" id="inputName_${cont}" placeholder="Respuesta">
+				<textarea id="inputName_${cont}" class="form-control response_text" cols="10" rows="2"></textarea>
 			</div>
 			<div class="col-md-2 d-flex align-items-center pt-2">
 				<button type="button" class="btn btn-outline-danger delete-answer-btn">Quitar</button>
@@ -194,7 +194,7 @@ function addItemQuestion(idWrapp){
 			</div>
 			<div class="col-md-8 text_response">
 				<label for="inputName_${ans_id}">Respuesta:</label>
-				<input type="text" class="form-control response_text" id="inputName_${ans_id}" placeholder="Respuesta">
+				<textarea id="inputName_${ans_id}" class="form-control response_text" placeholder="Respuesta" cols="10" rows="2"></textarea>
 			</div>
 			<div class="col-md-2 d-flex align-items-center pt-2">
 				<button type="button" class="btn btn-outline-danger delete-answer-btn">Quitar</button>
@@ -323,7 +323,7 @@ function addItemQuestion(idWrapp){
 			<div id="question_${nmbrQuestion}" class="border border-primary px-4 py-3">
 				<div class="form-group">					
 					<label class="counter_question font-weight-bold" for="inputName_${wrapAns}">Pregunta ${nmbrQuestion}:</label>
-					<input type="text" class="form-control question_text" id="inputName_${wrapAns}" placeholder="Nombre de la pregunta">
+					<textarea class="form-control question_text" rows="3" cols="50" id="inputName_${wrapAns}" placeholder="Nombre de la pregunta"></textarea>
 					<input type="hidden" class="question_number" value="${nmbrQuestion}">
 					<div class="wrapper_anws_${wrapAns}">
 						<div class="form-row border border-secondary mx-0 mt-2 py-2 px-4 item_answer">
@@ -333,7 +333,7 @@ function addItemQuestion(idWrapp){
 							</div>
 							<div class="col-md-8 text_response">
 								<label for="inputName_${ans_id}">Respuesta: 1</label>
-								<input type="text" class="form-control response_text" id="inputName_${ans_id}" placeholder="respuesta">
+								<textarea id="inputName_${ans_id}" class="form-control response_text" placeholder="Respuesta" cols="10" rows="2"></textarea>
 							</div>
 							<div class="col-md-2 d-flex align-items-center pt-2">
 								<button type="button" class="btn btn-outline-danger delete-answer-btn">Quitar</button>
