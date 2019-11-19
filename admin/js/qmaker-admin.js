@@ -109,7 +109,7 @@
 			</div>
 			<div class="col-md-8 text_response">
 				<label for="inputName_${cont}">Respuesta:</label>
-				<textarea id="inputName_${cont}" class="form-control response_text" cols="10" rows="1"></textarea>
+				<textarea id="inputName_${cont}" class="form-control response_text" placeholder="Escribe la respuesta" cols="10" rows="1"></textarea>
 			</div>
 			<div class="col-md-2 d-flex align-items-center pt-2">
 				<button type="button" class="btn btn-sm btn-outline-danger delete-answer-btn">Eliminar respuesta</button>
@@ -208,7 +208,7 @@ function addItemQuestion(idWrapp){
 			</div>
 			<div class="col-md-8 text_response">
 				<label for="inputName_${ans_id}">Respuesta:</label>
-				<textarea id="inputName_${ans_id}" class="form-control response_text" placeholder="Respuesta" cols="10" rows="1"></textarea>
+				<textarea id="inputName_${ans_id}" class="form-control response_text" placeholder="Escribe la respuesta" cols="10" rows="1"></textarea>
 			</div>
 			<div class="col-md-2 d-flex align-items-center pt-2">
 				<button type="button" class="btn btn-sm btn-outline-danger delete-answer-btn">Eliminar respuesta</button>
@@ -347,17 +347,17 @@ function addItemQuestion(idWrapp){
 							</div>
 							<div class="col-md-8 text_response">
 								<label for="inputName_${ans_id}">Respuesta: 1</label>
-								<textarea id="inputName_${ans_id}" class="form-control response_text" placeholder="Respuesta" cols="10" rows="1"></textarea>
+								<textarea id="inputName_${ans_id}" class="form-control response_text" placeholder="Escribe la respuesta" cols="10" rows="1"></textarea>
 							</div>
 							<div class="col-md-2 d-flex align-items-center pt-2">
-								<button type="button" class="btn btn-outline-danger delete-answer-btn">Quitar</button>
+								<button type="button" class="btn btn-sm btn-outline-danger delete-answer-btn">Eliminar respuesta</button>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="form-group d-flex justify-content-end">
-					<button type="button" onclick="addItemQuestion('${wrapAns}')" class="btn btn-info btn-sm addresponse-btn-edit mr-2">Agregar Respuesta</button>
-					<button type="button" onclick="deleteQuestion(${nmbrQuestion})" class="btn btn-danger btn-sm">Quitar pregunta</button>
+				<button type="button" onclick="deleteQuestion(${nmbrQuestion})" class="btn btn-outline-danger btn-sm mr-2">Eliminar pregunta</button>
+				<button type="button" onclick="addItemQuestion('${wrapAns}')" class="btn btn-info btn-sm addresponse-btn-edit">Agregar Respuesta</button>
 				</div>
 			</div>
 		</div>

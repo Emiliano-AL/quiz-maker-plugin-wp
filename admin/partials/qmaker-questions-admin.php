@@ -21,20 +21,21 @@ $quiz_detail = $qmaker_quiz->get_quiz_detail($_GET['idQuiz']);
     </div>
 
     <div class="row pt-3">
-        <div class="col-md-10">
+        <div class="col-md-8">
             <h3 class="text-center">Preguntas (<?php echo count($quiz_detail); ?>)</h3>
         </div>
-        <div class="col-md-2 text-right">
+        <div class="col-md-4 text-right">
             <?php $url = site_url().'/vista-previa/?id='. $current_quiz->id; ?>
-            <a type="button" href="<?php echo $url ?>" target="_blank" class="btn btn-warning mr-2">Vista previa</a>
+            <a type="button" href="<?php echo $url ?>" target="_blank" class="btn btn-sm btn-warning mr-2">Vista previa</a>
+            <button type="button" class="btn btn-primary btn-lg save-question-btn">Guardar pregunta</button>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-12 mt-2">
             <!-- INICIO wrapper pregunta -->
             <div class="wrapper_question">
                 <div id="question_1" class="border p-3">
                     <div class="form-group">
                         <label class="counter_question font-weight-bold" for="inputName">Pregunta <?php echo count($quiz_detail)+1;  ?>:</label>
-                        <textarea id="inputName" class="form-control question_text" cols="10" rows="2"></textarea>
+                        <textarea id="inputName" class="form-control question_text" cols="10" placeholder="Escribe la pregunta" rows="2"></textarea>
                         <div class="wrapper_anws">
                             <div class="form-row border mx-0 mt-2 py-2 px-4 item_answer">
                                 <div class="col-md-2 custom-checkbox d-flex align-items-center is_correct_response">
@@ -43,7 +44,7 @@ $quiz_detail = $qmaker_quiz->get_quiz_detail($_GET['idQuiz']);
                                 </div>
                                 <div class="col-md-8 text_response">
                                     <label for="inputName_1">Respuesta:</label>
-                                    <textarea id="inputName_1" class="form-control response_text" cols="10" rows="1"></textarea>
+                                    <textarea id="inputName_1" class="form-control response_text" cols="10" placeholder="Escribe la respuesta" rows="1"></textarea>
                                 </div>
                                 <div class="col-md-2 d-flex align-items-center pt-2">
                                     <button type="button" class="btn btn-sm btn-outline-danger delete-answer-btn">Eliminar respuesta</button>
@@ -52,7 +53,7 @@ $quiz_detail = $qmaker_quiz->get_quiz_detail($_GET['idQuiz']);
                         </div><!--END wrapper_anws-->
                     </div>
                     <div class="form-group d-flex justify-content-end">
-                        <button type="button" class="btn btn-info btn-sm addresponse-btn mr-2">Agregar Respuesta</button>
+                        <button type="button" class="btn btn-info btn-sm addresponse-btn mr-2">Agregar respuesta</button>
                     </div>
                 </div> <!--END question-->
 
@@ -61,7 +62,7 @@ $quiz_detail = $qmaker_quiz->get_quiz_detail($_GET['idQuiz']);
            
             <div class="form-group d-flex justify-content-end mt-3">
                 <input type="hidden" class="quiz_id" value="<?php echo$current_quiz->id; ?>">
-                <button type="button" class="btn btn-primary btn-lg save-question-btn">Guardar Pregunta</button>
+                <button type="button" class="btn btn-primary btn-lg save-question-btn">Guardar pregunta</button>
             </div>
         </div>
     </div>

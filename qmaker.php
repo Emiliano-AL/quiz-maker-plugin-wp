@@ -38,7 +38,7 @@ define( 'QM_QUIZ', 			"{$wpdb->prefix}qm_quizes" );
 define( 'QM_QUESTION', 		"{$wpdb->prefix}qm_questions" );
 define( 'QM_ANSWERS', 		"{$wpdb->prefix}qm_answers" );
 
-define( 'QMAKER_VERSION', '1.1.2' );
+define( 'QMAKER_VERSION', '1.1.3' );
 
 /**
  * The code that runs during plugin activation.
