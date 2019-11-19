@@ -30,14 +30,14 @@
           
         </div> -->
 
-        <div class="col-4 d-flex justify-content-end pr-0">
+        <div class="col-4 text-right pr-0">
             <?php $url = site_url().'/vista-previa/?id='. $current_quiz->id; ?>
-            <a type="button" href="<?php echo $url ?>" target="_blank" class="btn btn-warning mr-2">Vista previa</a>
-            <button type="button" onclick="saveChangesQuestions(<?php echo $current_quiz->id ?>)" class="btn btn-primary">Guardar cambios</button>
+            <a type="button" href="<?php echo $url ?>" target="_blank" class="btn btn-sm btn-warning mr-2">Vista previa</a>
+            <button type="button" onclick="saveChangesQuestions(<?php echo $current_quiz->id ?>)" class="btn btn-lg btn-primary">Guardar cambios</button>
         </div>
     </div>
     <div class="row">
-        <div class="col-12 wrapper_quiz border border-success p-3 my-2">
+        <div class="col-12 wrapper_quiz border p-3 my-2">
             <div class="form-group">
                 <label class="font-weight-bold" for="inputName">Nombre del Quiz</label>
                 <input type="text" class="form-control name_quiz" id="inputName" placeholder="Nombre del Quiz" value="<?php echo $current_quiz->nombre_quiz  ?>">
@@ -50,7 +50,7 @@
             <!-- INICIO wrapper pregunta -->
             <div class="wrapper_question wrapp_manager_question_<?php echo $q->id ?> mb-2">
             <?php $idInput = rand(1, 10000000); ?>
-                <div id="question_<?php echo $q->id; ?>" class="border border-primary px-4 py-3">
+                <div id="question_<?php echo $q->id; ?>" class="border px-4 py-3">
                     <div class="form-group">
                         <?php $answers = $qmaker_answer->get_answers_by_id_quesion($q->id); ?>
                         <label class="counter_question font-weight-bold" for="inputName_<?php echo $idInput; ?>">Pregunta <?php echo $q->numero_pregunta  ?>:</label>
@@ -60,25 +60,25 @@
                         <div class="wrapper_anws_<?php echo $q->id; ?>">
                             <?php foreach($answers as $ans): ?>
                             <?php $ans_id = rand(1, 10000000); ?>
-                            <div class="form-row border border-secondary mx-0 mt-2 py-2 px-4 item_answer">
+                            <div class="form-row border mx-0 mt-2 py-2 px-4 item_answer">
                                 <div class="col-md-2 custom-checkbox d-flex align-items-center is_correct_response">
                                     <input type="checkbox"  <?php checked( 1, $ans->es_correcta);?>  class="custom-control-input response_iscorrect" id="customCheck_<?php echo $ans_id; ?>">
                                     <label class="custom-control-label ml-3" for="customCheck_<?php echo $ans_id; ?>">Correcta</label>
                                 </div>
                                 <div class="col-md-8 text_response">
                                     <label for="inputName_<?php echo $ans_id; ?>">Respuesta: <?php echo $ans->numero_respuesta; ?></label>
-                                    <textarea id="inputName_<?php echo $ans_id; ?>" class="form-control response_text" placeholder="Respuesta" cols="10" rows="2"><?php echo $ans->nombre_respuesta; ?></textarea>
+                                    <textarea id="inputName_<?php echo $ans_id; ?>" class="form-control response_text" placeholder="Respuesta" cols="10" rows="1"><?php echo $ans->nombre_respuesta; ?></textarea>
                                 </div>
                                 <div class="col-md-2 d-flex align-items-center pt-2">
-                                    <button type="button" class="btn btn-outline-danger delete-answer-btn">Quitar</button>
+                                    <button type="button" class="btn btn-sm btn-outline-danger delete-answer-btn">Eliminar respuesta</button>
                                 </div>
                             </div>
                             <?php endforeach; ?>
                         </div><!--END wrapper_anws-->
                     </div>
                     <div class="form-group d-flex justify-content-end">
-                        <button type="button" onclick="addItemQuestion(<?php echo $q->id; ?>)" class="btn btn-info btn-sm addresponse-btn-edit mr-2">Agregar Respuesta</button>
-                        <button type="button" onclick="deleteQuestion(<?php echo $q->id;?>)" class="btn btn-danger btn-sm">Quitar pregunta</button>
+                        <button type="button" onclick="deleteQuestion(<?php echo $q->id;?>)" class="btn btn-outline-danger btn-sm  mr-2">Eliminar pregunta</button>
+                        <button type="button" onclick="addItemQuestion(<?php echo $q->id; ?>)" class="btn btn-info btn-sm addresponse-btn-edit">Agregar Respuesta</button>
                     </div>
                 </div> <!--END question-->
             </div>
@@ -88,9 +88,9 @@
     </div>
 
     <div class="row  mt-3 mb-2">
-        <div class="col-4 offset-md-8 d-flex justify-content-end pr-0">
-            <button type="button" onclick="addQuestionWrap(<?php echo $current_quiz->id ?>)" class="btn btn-warning mr-2">Agregar pregunta</button>
-            <button type="button" onclick="saveChangesQuestions(<?php echo $current_quiz->id ?>)"  class="btn btn-primary">Guardar cambios</button>
+        <div class="col-4 offset-md-8 text-right pr-0">
+            <button type="button" onclick="addQuestionWrap(<?php echo $current_quiz->id ?>)" class="btn btn-sm btn-info mr-2">Agregar pregunta</button>
+            <button type="button" onclick="saveChangesQuestions(<?php echo $current_quiz->id ?>)"  class="btn btn-lg btn-primary">Guardar cambios</button>
         </div>
     </div>
 </div>

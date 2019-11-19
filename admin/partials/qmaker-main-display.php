@@ -31,7 +31,7 @@
         <div class="col-10">
             <h2 class="text-center"><?php echo esc_html(get_admin_page_title()); ?></h2>
         </div>
-        <div class="col-2">
+        <div class="col-2 text-right">
             <button class="btn btn-primary" data-toggle="modal" data-target="#addQuizmodal">Agregar quiz</button>
         </div>
     </div>

@@ -188,6 +188,24 @@ class Qmaker_Quiz extends WP_List_Table {
     }
 
     /**
+    * Personaliza la columna de ID
+    *
+    * personaliza la columna del ID del quiz, para que se pueda actualizar 
+    * el cuestionario
+    *
+    * @access    public
+    * @author Emiliano
+    * @param array $item
+    **/
+    public function column_id($item){
+        $actions = array(
+            'edit'      => sprintf('<a href="?page=%s&action=%s&idQuiz=%s">Editar</a>',$_REQUEST['page'],'edit',$item['id'] ),
+            'delete'    => sprintf('<a href="?page=%s&action=%s&idQuiz=%s">Eliminar</a>',$_REQUEST['page'],'delete',$item['id'] ),
+        );
+        return sprintf('%1$s %2$s', $item['id'], $this->row_actions( $actions ) );
+    }
+
+    /**
      * Render the bulk edit checkbox
      * @access    public
      * @author    Emiliano
@@ -209,9 +227,8 @@ class Qmaker_Quiz extends WP_List_Table {
     public function get_columns() {
         $columns = [
             'cb'                => '<input type="checkbox" />',
-            'nombre_quiz'       => __( 'Nombre del quiz', 'qmaker' ),
             'id'                => __( 'ID Quiz', 'qmaker' ),
-            // 'descripcion'       => __( 'Descripción', 'qmaker' ),
+            'nombre_quiz'       => __( 'Nombre del quiz', 'qmaker' ),
             'preguntas_total'   => __( 'Total de preguntas', 'qmaker' )
         ];
     
