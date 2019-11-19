@@ -356,8 +356,11 @@ function addItemQuestion(idWrapp){
 					</div>
 				</div>
 				<div class="form-group d-flex justify-content-end">
-				<button type="button" onclick="deleteQuestion(${nmbrQuestion})" class="btn btn-outline-danger btn-sm mr-2">Eliminar pregunta</button>
-				<button type="button" onclick="addItemQuestion('${wrapAns}')" class="btn btn-info btn-sm addresponse-btn-edit">Agregar Respuesta</button>
+					<button type="button" onclick="addItemQuestion('${wrapAns}')" class="btn btn-info btn-sm addresponse-btn-edit">Agregar respuesta</button>
+				</div>
+
+				<div class="form-group d-flex justify-content-end">
+					<button type="button" onclick="deleteQuestion(${nmbrQuestion})" class="btn btn-outline-danger btn-sm ">Eliminar pregunta</button>
 				</div>
 			</div>
 		</div>

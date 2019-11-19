@@ -77,8 +77,11 @@
                         </div><!--END wrapper_anws-->
                     </div>
                     <div class="form-group d-flex justify-content-end">
+                        <button type="button" onclick="addItemQuestion(<?php echo $q->id; ?>)" class="btn btn-info btn-sm addresponse-btn-edit">Agregar respuesta</button>
+                    </div>
+                    <div class="form-group d-flex justify-content-end">
                         <button type="button" onclick="deleteQuestion(<?php echo $q->id;?>)" class="btn btn-outline-danger btn-sm  mr-2">Eliminar pregunta</button>
-                        <button type="button" onclick="addItemQuestion(<?php echo $q->id; ?>)" class="btn btn-info btn-sm addresponse-btn-edit">Agregar Respuesta</button>
+                        <button type="button" onclick="addQuestionWrap(<?php echo $current_quiz->id ?>)" class="btn btn-sm btn-info">Agregar pregunta</button>
                     </div>
                 </div> <!--END question-->
             </div>
@@ -89,7 +92,6 @@
 
     <div class="row  mt-3 mb-2">
         <div class="col-4 offset-md-8 text-right pr-0">
-            <button type="button" onclick="addQuestionWrap(<?php echo $current_quiz->id ?>)" class="btn btn-sm btn-info mr-2">Agregar pregunta</button>
             <button type="button" onclick="saveChangesQuestions(<?php echo $current_quiz->id ?>)"  class="btn btn-lg btn-primary">Guardar cambios</button>
         </div>
     </div>

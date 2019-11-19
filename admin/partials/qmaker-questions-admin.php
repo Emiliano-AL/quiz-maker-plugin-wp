@@ -47,7 +47,7 @@ $quiz_detail = $qmaker_quiz->get_quiz_detail($_GET['idQuiz']);
                                     <textarea id="inputName_1" class="form-control response_text" cols="10" placeholder="Escribe la respuesta" rows="1"></textarea>
                                 </div>
                                 <div class="col-md-2 d-flex align-items-center pt-2">
-                                    <button type="button" class="btn btn-sm btn-outline-danger delete-answer-btn">Eliminar respuesta</button>
+                                <button type="button" class="btn btn-sm btn-outline-danger delete-answer-btn">Eliminar respuesta</button>
                                 </div>
                             </div>
                         </div><!--END wrapper_anws-->
