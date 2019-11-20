@@ -25,7 +25,7 @@ if($id != ''):
 <div class="container p-0">
     <div class="row">
         <div class="col-12">
-            <h4><?php echo $quiz->nombre_quiz ?></h4>
+            <h4 class="qmaker-title-quiz"><?php echo $quiz->nombre_quiz ?></h4>
         </div>
         <div class="col-12">
             <?php 
