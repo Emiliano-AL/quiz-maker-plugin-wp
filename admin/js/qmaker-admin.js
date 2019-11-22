@@ -100,7 +100,7 @@
 
 	 $btnAddResponse.live('click', function(e){
 		var cont = $('.wrapper_anws').children().length + 1
-		
+		var placeholderAnswers = "Escribe la respuesta"
 		$( '.wrapper_anws' ).append(`
 		 <div class="form-row border mx-0 mt-2 py-2 px-4 item_answer">
 			<div class="col-md-2 custom-checkbox d-flex align-items-center is_correct_response">
@@ -109,7 +109,7 @@
 			</div>
 			<div class="col-md-8 text_response">
 				<label for="inputName_${cont}">Respuesta:</label>
-				<textarea id="inputName_${cont}" class="form-control response_text" placeholder="Escribe la respuesta" cols="10" rows="1"></textarea>
+				<textarea id="inputName_${cont}" class="form-control response_text" placeholder="${placeholderAnswers}" cols="10" rows="1"></textarea>
 			</div>
 			<div class="col-md-2 d-flex align-items-center pt-2">
 				<button type="button" class="btn btn-sm btn-outline-danger delete-answer-btn">Eliminar respuesta</button>
@@ -199,7 +199,7 @@
 function addItemQuestion(idWrapp){
 	var cont = jQuery('.wrapper_anws_'+idWrapp).children().length + 1
 	var ans_id = `${uniqueid()}`
-	console.log('el id: ',ans_id)
+	var placeholderAnswers = "Escribe la respuesta"
 	jQuery( '.wrapper_anws_'+idWrapp ).append(`
 		 <div class="form-row border mx-0 mt-2 py-2 px-4 item_answer">
 			<div class="col-md-2 custom-checkbox d-flex align-items-center is_correct_response">
@@ -208,7 +208,7 @@ function addItemQuestion(idWrapp){
 			</div>
 			<div class="col-md-8 text_response">
 				<label for="inputName_${ans_id}">Respuesta:</label>
-				<textarea id="inputName_${ans_id}" class="form-control response_text" placeholder="Escribe la respuesta" cols="10" rows="1"></textarea>
+				<textarea id="inputName_${ans_id}" class="form-control response_text" placeholder="${placeholderAnswers}" cols="10" rows="1"></textarea>
 			</div>
 			<div class="col-md-2 d-flex align-items-center pt-2">
 				<button type="button" class="btn btn-sm btn-outline-danger delete-answer-btn">Eliminar respuesta</button>
@@ -332,12 +332,14 @@ function addItemQuestion(idWrapp){
 	var nmbrQuestion = 	jQuery('.wrap_main_questions').children().length + 1
 	var wrapAns = 	(jQuery('.wrap_main_questions').children().length + 1) + uniqueid()
 	var ans_id = `${uniqueid()}`
+	var placeholderQuestion = "Escribe la pregunta"
+	var placeholderAnswers = "Escribe la respuesta"
 	jQuery('.wrap_main_questions').append(`
 		<div class="wrapper_question wrapp_manager_question_${nmbrQuestion}  mb-2">
 			<div id="question_${nmbrQuestion}" class="border px-4 py-3">
 				<div class="form-group">					
 					<label class="counter_question font-weight-bold" for="inputName_${wrapAns}">Pregunta ${nmbrQuestion}:</label>
-					<textarea class="form-control question_text" rows="3" cols="50" id="inputName_${wrapAns}" placeholder="Nombre de la pregunta"></textarea>
+					<textarea class="form-control question_text" rows="3" cols="50" id="inputName_${wrapAns}" placeholder="${placeholderQuestion}"></textarea>
 					<input type="hidden" class="question_number" value="${nmbrQuestion}">
 					<div class="wrapper_anws_${wrapAns}">
 						<div class="form-row border mx-0 mt-2 py-2 px-4 item_answer">
@@ -347,7 +349,7 @@ function addItemQuestion(idWrapp){
 							</div>
 							<div class="col-md-8 text_response">
 								<label for="inputName_${ans_id}">Respuesta: 1</label>
-								<textarea id="inputName_${ans_id}" class="form-control response_text" placeholder="Escribe la respuesta" cols="10" rows="1"></textarea>
+								<textarea id="inputName_${ans_id}" class="form-control response_text" placeholder="${placeholderAnswers}" cols="10" rows="1"></textarea>
 							</div>
 							<div class="col-md-2 d-flex align-items-center pt-2">
 								<button type="button" class="btn btn-sm btn-outline-danger delete-answer-btn">Eliminar respuesta</button>
@@ -358,11 +360,10 @@ function addItemQuestion(idWrapp){
 				<div class="form-group d-flex justify-content-end">
 					<button type="button" onclick="addItemQuestion('${wrapAns}')" class="btn btn-info btn-sm addresponse-btn-edit">Agregar respuesta</button>
 				</div>
-
-				<div class="form-group d-flex justify-content-end">
-					<button type="button" onclick="deleteQuestion(${nmbrQuestion})" class="btn btn-outline-danger btn-sm ">Eliminar pregunta</button>
-				</div>
 			</div>
+		</div>
+		<div class="form-group d-flex justify-content-end">
+			<button type="button" onclick="deleteQuestion(${nmbrQuestion})" class="btn btn-outline-danger btn-sm ">Eliminar pregunta</button>
 		</div>
 	`)
 	jQuery('.question_text').focus()

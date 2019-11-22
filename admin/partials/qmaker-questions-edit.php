@@ -44,6 +44,10 @@
             </div>
         </div>
     </div>
+    <?php 
+    $placeholderQ = "Escribe la pregunta";
+	$placeholderA = "Escribe la respuesta";
+    ?>
     <div class="row">
       <div class="col-12 wrap_main_questions px-0">
         <?php foreach($questions as $q):?>
@@ -54,7 +58,7 @@
                     <div class="form-group">
                         <?php $answers = $qmaker_answer->get_answers_by_id_quesion($q->id); ?>
                         <label class="counter_question font-weight-bold" for="inputName_<?php echo $idInput; ?>">Pregunta <?php echo $q->numero_pregunta  ?>:</label>
-                        <textarea class="form-control question_text" name="textarea" rows="3" cols="50"  id="inputName_<?php echo $idInput; ?>" placeholder="Nombre de la pregunta"><?php echo $q->nombre_pregunta; ?></textarea>
+                        <textarea class="form-control question_text" name="textarea" rows="3" cols="50"  id="inputName_<?php echo $idInput; ?>" placeholder="<?php echo $placeholderQ; ?>"><?php echo $q->nombre_pregunta; ?></textarea>
                         <input type="hidden" class="question_number" value="<?php echo $q->numero_pregunta ?>">
                         <?php $i = 1; ?>
                         <div class="wrapper_anws_<?php echo $q->id; ?>">
@@ -67,7 +71,7 @@
                                 </div>
                                 <div class="col-md-8 text_response">
                                     <label for="inputName_<?php echo $ans_id; ?>">Respuesta: <?php echo $ans->numero_respuesta; ?></label>
-                                    <textarea id="inputName_<?php echo $ans_id; ?>" class="form-control response_text" placeholder="Respuesta" cols="10" rows="1"><?php echo $ans->nombre_respuesta; ?></textarea>
+                                    <textarea id="inputName_<?php echo $ans_id; ?>" class="form-control response_text" placeholder="<?php echo $placeholderA; ?>" cols="10" rows="1"><?php echo $ans->nombre_respuesta; ?></textarea>
                                 </div>
                                 <div class="col-md-2 d-flex align-items-center pt-2">
                                     <button type="button" class="btn btn-sm btn-outline-danger delete-answer-btn">Eliminar respuesta</button>
@@ -79,13 +83,14 @@
                     <div class="form-group d-flex justify-content-end">
                         <button type="button" onclick="addItemQuestion(<?php echo $q->id; ?>)" class="btn btn-info btn-sm addresponse-btn-edit">Agregar respuesta</button>
                     </div>
-                    <div class="form-group d-flex justify-content-end">
-                        <button type="button" onclick="deleteQuestion(<?php echo $q->id;?>)" class="btn btn-outline-danger btn-sm  mr-2">Eliminar pregunta</button>
-                        <button type="button" onclick="addQuestionWrap(<?php echo $current_quiz->id ?>)" class="btn btn-sm btn-info">Agregar pregunta</button>
-                    </div>
+                 
                 </div> <!--END question-->
+            </div> <!--END wrapper_question-->
+            <!-- END wrapper pregunta -->
+            <div class="form-group d-flex justify-content-end">
+                <button type="button" onclick="deleteQuestion(<?php echo $q->id;?>)" class="btn btn-outline-danger btn-sm  mr-2">Eliminar pregunta</button>
+                <button type="button" onclick="addQuestionWrap(<?php echo $current_quiz->id ?>)" class="btn btn-sm btn-info">Agregar pregunta</button>
             </div>
-            <!-- FIN wrapper pregunta -->
         <?php endforeach; ?>
       </div>
     </div>

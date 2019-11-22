@@ -19,7 +19,10 @@ $quiz_detail = $qmaker_quiz->get_quiz_detail($_GET['idQuiz']);
             <h2 class="text-center">Agregar preguntas a: <?php echo $current_quiz->nombre_quiz ?> - <span class="text-muted">ID <?php echo $current_quiz->id ?></span></h2>
         </div>
     </div>
-
+    <?php 
+    $placeholderQ = "Escribe la pregunta";
+	$placeholderA = "Escribe la respuesta";
+    ?>
     <div class="row pt-3">
         <div class="col-md-8">
             <h3 class="text-center">Preguntas (<?php echo count($quiz_detail); ?>)</h3>
@@ -35,7 +38,7 @@ $quiz_detail = $qmaker_quiz->get_quiz_detail($_GET['idQuiz']);
                 <div id="question_1" class="border p-3">
                     <div class="form-group">
                         <label class="counter_question font-weight-bold" for="inputName">Pregunta <?php echo count($quiz_detail)+1;  ?>:</label>
-                        <textarea id="inputName" class="form-control question_text" cols="10" placeholder="Escribe la pregunta" rows="2"></textarea>
+                        <textarea id="inputName" class="form-control question_text" cols="10" placeholder="<?php echo $placeholderQ; ?>" rows="2"></textarea>
                         <div class="wrapper_anws">
                             <div class="form-row border mx-0 mt-2 py-2 px-4 item_answer">
                                 <div class="col-md-2 custom-checkbox d-flex align-items-center is_correct_response">
@@ -44,7 +47,7 @@ $quiz_detail = $qmaker_quiz->get_quiz_detail($_GET['idQuiz']);
                                 </div>
                                 <div class="col-md-8 text_response">
                                     <label for="inputName_1">Respuesta:</label>
-                                    <textarea id="inputName_1" class="form-control response_text" cols="10" placeholder="Escribe la respuesta" rows="1"></textarea>
+                                    <textarea id="inputName_1" class="form-control response_text" cols="10" placeholder="<?php echo $placeholderA; ?>" rows="1"></textarea>
                                 </div>
                                 <div class="col-md-2 d-flex align-items-center pt-2">
                                 <button type="button" class="btn btn-sm btn-outline-danger delete-answer-btn">Eliminar respuesta</button>
