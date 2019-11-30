@@ -15,8 +15,9 @@ $quiz_detail = $qmaker_quiz->get_quiz_detail($_GET['idQuiz']);
 
 <div class="container">
     <div class="row mt-3">
-        <div class="col-10">
+        <div class="col-12 d-flex justify-content-between">
             <h2 class="text-center">Agregar preguntas a: <?php echo $current_quiz->nombre_quiz ?> - <span class="text-muted">ID <?php echo $current_quiz->id ?></span></h2>
+            <button type="button" class="btn btn-light" onclick="closeEditor()">Regresar</button>
         </div>
     </div>
     <?php 
@@ -29,7 +30,7 @@ $quiz_detail = $qmaker_quiz->get_quiz_detail($_GET['idQuiz']);
         </div>
         <div class="col-md-4 text-right">
             <?php $url = site_url().'/vista-previa/?id='. $current_quiz->id; ?>
-            <a type="button" href="<?php echo $url ?>" target="_blank" class="btn btn-sm btn-warning mr-2">Vista previa</a>
+            <a href="<?php echo $url ?>" target="_blank" class="btn btn-sm btn-warning mr-2">Vista previa</a>
             <button type="button" class="btn btn-primary btn-lg save-question-btn">Guardar pregunta</button>
         </div>
         <div class="col-md-12 mt-2">

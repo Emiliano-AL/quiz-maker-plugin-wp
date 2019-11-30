@@ -28,20 +28,9 @@
 	 * Although scripts in the WordPress core, Plugins and Themes may be
 	 * practising this, we should strive to set a better example in our own work.
 	 */
-	 
-	$(function() {
-		
-	})
-
-	$( window ).load(function() {
-		// console.log('hola')
-	});
-
 	$('#addQuizmodal').on('keypress',function(e) {
 		if(e.which == 13) {
 			e.preventDefault();
-			// alert('You pressed enter!');
-			// $('#create-quiz').click()
 			createQuiz()
 		}
 	});
@@ -168,14 +157,10 @@
 				success: function(data){
 					data = JSON.parse(data);
 					if(data.result){
-						console.log('Todo Ok!');
-						var r = confirm("Pregunta agregada correctamente. ¿Deseas agregar más?")
-						if(r === true){
-							urlAddQuestions += $('.quiz_id').val()
-							location.href = urlAddQuestions;
-						}else{
-							location.href = urlhome;
-						}
+						alert('Pregunta agregada correctamente!')
+
+						urlAddQuestions += $('.quiz_id').val()
+						location.href= urlAddQuestions
 					}
 					console.log('Algo salió mal... ', data)
 				},
@@ -324,8 +309,15 @@ function addItemQuestion(idWrapp){
 	
  }
 
- function uniqueid() {
+function uniqueid() {
 	return Math.random().toString(36).substr(2, 9);
+}
+
+function closeEditor() {
+	const home = '?page=qmaker'
+	const exit = confirm('¿Estás seguro de salir? Puedes tener cambios sin guardar.')
+
+	if(exit) window.location.href = home
 }
 
  function addQuestionWrap(idQuiz){
