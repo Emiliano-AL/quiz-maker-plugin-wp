@@ -8,9 +8,6 @@ $qmaker_quiz = new Qmaker_Quiz();
 $current_quiz = $qmaker_quiz->get_quiz($_GET['idQuiz']);
 $quiz_detail = $qmaker_quiz->get_quiz_detail($_GET['idQuiz']);
 
-// print_r($quiz_detail );
-
-// echo "Agrega preguntas!";
 ?>
 
 <div class="container">
@@ -25,11 +22,14 @@ $quiz_detail = $qmaker_quiz->get_quiz_detail($_GET['idQuiz']);
 	$placeholderA = "Escribe la respuesta";
     ?>
     <div class="row pt-3">
-        <div class="col-md-8">
-            <h3 class="text-center">Preguntas (<?php echo count($quiz_detail); ?>)</h3>
+        <div class="col-md-6">
+            <h3>Preguntas (<?php echo count($quiz_detail); ?>)</h3>
         </div>
-        <div class="col-md-4 text-right">
+        <div class="col-md-6 text-right">
             <?php $url = site_url().'/vista-previa/?id='. $current_quiz->id; ?>
+            <a href="https://www.codecogs.com/latex/eqneditor.php?lang=es-es" target="_blank" class="btn btn-sm btn-warning mr-2">
+                Editor Mathjax
+            </a>
             <a href="<?php echo $url ?>" target="_blank" class="btn btn-sm btn-warning mr-2">Vista previa</a>
             <button type="button" class="btn btn-primary btn-lg save-question-btn">Guardar pregunta</button>
         </div>
