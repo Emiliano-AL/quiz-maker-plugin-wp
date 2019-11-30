@@ -138,6 +138,12 @@ if($id != ''):
                             class="btn btn-outline-primary btn-reset-quiz">Reiniciar Quiz
                         </button>
                     </div>
+
+                    <?php if( m2m_get_theme_option( 'quiz_banner_link' ) ): ?>
+                        <a href="<?php echo m2m_get_theme_option( 'quiz_banner_link' ) ?>" class="quiz-banner mt-4 d-block">
+                            <img src="<?php echo m2m_get_theme_option( 'quiz_banner_image' ) ?>" alt="" class="d-block w-100">
+                        </a>
+                    <?php endif ?>
                 </div>
             </div>
         </div>
