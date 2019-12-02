@@ -143,7 +143,11 @@ if ( ! class_exists( 'QMaker_Options' ) ) {
                             <th scope="row"><?php esc_html_e( 'Imagen del banner', 'qmaker_settings'); ?></th>
                             <td>
 								<?php $value = self::get_option( 'quiz_banner_image' ); ?>
-								<img id='image-preview' src='<?php echo wp_get_attachment_url( $value ); ?>'>
+								
+								<?php if( $value ): ?>
+									<img id='image-preview' src='<?php echo wp_get_attachment_url( $value ); ?>'>
+								<?php endif ?>
+
 								<br>
 								<input id="upload_image_button" type="button" class="button" value="Subir imagen" />
 								<br>
@@ -161,7 +165,7 @@ if ( ! class_exists( 'QMaker_Options' ) ) {
 					// Uploading files
 					var file_frame;
 					var wp_media_post_id = wp.media.model.settings.post.id; // Store the old id
-					var set_to_post_id = <?php echo self::get_option( 'quiz_banner_image' ); ?>; // Set this
+					var set_to_post_id = <?php echo self::get_option( 'quiz_banner_image' ) ? self::get_option( 'quiz_banner_image' ) : 0 ?>; // Set this
 					jQuery('#upload_image_button').on('click', function( event ){
 						event.preventDefault();
 						// If the media frame already exists, reopen it.
