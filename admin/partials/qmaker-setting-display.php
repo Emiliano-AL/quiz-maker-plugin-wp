@@ -127,8 +127,7 @@ if ( ! class_exists( 'QMaker_Options' ) ) {
 					<table class="form-table wpex-custom-admin-login-table">
 						<!-- Quiz Banner -->
                         <tr valign="top">
-                            <th class="qmaker_setting_subtitle" scope="row"><h5><?php esc_html_e( 'Banner del Quiz','qmaker_settings' ); ?></h5></th>
-                            <td></td>
+                            <h5 style="margin-top: 30px"><?php esc_html_e( 'Banner del Quiz','qmaker_settings' ); ?></h5>
                         </tr>
                         <tr valign="top">
                             <th scope="row"><?php esc_html_e( 'Hipervinculo del banner', 'qmaker_settings'); ?></th>
@@ -136,7 +135,7 @@ if ( ! class_exists( 'QMaker_Options' ) ) {
                                 <?php $value = self::get_option( 'quiz_banner_link' ); ?>
                                 <input type="url" class="ctrl_qmaker_setting" name="qmaker_options[quiz_banner_link]" value="<?php echo esc_attr( $value ); ?>">
                                 <br />
-                                <span class="description"><?php esc_html_e( 'Hipervinculo del banner que aparece en el Quiz', 'qmaker_settings'); ?></span>
+                                <span class="description"><?php esc_html_e( 'Hipervínculo para el banner que se muestra al revisar un quiz que contiene errores', 'qmaker_settings'); ?></span>
                             </td>
                         </tr>
                         <tr valign="top">
