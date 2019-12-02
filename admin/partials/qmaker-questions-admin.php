@@ -14,7 +14,6 @@ $quiz_detail = $qmaker_quiz->get_quiz_detail($_GET['idQuiz']);
     <div class="row mt-3">
         <div class="col-12 d-flex justify-content-between">
             <h2 class="text-center">Agregar preguntas a: <?php echo $current_quiz->nombre_quiz ?> - <span class="text-muted">ID <?php echo $current_quiz->id ?></span></h2>
-            <button type="button" class="btn btn-light" onclick="closeEditor()">Regresar</button>
         </div>
     </div>
     <?php 
