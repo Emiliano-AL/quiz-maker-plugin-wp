@@ -35,6 +35,10 @@
 		}
 	});
 
+	$('#addQuizmodal').on('shown.bs.modal', function () {
+		$('#inputName').trigger('focus')
+	})
+
 	var urlhome = "?page=qmaker"
 	var urlAddQuestions = "?page=qmaker&action=addquestions&idQuiz="
 
