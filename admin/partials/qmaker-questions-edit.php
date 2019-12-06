@@ -87,7 +87,7 @@
                 </div> <!--END question-->
             </div> <!--END wrapper_question-->
             <!-- END wrapper pregunta -->
-            <div class="form-group d-flex justify-content-end">
+            <div class="form-group wrapp_manager_buttons_<?php echo $q->id ?> d-flex justify-content-end">
                 <button type="button" onclick="deleteQuestion(<?php echo $q->id;?>)" class="btn btn-outline-danger btn-sm  mr-2">Eliminar pregunta</button>
                 <button type="button" onclick="addQuestionWrap(<?php echo $current_quiz->id ?>)" class="btn btn-sm btn-info">Agregar pregunta</button>
             </div>

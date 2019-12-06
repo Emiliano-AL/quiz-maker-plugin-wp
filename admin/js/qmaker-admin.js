@@ -222,6 +222,7 @@ function addItemQuestion(idWrapp){
 	var r = confirm("La pregunta será removida, ¿esta seguro?")
 	if(r === true){
 		jQuery('.wrapp_manager_question_'+id).remove()
+		jQuery('.wrapp_manager_buttons_'+id).remove()
 	}
 	 
  }
@@ -259,32 +260,33 @@ function addItemQuestion(idWrapp){
 		questionObj.response = responses
 		questions.push(questionObj)
 	})
-	let hasResponse = false
-	let hasEmptyAnws = false
+
 	quiz.questions = questions
-	quiz.questions.map(q =>{
-		hasResponse = false
-		hasEmptyAnws  = false
-		q.response.forEach(anws => {
-			if(anws.responseText  === ""){
-				hasEmptyAnws = true
-			}
-			if(anws.isCorrect == 1){
-				hasResponse = true
-			}
-		});
-		if(!hasResponse){
-			console.log('Esta pregunta no tiene respuesta', q)
+
+	var hasresponsecorrect = false
+	var emptyresponse = false
+	for(let i = 0; questions.length > i; i++ ){
+		let responses = questions[i].response
+		hasresponsecorrect = false 
+		emptyresponse = false 
+		for (let j = 0; responses.length > j; j++){
+			if(responses[j].isCorrect == 1)
+				hasresponsecorrect = true
+			if(responses[j].responseText === "")
+				emptyresponse = true
 		}
-		if(hasEmptyAnws){
-			console.log('Esta pregunta no tiene texto', q)
+		if(!hasresponsecorrect || emptyresponse){
+			break
 		}
-	})
+	}
+	console.log('tiene respuesta correcta ', hasresponsecorrect)
+
 	let qmIsValid = true
-	if(!hasResponse){
+
+	if(!hasresponsecorrect){
 		alert('Hay por lo menos, una pregunta que no tiene una respuesta correcta.')
 		qmIsValid = false
-	}else if(hasEmptyAnws){
+	}else if(emptyresponse){
 		alert('Hay preguntas que tienen respuestas vacias.')
 		qmIsValid = false
 	}else if(hasErrorOnQuestion){
@@ -294,6 +296,7 @@ function addItemQuestion(idWrapp){
 		alert('El quiz debe tener un nombre.')
 		qmIsValid = false
 	}
+
 	if(qmIsValid){
 		// Evento ajax 
 		jQuery.ajax({
@@ -310,7 +313,7 @@ function addItemQuestion(idWrapp){
 				data = JSON.parse(data);
 				if(data.result){
 					console.info(data)
-					alert('Actualizado exitosamente.')
+					alert('Actualizado exitosamente.') ? "" : location.reload()
 				}
 				console.info(data)
 			},
@@ -362,7 +365,7 @@ function addItemQuestion(idWrapp){
 				</div>
 			</div>
 		</div>
-		<div class="form-group d-flex justify-content-end">
+		<div class="form-group wrapp_manager_buttons_${nmbrQuestion} d-flex justify-content-end">
 			<button type="button" onclick="deleteQuestion(${nmbrQuestion})" class="btn btn-outline-danger btn-sm ">Eliminar pregunta</button>
 		</div>
 	`)
