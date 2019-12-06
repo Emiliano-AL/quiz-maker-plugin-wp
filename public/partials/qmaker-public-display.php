@@ -138,6 +138,12 @@ if($id != ''):
                             class="btn btn-outline-primary btn-reset-quiz">Reiniciar Quiz
                         </button>
                     </div>
+
+                    <?php if( qmaker_get_option( 'quiz_banner_link' ) && qmaker_get_option( 'quiz_banner_image' ) ): ?>
+                        <a href="<?php echo qmaker_get_option( 'quiz_banner_link' ) ?>" class="quiz-banner mt-4 d-block" target="_blank">
+                            <img src="<?php echo wp_get_attachment_url( qmaker_get_option( 'quiz_banner_image' ) ) ?>" alt="" class="d-block w-100">
+                        </a>
+                    <?php endif ?>
                 </div>
             </div>
         </div>
