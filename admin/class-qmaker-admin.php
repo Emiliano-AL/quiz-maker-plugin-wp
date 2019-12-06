@@ -1,5 +1,7 @@
 <?php
 
+require_once QM_PLUGIN_DIR_PATH . 'admin/partials/qmaker-setting-display.php';
+
 /**
  * The admin-specific functionality of the plugin.
  *
@@ -60,6 +62,13 @@ class Qmaker_Admin {
 	private $qmaker_question;
 
 	/**
+	 * Page Setting
+	 * @var QMaker_Options
+	 */
+	private $page_settings;
+
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
@@ -73,6 +82,8 @@ class Qmaker_Admin {
 
 		$this->qmaker_quiz = new Qmaker_Quiz();
 		$this->qmaker_question = new Qmaker_Question();
+
+		$this->page_settings = new QMaker_Options();
 	}
 
 	/**
@@ -173,7 +184,17 @@ class Qmaker_Admin {
 			$this->plugin_name, 
 			array($this, 'display_plugin_main_page'), 
 			'dashicons-list-view', 
-			9);
+			9
+		);
+
+		add_submenu_page(
+			$this->plugin_name,
+			'Configuración',
+			'Configuración',
+			'manage_options',
+			$this->plugin_name . '_settings',
+			array( $this, 'qmaker_display_setting_page' )	
+		);
 	}
 
 	/**
@@ -283,5 +304,14 @@ class Qmaker_Admin {
 		}
 
 		return $json;
+	}
+
+	/**
+	 * Función que despliega la página de configuración del plugin
+	 * 
+	 */
+	function qmaker_display_setting_page()
+	{
+		$this->page_settings->display_page_options();
 	}
 }

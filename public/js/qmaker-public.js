@@ -97,6 +97,8 @@
 				console.log('Todo bien: ', corrects, ttlQuestions)
 				$('.btn-reset-quiz').addClass('d-none')
 				$('.alert-msg-qm').removeClass('d-none')
+				$('.quiz-banner').removeClass('d-block')
+				$('.quiz-banner').addClass('d-none')
 			}
 			$('.show-results-text').empty()
 			$('.show-results-text').append(`

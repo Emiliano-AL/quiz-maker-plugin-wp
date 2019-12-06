@@ -22,7 +22,7 @@
  $qmaker_answer = new Qmaker_Answers();
  ?>
     <div class="row mt-3 mb-2">
-        <div class="col-8">
+        <div class="col-6">
             <h2>Editar Quiz: <?php echo $current_quiz->nombre_quiz ?> - <span class="text-muted">ID <?php echo $current_quiz->id ?></span></h2>
         </div>
        
@@ -30,9 +30,12 @@
           
         </div> -->
 
-        <div class="col-4 text-right pr-0">
+        <div class="col-6 text-right pr-0">
             <?php $url = site_url().'/vista-previa/?id='. $current_quiz->id; ?>
-            <a type="button" href="<?php echo $url ?>" target="_blank" class="btn btn-sm btn-warning mr-2">Vista previa</a>
+            <a href="https://www.codecogs.com/latex/eqneditor.php?lang=es-es" target="_blank" class="btn btn-sm btn-warning mr-2">
+                Editor Mathjax
+            </a>
+            <a href="<?php echo $url ?>" target="_blank" class="btn btn-sm btn-warning mr-2">Vista previa</a>
             <button type="button" onclick="saveChangesQuestions(<?php echo $current_quiz->id ?>)" class="btn btn-lg btn-primary">Guardar cambios</button>
         </div>
     </div>
