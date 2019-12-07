@@ -46,7 +46,7 @@ $quiz_detail = $qmaker_quiz->get_quiz_detail($_GET['idQuiz']);
                                     <label class="custom-control-label ml-3" for="customCheck_1">Correcta</label>
                                 </div>
                                 <div class="col-md-8 text_response">
-                                    <label for="inputName_1">Respuesta:</label>
+                                    <label for="inputName_1">Respuesta 1:</label>
                                     <textarea id="inputName_1" class="form-control response_text" cols="10" placeholder="<?php echo $placeholderA; ?>" rows="1"></textarea>
                                 </div>
                                 <div class="col-md-2 d-flex align-items-center pt-2">

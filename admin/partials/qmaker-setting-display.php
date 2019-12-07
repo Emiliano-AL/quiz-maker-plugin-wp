@@ -154,6 +154,23 @@ if ( ! class_exists( 'QMaker_Options' ) ) {
 								<input type='hidden' class="ctrl_qmaker_setting" name='qmaker_options[quiz_banner_image]' id='image_attachment_id' value='<?php echo $value ?>'>
                             </td>
                         </tr>
+						<tr valign="top">
+                            <th scope="row"><?php esc_html_e( 'Random de las respuestas', 'qmaker_settings'); ?></th>
+                            <td>
+								<label for="lblactiverandom">
+                                <?php $value = self::get_option( 'qmaker_random_responses' ); ?>
+                                <input 
+									id="lblactiverandom" 
+									type="checkbox" 
+									class="ctrl_qmaker_setting" 
+									name="qmaker_options[qmaker_random_responses]" 
+									<?php checked( $value, 'on' ); ?>>
+									<strong><?php esc_html_e( 'Random en respuestas.', 'qmaker_settings'); ?></strong>
+								</label>
+                                <br />
+                                <span class="description"><?php esc_html_e( 'Activar o desactivar random en las respuestas.', 'qmaker_settings'); ?></span>
+                            </td>
+                        </tr>
 					</table>
 					<?php submit_button(); ?>
 				</form>

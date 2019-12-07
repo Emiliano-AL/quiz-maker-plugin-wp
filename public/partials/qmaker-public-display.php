@@ -21,6 +21,9 @@ if($id != ''):
     $public_quiz = new Qmaker_Public_Quizz();
     $quiz = $public_quiz->get_quiz($id);
     $questions = $public_quiz->get_questions_by_id_quiz($id);
+
+    $options = get_option( 'qmaker_options' );
+    $activeRandom = $options[ 'qmaker_random_responses' ];
 ?>
 <div class="container p-0">
     <div class="row">
@@ -124,6 +127,8 @@ if($id != ''):
             <?php endforeach; ?>
             <input type="hidden" class="correct-answers" value="0">
             <input type="hidden" class="incorrect-answers" value="0">
+            <input type="hidden" class="random-answers" value="<?php echo $activeRandom == 'on' ? 1 : 0; ?>">
+            
             <div class="card card-results invisible-qm">
                 <div class="card-body">
                     <h5 class="card-title">Resultados: </h5>

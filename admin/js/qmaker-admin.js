@@ -101,7 +101,7 @@
 				<label class="custom-control-label ml-3" for="customCheck_${cont}">Correcta</label>
 			</div>
 			<div class="col-md-8 text_response">
-				<label for="inputName_${cont}">Respuesta:</label>
+				<label for="inputName_${cont}">Respuesta ${cont}:</label>
 				<textarea id="inputName_${cont}" class="form-control response_text" placeholder="${placeholderAnswers}" cols="10" rows="1"></textarea>
 			</div>
 			<div class="col-md-2 d-flex align-items-center pt-2">
@@ -187,6 +187,7 @@
 
 function addItemQuestion(idWrapp){
 	var cont = jQuery('.wrapper_anws_'+idWrapp).children().length + 1
+	console.log('total de preguntas ' , cont)
 	var ans_id = `${uniqueid()}`
 	var placeholderAnswers = "Escribe la respuesta"
 	jQuery( '.wrapper_anws_'+idWrapp ).append(`
@@ -196,7 +197,7 @@ function addItemQuestion(idWrapp){
 				<label class="custom-control-label ml-3" for="customCheck_${ans_id}">Correcta</label>
 			</div>
 			<div class="col-md-8 text_response">
-				<label for="inputName_${ans_id}">Respuesta:</label>
+				<label for="inputName_${ans_id}">Respuesta ${cont}:</label>
 				<textarea id="inputName_${ans_id}" class="form-control response_text" placeholder="${placeholderAnswers}" cols="10" rows="1"></textarea>
 			</div>
 			<div class="col-md-2 d-flex align-items-center pt-2">
@@ -347,7 +348,7 @@ function closeEditor() {
 								<label class="custom-control-label ml-3" for="customCheck_${ans_id}">Correcta</label>
 							</div>
 							<div class="col-md-8 text_response">
-								<label for="inputName_${ans_id}">Respuesta: 1</label>
+								<label for="inputName_${ans_id}">Respuesta 1:</label>
 								<textarea id="inputName_${ans_id}" class="form-control response_text" placeholder="${placeholderAnswers}" cols="10" rows="1"></textarea>
 							</div>
 							<div class="col-md-2 d-flex align-items-center pt-2">

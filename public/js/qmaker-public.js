@@ -39,6 +39,7 @@
 				$(idQuestion).each(function() {
 					var answser = $(this).find('.ans_item')
 					answser.attr('disabled', true)
+					
 					if( !$(answser).parent().hasClass('evaluated') && answser.is(":checked")){
 						if(answser.val() == 1){
 							var corrects = Number($('.correct-answers').val()) + 1
@@ -49,7 +50,6 @@
 						}else{
 							var incorrects = Number($('.incorrect-answers').val()) + 1
 							$('.incorrect-answers').val(incorrects)
-							console.info('QUIZM: incorrects', incorrects)
 							$(answser).next().addClass('incorrect-answer')
 							$(answser).parent().next().removeClass('d-none')
 							$(idQuestion).each(function() {
@@ -59,6 +59,9 @@
 								}
 							})
 						}
+					}
+					if(answser.val() == 1){
+						$(answser).next().addClass('correct-answer')
 					}
 					$(answser).parent().addClass('evaluated')
 				})
@@ -127,12 +130,12 @@
 			$('.btn-next-ctrl_1').addClass('d-none')
 			$('.btn-directions-next').addClass('d-none')
 			$('.btn-directions-show-results').addClass('d-none')
-			//TODO: También se debe agregar las clases d-none a los bts que estaban ocultos
 			for(let i = 1; i <= $(this).data('total-questions'); i++){
 				let wrap_question = '.question_wrap_'+i
 
 				var $nodes = $(wrap_question).find('li');
-				shuffle($nodes, 'li-option');
+				if( Number($('.random-answers').val()) == 1)
+					shuffle($nodes, 'li-option');
 				$(wrap_question).append($nodes);
 			}
 			// var wrapQuestion = 'card-question_' + $(this).data('total-questions')

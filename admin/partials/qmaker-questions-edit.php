@@ -73,7 +73,7 @@
                                     <label class="custom-control-label ml-3" for="customCheck_<?php echo $ans_id; ?>">Correcta</label>
                                 </div>
                                 <div class="col-md-8 text_response">
-                                    <label for="inputName_<?php echo $ans_id; ?>">Respuesta: <?php echo $ans->numero_respuesta; ?></label>
+                                    <label for="inputName_<?php echo $ans_id; ?>">Respuesta <?php echo $ans->numero_respuesta; ?>:</label>
                                     <textarea id="inputName_<?php echo $ans_id; ?>" class="form-control response_text" placeholder="<?php echo $placeholderA; ?>" cols="10" rows="1"><?php echo $ans->nombre_respuesta; ?></textarea>
                                 </div>
                                 <div class="col-md-2 d-flex align-items-center pt-2">
