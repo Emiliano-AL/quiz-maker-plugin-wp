@@ -53,7 +53,7 @@ if($id != ''):
                         if(intval($isPreview) == 1)
                             $randomOn = 0;
                     ?>
-                    <h4 class="text-center pb-0 mt-3 question_title" ><?php echo $q->nombre_pregunta . $isPreview; ?></h4>
+                    <h4 class="text-center pb-0 mt-3 question_title" ><?php echo $q->nombre_pregunta; ?></h4>
                     <ul class="list-group list-group-flush text-center pb-4 pl-4 pr-4 question_wrap_<?php echo $qnmbr; ?>">
                         <?php $answers = $public_quiz->get_answers_by_id_quesion($q->id, $randomOn); ?>
                         <?php foreach($answers as $a):?>

@@ -16,7 +16,7 @@
  * Plugin Name:       Quizzes Maker HW
  * Plugin URI:        https://habitatweb.mx/
  * Description:       Este plugin, sirve para crear Quizes de manera sencilla y concreta
- * Version:           1.2.6
+ * Version:           1.2.7
  * Author:            Habitat Web
  * Author URI:        https://habitatweb.mx/
  * License:           GPL-2.0+
@@ -38,7 +38,7 @@ define( 'QM_QUIZ', 			"{$wpdb->prefix}qm_quizes" );
 define( 'QM_QUESTION', 		"{$wpdb->prefix}qm_questions" );
 define( 'QM_ANSWERS', 		"{$wpdb->prefix}qm_answers" );
 
-define( 'QMAKER_VERSION', '1.2.6' );
+define( 'QMAKER_VERSION', '1.2.7' );
 
 /**
  * The code that runs during plugin activation.
