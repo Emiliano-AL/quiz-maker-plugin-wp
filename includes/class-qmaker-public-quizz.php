@@ -74,9 +74,13 @@ class Qmaker_Public_Quizz {
     *@author Emiliano
     *@param     $idQuestion     id id del question
     **/
-    public function get_answers_by_id_quesion ($idQuestion){
+    public function get_answers_by_id_quesion ($idQuestion, $randomOn = 0){
         if($idQuestion > 0){
-            $results = $this->db->get_results( "SELECT * FROM ".QM_ANSWERS." WHERE question_id = {$idQuestion} ORDER BY RAND()" );
+            $query = "SELECT * FROM ".QM_ANSWERS." WHERE question_id = {$idQuestion}";
+            if(intval($randomOn) == 1)
+                $query .= " ORDER BY RAND()";
+
+            $results = $this->db->get_results($query);
             return $results;
         }
         return false;

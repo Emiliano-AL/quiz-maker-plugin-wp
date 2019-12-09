@@ -166,7 +166,6 @@ class Qmaker_Question {
         return false;
     }
 
-
     /**
     * Elimina las preguntas relacionadas al idQuiz
     *
@@ -181,4 +180,21 @@ class Qmaker_Question {
         }
     }
 
+    /**
+    * Regresa el listado de preguntas en base a un id de quiz
+    *
+    * regresa un listado de las preguntas pertenecientes a un quiz
+    *
+    * @author Emiliano
+    * @param     $idQuiz       id id del quiz
+    * @return array
+    **/
+    public function get_ttl_questions ($idQuiz){
+        if($idQuiz > 0){
+            $ttl = $this->db->get_var( "SELECT MAX(numero_pregunta) as nmbrQuestion from ".QM_QUESTION." WHERE quiz_id = {$idQuiz}" );
+            return $ttl;
+        }
+        return false;
+    }
+    
 }

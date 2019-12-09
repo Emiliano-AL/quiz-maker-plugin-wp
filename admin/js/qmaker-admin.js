@@ -227,7 +227,8 @@ function addItemQuestion(idWrapp){
 	}
 	quiz.name = jQuery('.name_quiz').val()
 	quiz.description = jQuery('.description_quiz').val()
-	quiz.total_questions = jQuery('.wrap_main_questions').children().length
+	// quiz.total_questions = jQuery('.wrap_main_questions').children().length
+	quiz.total_questions = 	jQuery('.wrapper_question').length + 1
 	quiz.idQuiz = idQuiz
 	jQuery('.wrapper_question').each(function() {
 		var questionText = jQuery(this).find('.question_text')
@@ -328,17 +329,19 @@ function closeEditor() {
 	if(exit) window.location.href = home
 }
 
- function addQuestionWrap(idQuiz){
+ function addQuestionWrap(idQuiz, questionNmbr){
 	var nmbrQuestion = 	jQuery('.wrap_main_questions').children().length + 1
+	// var questionNmbr = 	jQuery('.wrapper_question').length + 1
 	var wrapAns = 	(jQuery('.wrap_main_questions').children().length + 1) + uniqueid()
 	var ans_id = `${uniqueid()}`
+	// console.log('Numero de pregunta xd: ',  )
 	var placeholderQuestion = "Escribe la pregunta"
 	var placeholderAnswers = "Escribe la respuesta"
 	jQuery('.wrap_main_questions').append(`
 		<div class="wrapper_question wrapp_manager_question_${nmbrQuestion}  mb-2">
 			<div id="question_${nmbrQuestion}" class="border px-4 py-3">
 				<div class="form-group">					
-					<label class="counter_question font-weight-bold" for="inputName_${wrapAns}">Pregunta ${nmbrQuestion}:</label>
+					<label class="counter_question font-weight-bold" for="inputName_${wrapAns}">Pregunta ${questionNmbr}:</label>
 					<textarea class="form-control question_text" rows="3" cols="50" id="inputName_${wrapAns}" placeholder="${placeholderQuestion}"></textarea>
 					<input type="hidden" class="question_number" value="${nmbrQuestion}">
 					<div class="wrapper_anws_${wrapAns}">

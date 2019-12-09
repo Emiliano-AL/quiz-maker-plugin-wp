@@ -92,7 +92,11 @@
             <!-- END wrapper pregunta -->
             <div class="form-group wrapp_manager_buttons_<?php echo $q->id ?> d-flex justify-content-end">
                 <button type="button" onclick="deleteQuestion(<?php echo $q->id;?>)" class="btn btn-outline-danger btn-sm  mr-2">Eliminar pregunta</button>
-                <button type="button" onclick="addQuestionWrap(<?php echo $current_quiz->id ?>)" class="btn btn-sm btn-info">Agregar pregunta</button>
+                <?php 
+                    $ttlQuestions = $qmaker_question->get_ttl_questions($_GET['idQuiz']); 
+                    $nextNmbrQ = $ttlQuestions + 1;
+                ?>
+                <button type="button" onclick="addQuestionWrap(<?php echo $current_quiz->id ?>, <?php echo $nextNmbrQ; ?>)" class="btn btn-sm btn-info">Agregar pregunta</button>
             </div>
         <?php endforeach; ?>
       </div>

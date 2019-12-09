@@ -20,10 +20,7 @@ extract($args, EXTR_OVERWRITE);
 if($id != ''):
     $public_quiz = new Qmaker_Public_Quizz();
     $quiz = $public_quiz->get_quiz($id);
-    $questions = $public_quiz->get_questions_by_id_quiz($id);
-
-    $options = get_option( 'qmaker_options' );
-    $activeRandom = $options[ 'qmaker_random_responses' ];
+    $questions = $public_quiz->get_questions_by_id_quiz($id);  
 ?>
 <div class="container p-0">
     <div class="row">
@@ -44,9 +41,21 @@ if($id != ''):
                             Actividad <?php echo  $qnmbr; ?>/<?php echo $ttlQuestions; ?>
                         </h5>
                     </div>
-                    <h4 class="text-center pb-0 mt-3 question_title" ><?php echo $q->nombre_pregunta; ?></h4>
+                    <?php 
+                        $options = get_option( 'qmaker_options' );
+                        $activeRandom = $options[ 'qmaker_random_responses' ] == 'on' ? 1 : 0;
+                        $isPreview = isset($_GET['isPreview']) ? $_GET['isPreview'] : 0;
+                        if( $activeRandom == 1)
+                            $randomOn = 1;
+                        else
+                            $randomOn = 0;
+                        //En preview SIEMPRE se apaga el random
+                        if(intval($isPreview) == 1)
+                            $randomOn = 0;
+                    ?>
+                    <h4 class="text-center pb-0 mt-3 question_title" ><?php echo $q->nombre_pregunta . $isPreview; ?></h4>
                     <ul class="list-group list-group-flush text-center pb-4 pl-4 pr-4 question_wrap_<?php echo $qnmbr; ?>">
-                        <?php $answers = $public_quiz->get_answers_by_id_quesion($q->id); ?>
+                        <?php $answers = $public_quiz->get_answers_by_id_quesion($q->id, $randomOn); ?>
                         <?php foreach($answers as $a):?>
                         <li class="list-group-item-anws li-option question_<?php echo $q->id; ?>">
                             <label 
@@ -127,8 +136,8 @@ if($id != ''):
             <?php endforeach; ?>
             <input type="hidden" class="correct-answers" value="0">
             <input type="hidden" class="incorrect-answers" value="0">
-            <input type="hidden" class="ispreview" value="<?php echo isset($_GET['isPreview']) ? $_GET['isPreview'] : 0; ?>">
-            <input type="hidden" class="random-answers" value="<?php echo $activeRandom == 'on' ? 1 : 0; ?>">
+            <input type="hidden" class="ispreview" value="<?php echo $isPreview ?>">
+            <input type="hidden" class="random-answers" value="<?php echo $activeRandom; ?>">
             
             <div class="card card-results invisible-qm">
                 <div class="card-body">

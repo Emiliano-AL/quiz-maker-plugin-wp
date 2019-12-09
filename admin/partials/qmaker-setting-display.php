@@ -168,7 +168,7 @@ if ( ! class_exists( 'QMaker_Options' ) ) {
 									<strong><?php esc_html_e( 'Random en respuestas.', 'qmaker_settings'); ?></strong>
 								</label>
                                 <br />
-                                <span class="description"><?php esc_html_e( 'Activar o desactivar random en las respuestas.', 'qmaker_settings'); ?></span>
+                                <span class="description"><?php esc_html_e( 'Activar o desactivar orden aleatorio en las respuestas.', 'qmaker_settings'); ?></span>
                             </td>
                         </tr>
 					</table>
