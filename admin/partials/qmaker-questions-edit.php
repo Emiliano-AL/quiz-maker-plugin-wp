@@ -60,7 +60,9 @@
                 <div id="question_<?php echo $q->id; ?>" class="border px-4 py-3">
                     <div class="form-group">
                         <?php $answers = $qmaker_answer->get_answers_by_id_quesion($q->id); ?>
-                        <label class="counter_question font-weight-bold" for="inputName_<?php echo $idInput; ?>">Pregunta <?php echo $q->numero_pregunta  ?>:</label>
+                        <label class="counter_question font-weight-bold" for="inputName_<?php echo $idInput; ?>">
+                            Pregunta <span class="m2m-number-question"><?php echo $q->numero_pregunta  ?></span>:
+                        </label>
                         <textarea class="form-control question_text" name="textarea" rows="3" cols="50"  id="inputName_<?php echo $idInput; ?>" placeholder="<?php echo $placeholderQ; ?>"><?php echo $q->nombre_pregunta; ?></textarea>
                         <input type="hidden" class="question_number" value="<?php echo $q->numero_pregunta ?>">
                         <?php $i = 1; ?>
@@ -96,7 +98,7 @@
                     $ttlQuestions = $qmaker_question->get_ttl_questions($_GET['idQuiz']); 
                     $nextNmbrQ = $ttlQuestions + 1;
                 ?>
-                <button type="button" onclick="addQuestionWrap(<?php echo $current_quiz->id ?>, <?php echo $nextNmbrQ; ?>)" class="btn btn-sm btn-info">Agregar pregunta</button>
+                <button type="button" onclick="addQuestionWrap(<?php echo $current_quiz->id ?>)" class="btn btn-sm btn-info">Agregar pregunta</button>
             </div>
         <?php endforeach; ?>
       </div>

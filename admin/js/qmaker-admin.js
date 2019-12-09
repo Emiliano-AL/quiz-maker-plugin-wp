@@ -41,6 +41,7 @@
 
 	var urlhome = "?page=qmaker"
 	var urlAddQuestions = "?page=qmaker&action=addquestions&idQuiz="
+	var urlEditQuestions = "?page=qmaker&action=edit&idQuiz="
 
 	function createQuiz(){
 		console.log('Vamos a crear el quiz')
@@ -213,8 +214,17 @@ function addItemQuestion(idWrapp){
 	if(r === true){
 		jQuery('.wrapp_manager_question_'+id).remove()
 		jQuery('.wrapp_manager_buttons_'+id).remove()
+		// urlEditQuestions += id
+		// location.href = urlEditQuestions
+		var contador = 1
+		jQuery('.wrapper_question').each(function() {
+			var nmbrQuestion = jQuery(this).find('.m2m-number-question')
+			nmbrQuestion.text(contador)
+			contador ++
+		})
+		
 	}
-	 
+	
  }
 
  function saveChangesQuestions(idQuiz){
@@ -227,7 +237,6 @@ function addItemQuestion(idWrapp){
 	}
 	quiz.name = jQuery('.name_quiz').val()
 	quiz.description = jQuery('.description_quiz').val()
-	// quiz.total_questions = jQuery('.wrap_main_questions').children().length
 	quiz.total_questions = 	jQuery('.wrapper_question').length + 1
 	quiz.idQuiz = idQuiz
 	jQuery('.wrapper_question').each(function() {
@@ -270,7 +279,7 @@ function addItemQuestion(idWrapp){
 			break
 		}
 	}
-	console.log('tiene respuesta correcta ', hasresponsecorrect)
+	// console.log('tiene respuesta correcta ', hasresponsecorrect)
 
 	let qmIsValid = true
 
@@ -329,9 +338,9 @@ function closeEditor() {
 	if(exit) window.location.href = home
 }
 
- function addQuestionWrap(idQuiz, questionNmbr){
+ function addQuestionWrap(idQuiz){
 	var nmbrQuestion = 	jQuery('.wrap_main_questions').children().length + 1
-	// var questionNmbr = 	jQuery('.wrapper_question').length + 1
+	var questionNmbr = 	jQuery('.wrapper_question').length + 1
 	var wrapAns = 	(jQuery('.wrap_main_questions').children().length + 1) + uniqueid()
 	var ans_id = `${uniqueid()}`
 	// console.log('Numero de pregunta xd: ',  )

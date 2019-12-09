@@ -414,9 +414,12 @@ class Qmaker_Quiz extends WP_List_Table {
           //Elimina todas las preguntas 
           $this->qm_question->delete_questions($quiz['idQuiz']);
 
+          $cont = 1;
           //Agregar preguntas y respuestas 
           foreach($quiz['questions'] as $question){
-              $this->qm_question->add_question($question, $quiz['idQuiz'], $question['questionNmbr']);
+            // $this->qm_question->add_question($question, $quiz['idQuiz'], $question['questionNmbr']);
+            $this->qm_question->add_question($question, $quiz['idQuiz'], $cont);
+            $cont ++;
           }
 
           return $quiz['idQuiz'];  
