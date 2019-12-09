@@ -31,7 +31,7 @@
         </div> -->
 
         <div class="col-6 text-right pr-0">
-            <?php $url = site_url().'/vista-previa/?id='. $current_quiz->id; ?>
+            <?php $url = site_url().'/vista-previa/?isPreview=1&id='. $current_quiz->id; ?>
             <a href="https://www.codecogs.com/latex/eqneditor.php?lang=es-es" target="_blank" class="btn btn-sm btn-warning mr-2">
                 Editor Mathjax
             </a>

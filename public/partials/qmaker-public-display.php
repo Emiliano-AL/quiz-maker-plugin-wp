@@ -127,6 +127,7 @@ if($id != ''):
             <?php endforeach; ?>
             <input type="hidden" class="correct-answers" value="0">
             <input type="hidden" class="incorrect-answers" value="0">
+            <input type="hidden" class="ispreview" value="<?php echo isset($_GET['isPreview']) ? $_GET['isPreview'] : 0; ?>">
             <input type="hidden" class="random-answers" value="<?php echo $activeRandom == 'on' ? 1 : 0; ?>">
             
             <div class="card card-results invisible-qm">

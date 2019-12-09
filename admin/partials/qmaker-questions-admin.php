@@ -25,7 +25,7 @@ $quiz_detail = $qmaker_quiz->get_quiz_detail($_GET['idQuiz']);
             <h3>Preguntas (<?php echo count($quiz_detail); ?>)</h3>
         </div>
         <div class="col-md-6 text-right">
-            <?php $url = site_url().'/vista-previa/?id='. $current_quiz->id; ?>
+            <?php $url = site_url().'/vista-previa/?isPreview=1&id='. $current_quiz->id; ?>
             <a href="https://www.codecogs.com/latex/eqneditor.php?lang=es-es" target="_blank" class="btn btn-sm btn-warning mr-2">
                 Editor Mathjax
             </a>

@@ -135,7 +135,8 @@
 
 				var $nodes = $(wrap_question).find('li');
 				if( Number($('.random-answers').val()) == 1)
-					shuffle($nodes, 'li-option');
+					if( Number($('.ispreview').val()) == 0)
+						shuffle($nodes, 'li-option');
 				$(wrap_question).append($nodes);
 			}
 			// var wrapQuestion = 'card-question_' + $(this).data('total-questions')
